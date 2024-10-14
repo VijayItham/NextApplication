@@ -1,12 +1,12 @@
 import Image from "next/image";
-import AddUsers from "./components/AddUsers";
-import DisplayUsers from "./components/DisplayUsers";
+import AddAppRole from "./components/AddAppRole";
+import DisplayAppRole from "./components/DisplayAppRole";
 
 export default function Home() {
   return (
     <main>
-      <AddUsers/>
-      <DisplayUsers/>
+      <AddAppRole/>
+      <DisplayAppRole/>
     </main>
   );
 }

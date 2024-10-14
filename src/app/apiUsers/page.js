@@ -1,7 +1,7 @@
 "use client"
 
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAPIUser } from "../redux/slice";
+import { fetchAPIUser } from "../redux/AppRoleSlice";
 import { useEffect } from "react";
 
 
@@ -12,13 +12,9 @@ export default function page(){
     useEffect(()=>{
         dispatch(fetchAPIUser())
     },[])
-    // const onApiCall=()=>{
-           
-    // }
     return (
         <div>
         <div>user List from API</div>
-        {/* <button onClick={onApiCall}>Submit</button> */}
         {
                 data.map((item)=>{
                     return(
