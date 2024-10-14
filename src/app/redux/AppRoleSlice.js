@@ -3,7 +3,7 @@ import axios from "axios";
 
 const initialState = {
     appRoleData: [],
-    appRole: JSON.parse(localStorage.getItem("appRole")) ? JSON.parse(localStorage.getItem("appRole")) : []
+   // appRole: JSON.parse(localStorage.getItem("appRole")) ? JSON.parse(localStorage.getItem("appRole")) : []
 }
 
 export const fetchAppRole = createAsyncThunk('fetchAppRole', async () => {
