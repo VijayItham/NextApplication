@@ -130,6 +130,7 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
                       variant="contained"
                       color="secondary"
                       onClick={() => handleDelete(row)}
+                      style={{marginLeft:'2px'}}
                     >
                       Delete
                     </Button>

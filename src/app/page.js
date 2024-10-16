@@ -1,12 +1,9 @@
-import Image from "next/image";
-import AddAppRole from "./components/AddAppRole";
-import DisplayAppRole from "./components/DisplayAppRole";
+import PersistentDrawerLeft from "./components/Dashboard";
 
 export default function Home() {
   return (
-    <main>
-      <AddAppRole/>
-      <DisplayAppRole/>
-    </main>
+    <>
+      <PersistentDrawerLeft/>
+    </>
   );
 }

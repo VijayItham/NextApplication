@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import appRoleReducer from './AppRoleSlice'
-import todoReducer from './todoSlice'
+import countryStateCityReducer from './CountryStateCitySlice'
 
 const store = configureStore({
     reducer:{
         appRoleReducer,
-        toDosData:todoReducer
+        countryStateCityReducer
     }
 });
 
