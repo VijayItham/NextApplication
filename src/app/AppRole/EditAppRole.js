@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updateAppRole } from "../../redux/AppRoleSlice";
+import { updateAppRole } from "../redux/AppRoleSlice";
 import {
     Button,
     Dialog,

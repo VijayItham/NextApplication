@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { deleteAppRole } from "../../redux/AppRoleSlice";
+import { deleteAppRole } from "../redux/AppRoleSlice";
 import {
     Button,
     Dialog,

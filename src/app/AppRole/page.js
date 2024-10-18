@@ -1,11 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { addAppRole } from "../../redux/AppRoleSlice";
+import { addAppRole } from "../redux/AppRoleSlice";
 import DisplayAppRole from './DisplayAppRole'
 import { TextField, Button } from "@mui/material";
-// import UploadImage from "../uploadImage";
-// import Home from "../page"
 
 import { useDispatch } from "react-redux";
 
@@ -19,8 +17,6 @@ export default function AddAppRole() {
 
     return (
         <div>
-            {/* <Home/> */}
-            {/* <UploadImage/> */}
             <h3>Add Users</h3>
             <TextField
                 placeholder="Add New Role"

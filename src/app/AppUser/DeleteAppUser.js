@@ -1,7 +1,6 @@
 "use client";
 
-import { useState } from "react";
-//import { deleteAppUser } from "../../redux/AppUserSlice";
+import { deleteAppUser } from "../redux/AppUserSlice";
 import {
     Button,
     Dialog,
@@ -9,16 +8,19 @@ import {
     DialogContent,
     DialogTitle,
 } from "@mui/material";
+import { fetchAppUser } from "@/app/redux/AppUserSlice";
 
 import { useDispatch } from "react-redux";
 
-export default function DeleteAppUser({ data, setIsDelete, isDelete }) {
-    console.log('Data123123', data)
+export default function DeleteAppUser({ data, setIsDelete, isDelete, setMessage, setOpenSnackbar }) {
     const dispatch = useDispatch();
 
-    const handleConfirmDelete = () => {
-        dispatch(deleteAppUser(data))
+    const handleConfirmDelete = async() => {
+       await dispatch(deleteAppUser(data.appUserId))
         setIsDelete(false)
+        setMessage("Data Deleted Succefully!")
+        setOpenSnackbar(true);
+        dispatch(fetchAppUser());
     }
 
     return (

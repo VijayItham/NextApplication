@@ -56,7 +56,7 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
   const handleDelete = (row) => {
     setSelectedRow(row);
     setIsDelete(true); 
-  };
+              };
 
   const dynamicKeys = Object.keys(data[0]);
 
@@ -78,7 +78,6 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
   );
 
   const keys = Object.keys(paginatedRows[0]);
-
   return (
     <Paper>
       <TextField
@@ -93,21 +92,21 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
           <TableHead>
             <TableRow>
               {column.map((header) => (
-                <TableCell key={header.field}>
+                <TableCell key={header.field} >
                   {header.isSortable ? (
                     <TableSortLabel
                       active={orderBy === header.field}
                       direction={orderBy === header.field ? order : "asc"}
-                      onClick={() => handleSortRequest(header.field)}
+                      onClick={() => handleSortRequest(header.field)}                 
                     >
-                      {header.field}
+                      <h4>{header.title}</h4>
                     </TableSortLabel>
                   ) : (
                     header.field
                   )}
                 </TableCell>
               ))}
-              <TableCell>Actions</TableCell>
+              <TableCell><h4>Actions</h4></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

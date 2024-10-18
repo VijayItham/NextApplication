@@ -1,14 +1,14 @@
 "use client"
 
 import { useDispatch, useSelector } from "react-redux"
-import { fetchAppRole } from "../../redux/AppRoleSlice"
+import { fetchAppRole } from "../redux/AppRoleSlice"
 import { useEffect, useState } from "react";
-import DataTable from "../../common/DataTable";
-import { column } from "../../constants/AppRoleConst";
+import DataTable from "../common/DataTable";
+import { column } from "../constants/AppRoleConst";
 import { isEmpty } from 'lodash';
 import EditAppRole from "./EditAppRole";
 import DeleteAppRole from "./DeleteAppRole";
-import LoadingSpinner from "../../common/Loading";
+import LoadingSpinner from "../common/Loading";
 
 export default function DisplayAppRole() {
   const [isEdit, setIsEdit] = useState(false);

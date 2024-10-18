@@ -1,4 +1,4 @@
-import { createSlice, nanoid, current, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {

@@ -4,7 +4,7 @@ import { Box, Drawer, CssBaseline, Toolbar, List, Typography, Divider, IconButto
     ListItem, ListItemButton, ListItemIcon, ListItemText, styled, useTheme, AppBar as MuiAppBar}  from '@mui/material';
 import {Menu, ChevronLeft, ChevronRight, Inbox  } from '@mui/icons-material';
 import AddAppRole from './AppRole/AddAppRole'
-import AppUserRole from './AppUser/AddAppUser';
+import DisplayAppUser from '../AppUser/page';
 import { MenuList, MenuSelection } from '../constants/MenuConst';
 
 const drawerWidth = 240;
@@ -123,7 +123,7 @@ export default function PersistentDrawerLeft() {
         <DrawerHeader />
         <Typography sx={{ marginBottom: 2 }}>
         {selectedMenu === MenuSelection.ROLE && <AddAppRole />}
-        {selectedMenu === MenuSelection.USER  && <AppUserRole />} 
+        {selectedMenu === MenuSelection.USER  && <DisplayAppUser />} 
         </Typography>
       </Main>
     </Box>
