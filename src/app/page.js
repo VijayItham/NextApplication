@@ -14,6 +14,10 @@ export default function Home() {
       <Link href="/AppRole">App Role</Link>
       <br></br>
       <Link href="/AppUser">App User</Link>
+      <br></br>
+      <Link href="/Menu">Menu</Link>
+      <br></br>
+      <Link href="/RoleMenu">Role Menu</Link>
       <br/>
     </>
   );
