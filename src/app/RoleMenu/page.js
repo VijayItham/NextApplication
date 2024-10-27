@@ -11,10 +11,13 @@ import DataTable from "../common/DataTable";
 import LoadingSpinner from "../common/Loading";
 import AddRoleMenu from "./AddRoleMenu";
 import DeleteRoleMenu from "./DeleteRoleMenu";
+import { isLoggedIn } from "../common/auth";
+import { useRouter } from "next/navigation";
 
 import { column } from "@/app/constants/RoleMenuConst";
 
 export default function DisplayRoleMenu() {
+  const router = useRouter()
   const dispatch = useDispatch();
   const { isLoading, roleMenuData } = useSelector((data) => {
     return data.roleMenuReducer
@@ -37,7 +40,12 @@ export default function DisplayRoleMenu() {
   );
 
   useEffect(() => {
+    if(isLoggedIn()){
     dispatch(fetchRoleMenu());
+    }
+    else{
+      router.push('/')
+    }
   }, []);
   const handleRoleMenu = () => setIsAdd(true);
 
@@ -46,9 +54,9 @@ export default function DisplayRoleMenu() {
   );
 
   return (
-    <div>
+    <div style={{ position: 'relative', minHeight: '200px' }}>
       <Box mb={2}>
-        {!isAdd && !isEdit && (
+        {!isAdd && !isEdit && isLoggedIn() && (
           <Button
             variant="contained"
             startIcon={<AddIcon />}

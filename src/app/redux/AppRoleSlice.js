@@ -1,35 +1,71 @@
 import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getToken } from "../common/auth";
 
 const initialState = {
     isLoading: false,
     appRoleData: [],
-    // appRole: JSON.parse(localStorage.getItem("appRole")) ? JSON.parse(localStorage.getItem("appRole")) : []
 }
 
-export const fetchAppRole = createAsyncThunk('fetchAppRole', async () => {
-    const response = await axios.get('https://devrechargeapi.codetrex.in/api/AppRole/getAllAppRole');
+ export const fetchAppRole = createAsyncThunk('fetchAppRole', async () => {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No token found');
+    }
+    const response = await axios.get('https://devrechargeapi.codetrex.in/api/AppRole/getAllAppRole', {
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    });
     return response.data.data;
 });
 
 export const addAppRole = createAsyncThunk('addAppRole', async (appRole) => {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No token found');
+    }
     const data = {
         roleName: appRole,
         createdBy: 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f'
     }
-    const response = await axios.post('https://devrechargeapi.codetrex.in/api/AppRole/addAppRole', data);
+    const response = await axios.post('https://devrechargeapi.codetrex.in/api/AppRole/addAppRole', data,{
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    });
     return response.data;
 });
 
 export const updateAppRole = createAsyncThunk('updateAppRole', async (data) => {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No token found');
+    }
     const updateData = { ...data, "updatedBy": 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f' }
-    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppRole/updateAppRole`, updateData);
+    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppRole/updateAppRole`, updateData, {
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    });
     return response.data;
 });
 
 export const deleteAppRole = createAsyncThunk('deleteAppRole', async (data) => {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No token found');
+    }
     const deleteData = { appRoleId: data.appRoleId, "updatedBy": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
-    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppRole/deleteAppRole`, deleteData);
+    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppRole/deleteAppRole`, deleteData, {
+        headers: {
+            Authorization: `Bearer ${token}`, 
+        },
+    });
     return response.data;
 });
 

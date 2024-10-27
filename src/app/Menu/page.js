@@ -5,6 +5,8 @@ import { useEffect, useState } from "react";
 import { omit, isEmpty } from "lodash";
 import { Button, Box, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import { isLoggedIn } from "../common/auth";
+import { useRouter } from "next/navigation";
 
 import { fetchMenu } from "../redux/MenuSlice";
 import DataTable from "../common/DataTable";
@@ -15,6 +17,7 @@ import DeleteMenu from "./DeleteMenu";
 import { column } from "@/app/constants/AppMenuConst";
 
 export default function DisplayMenu() {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { isLoading, menuData } = useSelector((data) => {
     console.log('data123', data)
@@ -28,17 +31,22 @@ export default function DisplayMenu() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchMenu());
+    if(isLoggedIn()){
+      dispatch(fetchMenu());
+    }
+    else{
+      router.push('/')
+    }
   }, []);
   console.log('menuData', menuData)
   const handleMenu = () => setIsAdd(true);
   const selectedAllRowData = menuData.filter(
-    (item) => item.appUserId === selectedRow.appUserId
+    (item) => item.menuId === selectedRow.menuId
   );
   return (
-    <div>
+    <div style={{ position: 'relative', minHeight: '200px' }}>
       <Box mb={2}>
-        {!isAdd && !isEdit && (
+        {!isAdd && !isEdit && isLoggedIn() && (
           <Button
             variant="contained"
             startIcon={<AddIcon />}

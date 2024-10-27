@@ -1,5 +1,6 @@
-import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { getToken } from "../common/auth";
 
 const initialState = {
     isLoading: false,
@@ -7,30 +8,65 @@ const initialState = {
 }
 
 export const fetchMenu = createAsyncThunk('fetchMenu', async () => {
-    const response = await axios.get('https://devrechargeapi.codetrex.in/api/Menu/getAllMenu');
+    const token = getToken();
+   
+    if (!token) {
+        throw new Error('No token found');
+    }
+    const response = await axios.get('https://devrechargeapi.codetrex.in/api/Menu/getAllMenu', {
+        headers:{
+             Authorization: `Bearer ${token}`
+        }
+    });
     return response.data.data;
 });
 
 export const addMenu = createAsyncThunk('addMenu', async (menuData) => {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No token found');
+    }
     const data = {...menuData,
         createdBy: 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f'
     }
     console.log('Data123123', data)
-    const response = await axios.post('https://devrechargeapi.codetrex.in/api/Menu/addMenu', data);
+    const response = await axios.post('https://devrechargeapi.codetrex.in/api/Menu/addMenu', data, {
+        headers:{
+             Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 
 export const updateMenu = createAsyncThunk('updateMenu', async (data) => {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No token found');
+    }
     const updateData = { ...data, "updatedBy": 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f' }
-    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/updateMenu`, updateData);
+    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/updateMenu`, updateData, {
+        headers:{
+             Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 
 export const deleteMenu = createAsyncThunk('deleteMenu', async (menuId) => {
+    const token = getToken();
+    
+    if (!token) {
+        throw new Error('No token found');
+    }
   
     const deleteData = { menuId, "updatedBy": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
-    console.log('deleteData', deleteData)
-    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/deleteMenu`, deleteData);
+    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/deleteMenu`, deleteData, {
+        headers:{
+             Authorization: `Bearer ${token}`
+        }
+    });
     return response.data;
 });
 

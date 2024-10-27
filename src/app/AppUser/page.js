@@ -12,6 +12,8 @@ import LoadingSpinner from "../common/Loading";
 import AddAppUser from "./AddAppUser";
 import DeleteAppUser from "./DeleteAppUser";
 import { column } from "@/app/constants/AppUserConst";
+import { isLoggedIn } from "../common/auth";
+import { useRouter } from "next/navigation";
 
 export default function DisplayAppUser() {
   const dispatch = useDispatch();
@@ -22,10 +24,17 @@ export default function DisplayAppUser() {
   const [isAddUser, setIsAddUser] = useState(false);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const router = useRouter();
 
-  // Fetch app users on component mount
+
   useEffect(() => {
-    dispatch(fetchAppUser());
+    if (isLoggedIn()) {
+      console.log('isLoggedIn12', isLoggedIn())
+      dispatch(fetchAppUser());
+    }
+    else{
+      router.push('/')
+    }
   }, []);
 
   // Handle user data omitting unnecessary fields
@@ -49,9 +58,9 @@ export default function DisplayAppUser() {
     (item) => item.appUserId === selectedRow.appUserId
   );
   return (
-    <div>
+    <div style={{ position: 'relative', minHeight: '200px' }}>
       <Box mb={2}>
-        {!isAddUser && !isEdit && (
+        {!isAddUser && !isEdit &&  (
           <Button
             variant="contained"
             startIcon={<AddIcon />}
