@@ -30,7 +30,6 @@ export const addRoleMenu = createAsyncThunk('addRoleMenu', async (roleMenuData) 
     const data = {...roleMenuData,
         createdBy: 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f'
     }
-    console.log('Data123123', data)
     const response = await axios.post('https://devrechargeapi.codetrex.in/api/RoleMenu/addRoleMenu', data, {
         headers:{
              Authorization: `Bearer ${token}`
@@ -62,7 +61,6 @@ export const deleteRoleMenu = createAsyncThunk('deleteRoleMenu', async (roleMenu
     }
   
     const deleteData = { roleMenuId, "updatedBy": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
-    console.log('deleteData', deleteData)
     const response = await axios.post(`https://devrechargeapi.codetrex.in/api/RoleMenu/deleteRoleMenu`, deleteData, {
         headers:{
              Authorization: `Bearer ${token}`

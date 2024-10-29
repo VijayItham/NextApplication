@@ -77,17 +77,17 @@ const AppRoleSlice = createSlice({
     extraReducers: (builder) => {
         builder
             .addCase(fetchAppRole.pending, (state) => {
-                state.isLoading = true; // Set loading to true when starting to fetch
+                state.isLoading = true; 
             })
             .addCase(fetchAppRole.fulfilled, (state, action) => {
                 state.isLoading = false,
                     state.appRoleData = action.payload
             })
             .addCase(fetchAppRole.rejected, (state) => {
-                state.isLoading = false; // Set loading to false when fetch fails
+                state.isLoading = false; 
             })
             .addCase(addAppRole.pending, (state) => {
-                state.isLoading = true; // Set loading to true when starting to add
+                state.isLoading = true;
             })
             .addCase(addAppRole.fulfilled, (state, action) => {
                 if (action.payload.statusCode == 200) {
@@ -97,7 +97,7 @@ const AppRoleSlice = createSlice({
                 }
             })   
             .addCase(addAppRole.rejected, (state) => {
-                state.isLoading = false; // Set loading to false when add fails
+                state.isLoading = false; 
             })      
             .addCase(updateAppRole.pending, (state) => {
                 state.isLoading = true;

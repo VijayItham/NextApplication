@@ -30,7 +30,6 @@ export const addMenu = createAsyncThunk('addMenu', async (menuData) => {
     const data = {...menuData,
         createdBy: 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f'
     }
-    console.log('Data123123', data)
     const response = await axios.post('https://devrechargeapi.codetrex.in/api/Menu/addMenu', data, {
         headers:{
              Authorization: `Bearer ${token}`

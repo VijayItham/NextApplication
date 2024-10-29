@@ -14,6 +14,8 @@ export default function LoadingSpinner() {
       pointerEvents: 'none' // prevent interaction with anything under the overlay
     }}>
       <img 
+        height={50}
+        width={50}
         src='/images/loading.gif'
         alt="Loading..."
         style={{ pointerEvents: 'all' }} // ensure the spinner itself can be clicked if needed

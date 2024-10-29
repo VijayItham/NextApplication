@@ -106,7 +106,6 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    console.log("FormData==>", formData);
     await dispatch(addAppUser(formData));
     setMessage("Data Save Successfully");
     setOpenSnackbar(true);

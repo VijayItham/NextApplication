@@ -30,7 +30,7 @@ export const fetchAppUser = createAsyncThunk('fetchAppUser', async () => {
 
 export const fetchUserLogin = createAsyncThunk('fetchUserLogin', async (userDetail) => {
     const response = await axios.post('https://devrechargeapi.codetrex.in/api/AppUser/loginUser', userDetail);
-    console.log('response122',response)
+
     return response.data;
 });
 
@@ -78,9 +78,7 @@ export const deleteAppUser = createAsyncThunk('deleteAppUser', async (appUserId)
     if (!token) {
         throw new Error('No token found');
     }
-    console.log('appUserId123',appUserId)
     const deleteData = { appUserId, "updatedBy": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
-    console.log('deleteData', deleteData)
     const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppUser/deleteAppUser`, deleteData, {
         headers:{
              Authorization: `Bearer ${token}`
@@ -147,11 +145,8 @@ const AppUserSlice = createSlice({
                 state.isLoading = true;
             })
             .addCase(fetchUserLogin.fulfilled, (state, action) => {
-                console.log('fetchUserLogin', state,'actiopmn', action)
                 const loginDetail=action?.payload?.getLoginDetails??{}
-                console.log('loginDeta111il', action)
                 if (loginDetail.statusCode == 200) {
-                    console.log('loginDetail.data[0]', loginDetail.data[0])
                     doLogin(loginDetail.data[0], action.payload.token)
                     state.userDetail = loginDetail.data[0];
                     state.token = action.payload.token

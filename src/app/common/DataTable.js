@@ -13,32 +13,29 @@ import {
   Paper,
   TextField,
   Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
 } from "@mui/material";
 
-const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelectedRow }) => {
+const DataTable = ({
+  data,
+  column,
+  searchBy,
+  setIsEdit,
+  setIsDelete,
+  setSelectedRow,
+}) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState('');
+  const [orderBy, setOrderBy] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
 
-  //const [editPopupOpen, setEditPopupOpen] = useState(false);
-  const [deletePopupOpen, setDeletePopupOpen] = useState(false);
-  //const [selectedRow, setSelectedRow] = useState(null); // Track selected row for edit/delete
-
-  // Handle sorting
   const handleSortRequest = (property) => {
     const isAsc = orderBy === property && order === "asc";
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
 
-  // Handle pagination change
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -49,16 +46,14 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
   };
 
   const handleEdit = (row) => {
-    setSelectedRow(row); 
+    setSelectedRow(row);
     setIsEdit(true);
   };
 
   const handleDelete = (row) => {
     setSelectedRow(row);
-    setIsDelete(true); 
-              };
-
-  const dynamicKeys = Object.keys(data[0]);
+    setIsDelete(true);
+  };
 
   const filteredRows = data
     .filter((row) =>
@@ -76,8 +71,7 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
-
-  const keys = Object.keys(paginatedRows[0]);
+  const keys = Object.keys(paginatedRows?.[0]??[]);
   return (
     <Paper>
       <TextField
@@ -92,21 +86,23 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
           <TableHead>
             <TableRow>
               {column.map((header) => (
-                <TableCell key={header.field} >
+                <TableCell key={header.field}>
                   {header.isSortable ? (
                     <TableSortLabel
                       active={orderBy === header.field}
                       direction={orderBy === header.field ? order : "asc"}
-                      onClick={() => handleSortRequest(header.field)}                 
+                      onClick={() => handleSortRequest(header.field)}
                     >
                       <h4>{header.title}</h4>
                     </TableSortLabel>
                   ) : (
-                    header.field
+                   header.hide
                   )}
                 </TableCell>
               ))}
-              <TableCell><h4>Actions</h4></TableCell>
+              <TableCell>
+                <h4>Actions</h4>
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -129,7 +125,7 @@ const DataTable = ({ data, column, searchBy, setIsEdit, setIsDelete, setSelected
                       variant="contained"
                       color="secondary"
                       onClick={() => handleDelete(row)}
-                      style={{marginLeft:'2px'}}
+                      style={{ marginLeft: "2px" }}
                     >
                       Delete
                     </Button>

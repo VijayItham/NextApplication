@@ -48,7 +48,7 @@ const Login = () => {
       ).unwrap();
       setLoading(false);
       if (result && result.token) {
-        router.push("/Home");
+        router.push("/dashboard");
       } else {
         setApiError("Invalid username or password.");
       }
