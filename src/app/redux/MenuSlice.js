@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getToken } from "../common/auth";
+import { getToken, getUserDetails } from "../common/auth";
 
 const initialState = {
     isLoading: false,
@@ -23,12 +23,12 @@ export const fetchMenu = createAsyncThunk('fetchMenu', async () => {
 
 export const addMenu = createAsyncThunk('addMenu', async (menuData) => {
     const token = getToken();
-    
+    const user = getUserDetails();
     if (!token) {
         throw new Error('No token found');
     }
     const data = {...menuData,
-        createdBy: 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f'
+        createdBy:  user?.appUserId ?? null,
     }
     const response = await axios.post('https://devrechargeapi.codetrex.in/api/Menu/addMenu', data, {
         headers:{
@@ -40,11 +40,12 @@ export const addMenu = createAsyncThunk('addMenu', async (menuData) => {
 
 export const updateMenu = createAsyncThunk('updateMenu', async (data) => {
     const token = getToken();
-    
+    const user = getUserDetails();
+
     if (!token) {
         throw new Error('No token found');
     }
-    const updateData = { ...data, "updatedBy": 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f' }
+    const updateData = { ...data, updatedBy: user?.appUserId ?? null, }
     const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/updateMenu`, updateData, {
         headers:{
              Authorization: `Bearer ${token}`
@@ -55,12 +56,13 @@ export const updateMenu = createAsyncThunk('updateMenu', async (data) => {
 
 export const deleteMenu = createAsyncThunk('deleteMenu', async (menuId) => {
     const token = getToken();
-    
+    const user = getUserDetails();
+
     if (!token) {
         throw new Error('No token found');
     }
   
-    const deleteData = { menuId, "updatedBy": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
+    const deleteData = { menuId, updatedBy: user?.appUserId ?? null }
     const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/deleteMenu`, deleteData, {
         headers:{
              Authorization: `Bearer ${token}`

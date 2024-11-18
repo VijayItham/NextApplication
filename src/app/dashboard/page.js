@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 
 const dashboard = () => {
   const router = useRouter();
-  console.log("asd", isLoggedIn());
   useEffect(() => {
     if (!isLoggedIn()) {
       router.push("/");

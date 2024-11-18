@@ -1,6 +1,6 @@
 import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { doLogin, getToken, doLogout } from "../common/auth";
+import { doLogin, getToken, doLogout, getUserDetails } from "../common/auth";
 
 const initialState = {
     isLoading: false,
@@ -36,7 +36,7 @@ export const fetchUserLogin = createAsyncThunk('fetchUserLogin', async (userDeta
 
 export const addAppUser = createAsyncThunk('addAppUser', async (userData) => {
     const token = getToken();
-    
+    const user = getUserDetails();
     if (!token) {
         throw new Error('No token found');
     }
@@ -46,7 +46,7 @@ export const addAppUser = createAsyncThunk('addAppUser', async (userData) => {
         address2:'',
         middleName:'',
         panImage:'',
-        createdBy: 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f'
+        createdBy: user?.appUserId ?? null,
     }
     const response = await axios.post('https://devrechargeapi.codetrex.in/api/AppUser/addAppUser', data,{
         headers:{
@@ -58,12 +58,12 @@ export const addAppUser = createAsyncThunk('addAppUser', async (userData) => {
 
 export const updateAppUser = createAsyncThunk('updateAppUser', async (data) => {
     const token = getToken();
-    
+    const user = getUserDetails();
     if (!token) {
         throw new Error('No token found');
     }
     
-    const updateData = { ...data, "updatedBy": 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f' }
+    const updateData = { ...data, updatedBy: user?.appUserId ?? null, }
    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppUser/updateAppUser`, updateData, {
     headers:{
          Authorization: `Bearer ${token}`
@@ -74,11 +74,12 @@ export const updateAppUser = createAsyncThunk('updateAppUser', async (data) => {
 
 export const deleteAppUser = createAsyncThunk('deleteAppUser', async (appUserId) => {
     const token = getToken();
-    
+    const user = getUserDetails();
+
     if (!token) {
         throw new Error('No token found');
     }
-    const deleteData = { appUserId, "updatedBy": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
+    const deleteData = { appUserId, updatedBy: user?.appUserId ?? null,}
     const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppUser/deleteAppUser`, deleteData, {
         headers:{
              Authorization: `Bearer ${token}`

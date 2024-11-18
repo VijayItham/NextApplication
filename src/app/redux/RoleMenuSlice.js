@@ -1,6 +1,6 @@
 import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { getToken } from "../common/auth";
+import { getToken, getUserDetails } from "../common/auth";
 
 const initialState = {
     isLoading: false,
@@ -23,12 +23,13 @@ export const fetchRoleMenu = createAsyncThunk('fetchRoleMenu', async () => {
 
 export const addRoleMenu = createAsyncThunk('addRoleMenu', async (roleMenuData) => {
     const token = getToken();
+    const user = getUserDetails();
    
     if (!token) {
         throw new Error('No token found');
     }
     const data = {...roleMenuData,
-        createdBy: 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f'
+        createdBy:  user?.appUserId ?? null,
     }
     const response = await axios.post('https://devrechargeapi.codetrex.in/api/RoleMenu/addRoleMenu', data, {
         headers:{
@@ -40,11 +41,12 @@ export const addRoleMenu = createAsyncThunk('addRoleMenu', async (roleMenuData) 
 
 export const updateRoleMenu = createAsyncThunk('updateRoleMenu', async (data) => {
     const token = getToken();
+    const user = getUserDetails();
    
     if (!token) {
         throw new Error('No token found');
     }
-    const updateData = { ...data, "updatedBy": 'd3b07384-d9a3-4e14-a2fc-dc7c4ef3a29f' }
+    const updateData = { ...data, updatedBy:  user?.appUserId ?? null }
     const response = await axios.post(`https://devrechargeapi.codetrex.in/api/RoleMenu/updateRoleMenu`, updateData, {
         headers:{
              Authorization: `Bearer ${token}`
@@ -55,12 +57,13 @@ export const updateRoleMenu = createAsyncThunk('updateRoleMenu', async (data) =>
 
 export const deleteRoleMenu = createAsyncThunk('deleteRoleMenu', async (roleMenuId) => {
     const token = getToken();
+    const user = getUserDetails();
    
     if (!token) {
         throw new Error('No token found');
     }
   
-    const deleteData = { roleMenuId, "updatedBy": "3fa85f64-5717-4562-b3fc-2c963f66afa6" }
+    const deleteData = { roleMenuId, updatedBy:  user?.appUserId ?? null }
     const response = await axios.post(`https://devrechargeapi.codetrex.in/api/RoleMenu/deleteRoleMenu`, deleteData, {
         headers:{
              Authorization: `Bearer ${token}`
