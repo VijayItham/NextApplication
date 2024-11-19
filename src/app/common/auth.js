@@ -28,3 +28,12 @@ export const isLoggedIn = () => {
       return null;
     }
   };
+
+  export const getUserId = () => {
+    if (isLoggedIn()) {
+      const data =  JSON.parse(localStorage.getItem("userDetail"));
+      return data?.appUserId??null
+    } else {
+      return null;
+    }
+  };

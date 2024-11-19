@@ -1,6 +1,6 @@
-import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { doLogin, getToken, doLogout, getUserDetails } from "../common/auth";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getRequest, postCreate, postUpdate , postLoginRequest } from "../common/api";
+import { doLogin, doLogout } from "../common/auth";
 
 const initialState = {
     isLoading: false,
@@ -13,79 +13,32 @@ export const onLogout = () => async (dispatch) => {
     dispatch(logout());
 };
 
-export const fetchAppUser = createAsyncThunk('fetchAppUser', async () => {
-    const token = getToken();
-    
-    if (!token) {
-        throw new Error('No token found');
-    }
-    const response = await axios.get('https://devrechargeapi.codetrex.in/api/AppUser/getAllAppUser', {
-        headers: {
-            Authorization: `Bearer ${token}`, 
-        },
-    });
-
-    return response.data.data;
-});
+export const fetchAppUser = createAsyncThunk("fetchAppUser", async () => {
+    const data = await getRequest("/AppUser/getAllAppUser");
+    return data.data;
+  });
 
 export const fetchUserLogin = createAsyncThunk('fetchUserLogin', async (userDetail) => {
-    const response = await axios.post('https://devrechargeapi.codetrex.in/api/AppUser/loginUser', userDetail);
-
-    return response.data;
+    return  await postLoginRequest("/AppUser/loginUser", userDetail);;
 });
 
 export const addAppUser = createAsyncThunk('addAppUser', async (userData) => {
-    const token = getToken();
-    const user = getUserDetails();
-    if (!token) {
-        throw new Error('No token found');
-    }
     const data = {
         ...userData,
         aadharImageBack:'',
         address2:'',
         middleName:'',
-        panImage:'',
-        createdBy: user?.appUserId ?? null,
+        panImage:''
     }
-    const response = await axios.post('https://devrechargeapi.codetrex.in/api/AppUser/addAppUser', data,{
-        headers:{
-             Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    return await postCreate("/AppUser/addAppUser", data);
 });
 
 export const updateAppUser = createAsyncThunk('updateAppUser', async (data) => {
-    const token = getToken();
-    const user = getUserDetails();
-    if (!token) {
-        throw new Error('No token found');
-    }
-    
-    const updateData = { ...data, updatedBy: user?.appUserId ?? null, }
-   const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppUser/updateAppUser`, updateData, {
-    headers:{
-         Authorization: `Bearer ${token}`
-    }
-});
-    return response.data;
+    return  await postUpdate("/AppUser/updateAppUser", data);
 });
 
 export const deleteAppUser = createAsyncThunk('deleteAppUser', async (appUserId) => {
-    const token = getToken();
-    const user = getUserDetails();
-
-    if (!token) {
-        throw new Error('No token found');
-    }
-    const deleteData = { appUserId, updatedBy: user?.appUserId ?? null,}
-    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/AppUser/deleteAppUser`, deleteData, {
-        headers:{
-             Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    return await postUpdate("/AppUser/deleteAppUser", {appUserId});
 });
 
 const AppUserSlice = createSlice({

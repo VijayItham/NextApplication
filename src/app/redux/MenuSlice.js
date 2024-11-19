@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { getToken, getUserDetails } from "../common/auth";
+import { getRequest, postCreate, postUpdate } from "../common/api";
 
 const initialState = {
     isLoading: false,
@@ -8,67 +7,20 @@ const initialState = {
 }
 
 export const fetchMenu = createAsyncThunk('fetchMenu', async () => {
-    const token = getToken();
-   
-    if (!token) {
-        throw new Error('No token found');
-    }
-    const response = await axios.get('https://devrechargeapi.codetrex.in/api/Menu/getAllMenu', {
-        headers:{
-             Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data.data;
+  const response = await getRequest("/Menu/getAllMenu");
+  return response.data;
 });
 
 export const addMenu = createAsyncThunk('addMenu', async (menuData) => {
-    const token = getToken();
-    const user = getUserDetails();
-    if (!token) {
-        throw new Error('No token found');
-    }
-    const data = {...menuData,
-        createdBy:  user?.appUserId ?? null,
-    }
-    const response = await axios.post('https://devrechargeapi.codetrex.in/api/Menu/addMenu', data, {
-        headers:{
-             Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    return await postCreate("/Menu/addMenu", menuData);
 });
 
 export const updateMenu = createAsyncThunk('updateMenu', async (data) => {
-    const token = getToken();
-    const user = getUserDetails();
-
-    if (!token) {
-        throw new Error('No token found');
-    }
-    const updateData = { ...data, updatedBy: user?.appUserId ?? null, }
-    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/updateMenu`, updateData, {
-        headers:{
-             Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    return await postUpdate("/Menu/updateMenu", data);
 });
 
 export const deleteMenu = createAsyncThunk('deleteMenu', async (menuId) => {
-    const token = getToken();
-    const user = getUserDetails();
-
-    if (!token) {
-        throw new Error('No token found');
-    }
-  
-    const deleteData = { menuId, updatedBy: user?.appUserId ?? null }
-    const response = await axios.post(`https://devrechargeapi.codetrex.in/api/Menu/deleteMenu`, deleteData, {
-        headers:{
-             Authorization: `Bearer ${token}`
-        }
-    });
-    return response.data;
+    return await postUpdate("/Menu/deleteMenu", {menuId});
 });
 
 const AppMenuSlice = createSlice({
