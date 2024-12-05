@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getRequest, postCreate, postUpdate } from "../common/api";
+import { getRequest, postCreate, postUpdate } from "../api/page";
 
 const initialState = {
   isLoading: false,
