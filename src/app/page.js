@@ -29,6 +29,8 @@ const HomePage = () => {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isValid, setIsValid] = useState(null);
+  const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState("");
 
   const { enqueueSnackbar } = useSnackbar(); 
 
