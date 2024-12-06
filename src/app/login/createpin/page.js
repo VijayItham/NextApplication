@@ -40,7 +40,6 @@ export default function CreatePin() {
     }, [pin, confirmPin]);
 
     async function createPin() {
-
         try {
             setLoading(true);
             setError("");

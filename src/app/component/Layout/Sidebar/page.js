@@ -35,11 +35,12 @@ const menuItems = [
 ];
 const Sidebar = () => {
   const router = useRouter();
+
   useEffect(() => {
     if (!isLoggedIn()) {
-      router.push("/");
+      router.push("/"); // Redirect to the login page
     }
-  });
+  }),[router];
 
   console.log("isLoggedIn()", isLoggedIn());
   const user = getUserDetails();

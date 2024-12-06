@@ -3,7 +3,7 @@ import Card from "./Card/card";
 import styles from "../Layout/layout.module.css";
 import Rightbar from "./RecentActivity/page";
 import { isLoggedIn } from "../../api/auth";
-import { Component, useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
