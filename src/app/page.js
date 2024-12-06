@@ -21,16 +21,16 @@ import LockIcon from "@mui/icons-material/Lock";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import { brown } from "@mui/material/colors";
 import styles from './page.module.css'
+import { useSnackbar } from "notistack"; 
 
 const HomePage = () => {
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
-  const [apiError, setApiError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isValid, setIsValid] = useState(null);
 
+  const { enqueueSnackbar } = useSnackbar(); 
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -42,10 +42,6 @@ const HomePage = () => {
     return tempErrors;
   };
 
-  const onCancel = () => {
-    router.push("/");
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setApiError("");
@@ -53,15 +49,12 @@ const HomePage = () => {
     setErrors(validationErrors);
 
     if (Object.keys(validationErrors).length > 0) return;
-
     setLoading(true);
-
     try {
       const result = await dispatch(
         fetchUserLogin({ userName, password })
       ).unwrap();
       setLoading(false);
-      console.log('result==>', result)
       if (result?.loginDetails?.data[0]?.hasPin === "True") {
         router.push("/login/verify-pin");
       } else if (result?.loginDetails?.data[0]?.hasPin === "False") {
