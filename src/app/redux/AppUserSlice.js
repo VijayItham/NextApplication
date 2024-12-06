@@ -3,15 +3,10 @@ import {
   getRequest,
   postCreate,
   postUpdate,
-  postLoginRequest,
-  verifyPinRequest,
-  updatePinRequest,
-  forgotPasswordRequest,
-  verifyOtpRequest,
-  updatePasswordRequest,
+  postRequest
 } from "../api/page";
 
-import { doLogin, doLogout } from "../api/auth";
+import { doLogin, doLogout, getToken } from "../api/auth";
 
 const initialState = {
   isLoading: false,
@@ -25,31 +20,33 @@ export const onLogout = () => async (dispatch) => {
 };
 
 export const fetchUserLogin = createAsyncThunk(
-    "fetchUserLogin",
-    async (userDetail) => {
-      return await postLoginRequest("/Authentication/loginUser", userDetail);
-    }
-  );
-  
+  "fetchUserLogin",
+  async (userDetail) => {
+    return await postRequest("/Authentication/loginUser", userDetail);
+  }
+);
+
 export const verifyPin = createAsyncThunk("verifyPin", async (pin) => {
-  return await verifyPinRequest("/Authentication/verifyPin", pin);
+  const data = { pin, token: getToken() };
+  return await postRequest("/Authentication/verifyPin", data);
 });
 
 export const updatePin = createAsyncThunk("updatePin", async (pin) => {
-  return await updatePinRequest("/Authentication/updatePin", pin);
+  const data = { pin, token: getToken() };
+  return await postRequest("/Authentication/updatePin", data);
 });
 
 export const forgotPassword = createAsyncThunk(
   "forgotPassword",
   async (username) => {
-    return await forgotPasswordRequest("/Authentication/getOTP", username);
+    return await postRequest("/Authentication/getOTP", {username});
   }
 );
 
 export const verifyOtp = createAsyncThunk(
   "verifyOtp",
   async ({ username, otp }) => {
-    return await verifyOtpRequest("/Authentication/verifyOTP", {
+    return await postRequest("/Authentication/verifyOTP", {
       username,
       otp,
     });
@@ -59,7 +56,7 @@ export const verifyOtp = createAsyncThunk(
 export const updatePassword = createAsyncThunk(
   "updatePassword",
   async ({ username, password }) => {
-    return await updatePasswordRequest("/Authentication/updatePassword", {
+    return await postRequest("/Authentication/updatePassword", {
       username,
       password,
     });
@@ -89,7 +86,9 @@ export const updateAppUser = createAsyncThunk("updateAppUser", async (data) => {
 export const deleteAppUser = createAsyncThunk(
   "deleteAppUser",
   async (appUserId) => {
-    return await postUpdate("/AppUser/deleteAppUser", { appUserId });
+    return await postUpdate("/AppUser/deleteAppUser", {
+      appUserId,
+    });
   }
 );
 
@@ -98,7 +97,6 @@ const AppUserSlice = createSlice({
   initialState,
   reducers: {
     logout: (state) => {
-      // Reset state to the initial state
       return initialState;
     },
   },
@@ -152,7 +150,6 @@ const AppUserSlice = createSlice({
       .addCase(fetchUserLogin.fulfilled, (state, action) => {
         const loginDetail = action?.payload?.loginDetails ?? {};
         if (loginDetail.statusCode == 200) {
-            console.log('loginDetail', loginDetail.data[0],'action.payload', action.payload.token)
           doLogin(loginDetail.data[0], action.payload.token);
           state.userDetail = loginDetail.data[0];
           state.token = action.payload.token;
@@ -161,78 +158,70 @@ const AppUserSlice = createSlice({
       })
       .addCase(fetchUserLogin.rejected, (state) => {
         state.isLoading = false;
-      }) .addCase(updatePassword.pending, (state) => {
+      })
+      .addCase(updatePassword.pending, (state) => {
         state.isLoading = true;
-    })    .addCase(verifyPin.pending, (state) => {
+      })
+      .addCase(verifyPin.pending, (state) => {
         state.isLoading = true;
-    })
-    .addCase(verifyPin.fulfilled, (state) => {
+      })
+      .addCase(verifyPin.fulfilled, (state, action) => {
         state.isLoading = false;
         state.pinVerificationSuccess = true;
-    })
+      })
 
-    .addCase(verifyPin.rejected, (state, action) => {
+      .addCase(verifyPin.rejected, (state, action) => {
         state.isLoading = false;
         state.pinVerificationSuccess = false;
-        console.error("Verification Error:", action.payload || "Unknown error");
-    })
-    .addCase(updatePin.pending, (state) => {
+      })
+      .addCase(updatePin.pending, (state) => {
         state.isLoading = true;
-    })
-    .addCase(updatePin.fulfilled, (state, action) => {
+      })
+      .addCase(updatePin.fulfilled, (state, action) => {
         state.isLoading = false;
         const response = action.payload;
-
         if (response.userDetails?.statusCode === 200) {
-            console.log("Pin updated successfully:", response.message);
+          console.log("Pin updated successfully:", response.message);
         }
-    })
-    .addCase(updatePin.rejected, (state, action) => {
+      })
+      .addCase(updatePin.rejected, (state, action) => {
         state.isLoading = false;
-    })
-    .addCase(forgotPassword.pending, (state, action) => {
+      })
+      .addCase(forgotPassword.pending, (state, action) => {
         state.isLoading = true;
-    })
-    .addCase(forgotPassword.fulfilled, (state,action) => {
-        if(action.payload.statusCode==200)
-        {
-            console.log('action===forgotPassword', action.meta.arg)
-            doLogin({userName:action.meta.arg}, action.payload.token);
-            state.isLoading = false;
-            state.otpSent = true;
+      })
+      .addCase(forgotPassword.fulfilled, (state, action) => {
+        if (action.payload.statusCode == 200) {
+          doLogin({ userName: action.meta.arg }, action.payload.token);
+          state.isLoading = false;
+          state.otpSent = true;
         }
-    })
-    .addCase(forgotPassword.rejected, (state) => {
+      })
+      .addCase(forgotPassword.rejected, (state) => {
         state.isLoading = false;
         state.otpSent = false;
-    })
+      })
 
-    .addCase(verifyOtp.pending, (state) => {
+      .addCase(verifyOtp.pending, (state) => {
         state.isLoading = true;
-    })
-    .addCase(verifyOtp.fulfilled, (state, action) => {
+      })
+      .addCase(verifyOtp.fulfilled, (state, action) => {
         state.isLoading = false;
         const response = action.payload;
-        console.log(response);
-
         if (response?.statusCode === 200) {
-            console.log("OTP verified successfully:", response.message);
-            state.userDetail = response.data;
+          state.userDetail = response.data;
         }
-    })
-    .addCase(verifyOtp.rejected, (state) => {
+      })
+      .addCase(verifyOtp.rejected, (state) => {
         state.isLoading = false;
-
-    })
-    .addCase(updatePassword.fulfilled, (state, action) => {
+      })
+      .addCase(updatePassword.fulfilled, (state, action) => {
         state.isLoading = false;
         const response = action.payload;
-    })
-
-    .addCase(updatePassword.rejected, (state) => {
+      })
+      .addCase(updatePassword.rejected, (state) => {
         state.isLoading = false;
-    });
-      
+      });
   },
 });
 
