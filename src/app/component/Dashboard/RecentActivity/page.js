@@ -1,3 +1,5 @@
+"use client";
+
 import styles from './RecentActivity.module.css'
 import { MdPlayCircle } from 'react-icons/md'
 
