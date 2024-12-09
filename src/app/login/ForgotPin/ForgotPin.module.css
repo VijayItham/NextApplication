@@ -1,0 +1,139 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f2eb;
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    top: 65px;
+    left: 0;
+}
+
+.leftImg {
+    height: 34rem;
+    margin-right: 4rem;
+    margin-bottom: 2rem;
+}
+
+.formContainer {
+    max-width: 440px;
+    background-color: #fff;
+    padding: 4rem;
+    border-radius: 50px;
+    box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+}
+
+.arrowBox {
+    background-color: #EEEEEE;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+}
+
+.arrowIcon {
+    font-size: 30px;
+    color: #666666;
+    margin-top: 7px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.title {
+    color: #333333;
+    margin-bottom: 1rem;
+}
+
+.description {
+    color: #666666;
+    font-size: 18px;
+    font-family: Montserrat;
+    word-spacing: 2px;
+}
+
+.inputField {
+    margin-bottom: 1rem;
+}
+
+.submitBtn {
+    margin-top: 1rem !important;
+    padding: 15px !important;
+    width: 8rem !important;
+    border-radius: 3rem !important;
+    background-color: #784800 !important;
+    font-size: 13px !important;
+    margin-right: 20rem !important;
+}
+
+.rightImg {
+    height: auto;
+    margin-left: 4rem;
+    max-height: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+}
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .leftImg,
+    .rightImg {
+        height: 30rem;
+        margin: 1rem 1rem;
+    }
+
+    .formContainer {
+        width: 50%;
+        padding: 2rem;
+        margin: 2rem auto;
+    }
+
+    .submitBtn {
+        width: 30%;
+    }
+}
+
+@media (max-width: 768px) {
+
+
+    .leftImg, .rightImg {
+        display: none !important;
+    }
+
+    .formContainer {
+        width: 90%;
+        padding: 1.5rem;
+    }
+
+    .submitBtn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .formContainer {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .submitBtn {
+        padding: 12px;
+        font-size: 14px;
+        width: 100%;
+    }
+}

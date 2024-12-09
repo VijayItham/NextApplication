@@ -1,0 +1,149 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: Montserrat;
+    justify-content: center;
+    background-color: #f6f2eb;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    position: fixed;
+    top: 45px;
+    left: 0;
+  }
+  
+  .leftImage {
+    display: block;
+    margin-right: 4rem;
+    margin-top: 2rem;
+    max-width: 100%;
+    height: 32rem
+  }
+  
+  .rightImage {
+    display: block;
+    margin-top: 2rem;
+    max-width: 100%;
+    height: 32rem;
+    margin-left :3rem;
+  }
+  
+  .formContainer {
+    max-width: 400px;
+    background-color: #fff;
+    padding: 3.5rem;
+    border-radius: 50px;
+    box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
+    text-align: center;
+  }
+  
+  .title {
+    color: #333333;
+    margin-bottom: 1rem;
+  }
+  
+  .description {
+    color: #666666;
+    font-size: 16px;
+    text-align: start;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    word-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  
+  .textField {
+    margin-bottom: 1rem;
+  }
+  
+  .checkboxandforgotpassword {
+    display: flex;
+    justify-Content: space-between;
+    align-Items: center;
+    margin-bottom: 5px
+  }
+  
+  .checkboxLabel {
+    color: brown;
+  }
+  
+  .forgotPassword {
+    color: #784800;
+    cursor: pointer;
+  }
+  
+  .containerBtn{
+    display: flex ;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .button {
+    margin-top: 1.5rem !important;
+    padding: 15px !important;
+    border-radius: 3rem !important;
+    background-color: #784800 !important;
+    font-size: 13px !important;
+    width: 35% !important;
+  }
+  
+  @media (max-width: 900px) {
+    .leftImage {
+      display: none;
+    }
+  
+    .rightImage {
+      display: none;
+    }
+    
+  }
+  
+  @media (max-width: 600px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    .leftImage,
+    .rightImage {
+      display: none; 
+    }
+  
+    .formContainer {
+      width: 100%;
+      padding: 2rem;
+    }
+  
+    .title {
+      font-size: 1.5rem;
+    }
+  
+    .description {
+      font-size: 0.9rem;
+    }
+  
+    .button {
+      font-size: 1rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .formContainer {
+      padding: 1.5rem;
+      width: 90%;
+    }
+  
+    .title {
+      font-size: 1.3rem;
+    }
+  
+    .description {
+      font-size: 0.75rem;
+    }
+  
+    .button {
+      font-size: 0.75rem;
+      padding: 12px;
+      width: 30%;
+    }
+  }

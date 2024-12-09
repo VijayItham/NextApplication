@@ -4,8 +4,8 @@ import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import styles from "./verifypin.module.css";
-import { verifyPin } from "../../redux/AppUserSlice";
+import styles from "./verifyPin.module.css";
+import { verifyPin } from "@/app/redux/AppUserSlice";
 import { useDispatch } from "react-redux";
 
 export default function VerifyPin() {
@@ -16,7 +16,7 @@ export default function VerifyPin() {
   const [loading, setLoading] = useState(false);
 
   const handleForgotPin = () => {
-    router.push("/forgotPin");
+    router.push("/login/ForgotPin");
   };
 
   // Verify the PIN
@@ -141,12 +141,7 @@ export default function VerifyPin() {
           variant="contained"
           fullWidth
           onClick={handleSubmit}
-          className={styles.verifypin}
-          sx={{
-            "&:hover": {
-              backgroundColor: "#5e3700",
-            },
-          }}
+          className={styles.verifyPin}
         >
           {loading ? <CircularProgress size={24} /> : "Verify PIN"}
         </Button>

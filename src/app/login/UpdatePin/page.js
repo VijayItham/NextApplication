@@ -2,14 +2,14 @@
 import { Box, Typography, TextField, Button, Snackbar, Alert } from "@mui/material";
 import { useEffect, useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
-import { updatePin } from "../../redux/AppUserSlice";
+import { updatePin } from "@/app/redux/AppUserSlice";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { getToken } from "../../api/auth";
+import { getToken } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import styles from "./CreatePin.module.css";
+import styles from "./UpdatePin.module.css";
 
-export default function CreatePin() {
+export default function UpdatePin() {
     const dispatch = useDispatch();
     const router = useRouter();
     const [pin, setPin] = useState("");
@@ -20,7 +20,6 @@ export default function CreatePin() {
     const handleGoHome = () => {
         router.push("/");
     }
-
 
     useEffect(() => {
         const token = getToken();
@@ -40,7 +39,6 @@ export default function CreatePin() {
     }, [pin, confirmPin]);
 
     async function createPin() {
-
         try {
             setLoading(true);
             setError("");
@@ -50,7 +48,7 @@ export default function CreatePin() {
               console.log(result);
 
             if (result?.userDetails?.message === "Data Found") {
-                router.push("/login/PinCreateSuccess")
+                router.push("/login/UpdatePinSuccess");
             }
         } catch (err) {
             console.log(err);
@@ -68,8 +66,6 @@ export default function CreatePin() {
         setPin("");
         setConfirmPin("");
     };
-
-
     return (
         <>
             <Box
@@ -83,22 +79,22 @@ export default function CreatePin() {
                 />
 
                 <Box
-                    className={styles.createpincontainer}
+                    className={styles.box}
                 >
-                    <Box sx={{ backgroundColor: "#EEEEEE", width: "45px", height: "45px", borderRadius: "50%", marginBottom: "2rem" }} onClick={handleGoHome}>
-                        <ArrowBackIcon sx={{ fontSize: "30px", color: "#666666", marginTop: "7px" }} />
+                    <Box className={styles.arrowBox} onClick={handleGoHome}>
+                        <ArrowBackIcon className={styles.arrowIcon} />
                     </Box>
 
-                    <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
-                        <Typography variant="h4" component="h3" sx={{ color: "#333333", marginBottom: "1rem" }}>
-                            Create Pin?
+                    <Box className = {styles.content}>
+                        <Typography variant="h4" component="h3">
+                            Update Pin?
                         </Typography>
-                        <Typography sx={{ color: "#666666", fontSize: "18px", fontFamily: "Montserrat", wordSpacing: "2px" }} >
-                            Create your pin and confirm your pin
+                        <Typography className={styles.description} >
+                            Enter your pin and confirm your pin
                         </Typography>
 
                         {error && (
-                            <Typography sx={{ color: "red", fontSize: "14px", marginBottom: "1rem" }}>
+                            <Typography className={styles.error}>
                                 {error}
                             </Typography>
                         )}
@@ -146,7 +142,6 @@ export default function CreatePin() {
                                     },
                                 }}
                             />
-
                             <TextField
                                 margin="normal"
                                 required

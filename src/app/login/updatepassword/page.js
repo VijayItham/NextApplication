@@ -6,11 +6,12 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useDispatch} from "react-redux";
-import { updatePassword } from "../../redux/AppUserSlice";
-import styles from "./updatepass.module.css";
+import { updatePassword } from "@/app/redux/AppUserSlice";
+import styles from "./UpdatePassword.module.css";
 
 
 export default function UpdatePassword() {
+    console.log(styles)
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
     const router = useRouter();
@@ -20,11 +21,10 @@ export default function UpdatePassword() {
 
     const userDetail = localStorage.getItem("userDetail");
     let username = null;
-    console.log('userDetail12123', userDetail)
+    
     if (userDetail) {
         const parsedUserDetail = JSON.parse(userDetail);
         username = parsedUserDetail.userName; 
-        // console.log("Username:", username);
     } else {
         console.log("No user detail found in localStorage.");
     }
@@ -62,7 +62,7 @@ export default function UpdatePassword() {
                 });
                 setPassword("");
                 setConfirmPassword("");
-                router.push("/login/passwordresetsuccessfully");
+                router.push("/login/PasswordResetSuccess");
             } else {
                 enqueueSnackbar("Failed to update password.", {
                     variant: "error",
@@ -77,26 +77,24 @@ export default function UpdatePassword() {
         }
     };
 
-
     return (
         <>
             <Box
-               className = {styles.container}
+                className = {styles.container}
             >
                 <Box
                     component="img"
                     src="/images/boy.svg"
                     alt="Boy Illustration"
-                   
+                    className={styles.leftImg}
                 />
 
                 <Box
-                   className = {styles.box}
+                    className={styles.box}
                 >
                     <Box className={styles.arrowBox} onClick={handleGoHome}>
-                        <ArrowBackIcon  />
+                        <ArrowBackIcon className={styles.arrowIcon} />
                     </Box>
-
                     <Box className={styles.content}>
                         <Typography variant="h4" component="h3" className={styles.title}>
                             Password reset?
@@ -114,6 +112,7 @@ export default function UpdatePassword() {
                                 id="password"
                                 placeholder="Password"
                                 name="password"
+                                className={styles.textField}
                                 autoFocus
                                 value={password}
                                 onChange={(e) => {
@@ -146,6 +145,7 @@ export default function UpdatePassword() {
                                 required
                                 fullWidth
                                 name="confirmPassword"
+                                className={styles.textField}
                                 placeholder="Confirm Password"
                                 id="confirmPassword"
                                 autoComplete="confirm-password"
@@ -178,8 +178,8 @@ export default function UpdatePassword() {
                             <Button
                                 type="submit"
                                 variant="contained"
-                                className={styles.submitBtn}
                                 disabled={loading}
+                                className={styles.submitBtn}
                             >
                                 {loading ? <CircularProgress size={24} /> : "Submit"}
                             </Button>
@@ -198,3 +198,4 @@ export default function UpdatePassword() {
         </>
     );
 }
+

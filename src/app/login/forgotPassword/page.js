@@ -13,8 +13,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
-import { forgotPassword, verifyOtp } from "../../redux/AppUserSlice";
-import styles from "./forgotpass.module.css";
+import { forgotPassword, verifyOtp } from "@/app/redux/AppUserSlice";
+import styles from "./ForgotPassword.module.css";
 
 export default function ForgotPassword() {
     const dispatch = useDispatch();
@@ -32,14 +32,6 @@ export default function ForgotPassword() {
     const handleForgotPassword = async (e) => {
         e.preventDefault();
 
-        if (!username) {
-            enqueueSnackbar("Please enter your username.", {
-                variant: "error",
-                autoHideDuration: 1000,
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
-            return;
-        }
 
         try {
             setLoading(true);
@@ -93,7 +85,7 @@ export default function ForgotPassword() {
                     autoHideDuration: 1000,
                     anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
-                router.push("/login/updatepassword");
+                router.push("/login/UpdatePassword");
             } else {
                 enqueueSnackbar("Invalid OTP.", {
                     variant: "error",

@@ -1,7 +1,7 @@
 import styles from './RecentActivity.module.css'
 import { MdPlayCircle } from 'react-icons/md'
 
-const rightbar=()=>{
+export default function rightbar(){
   
     return (
         <div className={styles.container}>
@@ -17,8 +17,7 @@ const rightbar=()=>{
                     <span className={styles.subtitle}>takes 4 minjte</span>
                     <p className={styles.desc}>
                         akjsdhskdbaskjfbksjdf
-                        ashkshfksdbnksdjfbksdjfbkdsfbk
-                     
+                        ashkshfksdbnksdjfbksdjfbkdsfbk 
                     </p>
                     <button className={styles.button}>
                     <MdPlayCircle/>
@@ -51,5 +50,3 @@ const rightbar=()=>{
         </div>
     )
 }
-
-export default rightbar

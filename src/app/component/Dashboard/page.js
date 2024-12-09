@@ -1,37 +1,61 @@
-"use client";
-import Card from "./Card/card";
-import styles from "../Layout/layout.module.css";
+
+"use client"
+
+import React from "react";
+import { Box, } from "@mui/material";
+import OutlinedCard from "./Card/Card";
+import { useEffect } from "react";
+import styles from "./DashBoard.module.css";
 import Rightbar from "./RecentActivity/page";
-import { isLoggedIn } from "../../api/auth";
-import { Component, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { isLoggedIn } from "@/app/api/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { getDashboard } from "@/app/redux/AppUserSlice";
+import Navbar from "../Layout/Navbar/page";
 
-const Dashboard = () => {
-  const router = useRouter();
-  console.log('Dashboard')
+
+export default function DashBoard() {
+  const dispatch = useDispatch();
+  const dashboardData = useSelector((state) => state.appUserReducer.dashboardData);
+  console.log("dashboard----->",dashboardData)
+
+  let username = null;
+  const userDetail = localStorage.getItem("userDetail");
+  if (userDetail) {
+      const parsedUserDetail = JSON.parse(userDetail);
+      username = parsedUserDetail.userName; 
+  } else {
+      console.log("No user detail found in localStorage.");
+  }
+
+  console.log(username);
+
   useEffect(() => {
-    if (!isLoggedIn()) {
-      router.push("/");
+    if (username) {
+      dispatch(getDashboard(username));
     }
-  });
-  return (
-    <div className={styles.wrapper}>
-      {isLoggedIn() && (
-        <div>
-          <div className={styles.main}>
-            <div className={styles.cards}>
-              <Card />
-              <Card />
-              <Card />
-            </div>
-          </div>
-          <div className={styles.side}>
-            <Rightbar />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+  }, [dispatch, username])
 
-export default Dashboard;
+
+  return (
+   <>
+      {/* Right Scrollable Section */}
+      <Box
+        className={styles.rightSection}
+      >
+        {isLoggedIn() && (
+          <Box>
+            <Box className={styles.cardContainer}>
+              <OutlinedCard />
+            </Box>
+            <Rightbar />
+          </Box>
+        )}
+      </Box>
+      </>
+  );
+}
+
+
+
+
+

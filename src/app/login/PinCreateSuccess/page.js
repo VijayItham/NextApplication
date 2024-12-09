@@ -1,14 +1,13 @@
 "use client";
 
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button, } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-
-export default function PasswordResetSuccessfully() {
+export default function PinCreateSuccess() {
     const router = useRouter();
 
-    const handleLoginNow = () => {
-        router.push("/");
+    const handleDashboard = () =>{
+        router.push("/component/Dashboard");
     }
 
     return (
@@ -39,41 +38,38 @@ export default function PasswordResetSuccessfully() {
 
             <Box
                 sx={{
-                    maxWidth: 500,
+                    width: "360px",
                     backgroundColor: "#fff",
                     padding: "2.5rem",
                     borderRadius: "50px",
                     boxShadow: "0px 4px 10px rgba(249, 224, 180, 1)",
                     textAlign: "center",
                     marginTop: "2rem",
-                    marginBottom: '15rem'
+                    marginBottom:'15rem'
                 }}
             >
 
 
-                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'start' }}>
-                    <Typography variant="h4" component="h3" sx={{ color: "#333333", marginBottom: "1rem", marginTop: "1rem", fontSize: "24px", }}>
-                        Password updated Successfully
+                <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <Typography variant="h4" component="h3" sx={{ color: "#333333",marginTop:"1rem", fontSize: "24px", }}>
+                     Pin Created Successfully
                     </Typography>
-
                     <Button
                         type="submit"
                         variant="contained"
-                        onClick={handleLoginNow}
                         sx={{
                             mb: 2,
-                            mt: 2,
-                            ml:12,
+                            mt:3,
                             padding: "15px",
                             borderRadius: "3rem",
                             backgroundColor: "#784800",
                             fontSize: "13px",
                             width: "7rem"
                         }}
+                        onClick={handleDashboard}
                     >
-                        Login Now
+                        Dashboard
                     </Button>
-
                 </Box>
             </Box>
 

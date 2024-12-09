@@ -3,11 +3,11 @@
 import { Box, Typography, Button, } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-export default function PinCreateSuccessfully() {
+export default function UpdatePinSuccess() {
     const router = useRouter();
 
     const handleDashboard = () =>{
-        router.push("/component/Dashboard");
+        router.push("/");
     }
 
     return (
@@ -52,7 +52,7 @@ export default function PinCreateSuccessfully() {
 
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                     <Typography variant="h4" component="h3" sx={{ color: "#333333",marginTop:"1rem", fontSize: "24px", }}>
-                     Pin Created Successfully
+                     Updated pin Successfully
                     </Typography>
                     <Button
                         type="submit"
@@ -68,7 +68,7 @@ export default function PinCreateSuccessfully() {
                         }}
                         onClick={handleDashboard}
                     >
-                        Dashboard
+                        Login Now
                     </Button>
                 </Box>
             </Box>

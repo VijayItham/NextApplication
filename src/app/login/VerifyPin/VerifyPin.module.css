@@ -1,0 +1,125 @@
+.container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  font-family: Montserrat;
+  background-color: #f6f2eb;
+  position: fixed;
+  width: 100%;
+  min-height: 100vh;
+  padding: 4rem;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Left Image */
+.leftImage {
+  width: 11rem;
+  margin-bottom: 2rem;
+  max-width: 100%;
+  margin-right: 3rem;
+  margin-top: 3rem;
+}
+
+/* Codetrex Logo */
+.codetrexlogo {
+  width: 11rem;
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+/* Verify Container */
+.verifycontainer {
+  max-width: 580px;
+  background-color: #fff;
+  padding: 7rem;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
+  text-align: center;
+  margin-bottom: 0;
+}
+
+/* Pin Input */
+.pininput {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 2rem;
+}
+
+/* Forgot Pin */
+.forgotpin {
+  cursor: pointer !important;
+  color: #784800 !important;
+  text-align: right !important;
+  margin-bottom: 1rem !important;
+  position: relative !important;
+  left: 6rem !important;
+}
+
+/* Verify Pin Button */
+.verifyPin {
+  border-radius: 40px !important;
+  padding: 10px !important;
+  background-color: #784800 !important ;
+}
+
+/* Right Image */
+.rightImg {
+  width: 15rem;
+  margin-left: 3rem;
+  margin-bottom: 2rem;
+  max-width: 100%;
+  margin-top: 3rem;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+  .container {
+    padding: 3rem;
+  }
+
+  .leftImage {
+    display: none;
+  }
+
+  .pininput {
+    flex-direction: row;
+    height: 3.5rem;
+    gap: 1rem;
+  }
+
+  .rightImg {
+      display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    flex-direction: column;
+    padding: 2rem;
+  }
+
+  .leftImage,
+  .rightImg {
+    display: none;
+  }
+
+  .verifycontainer {
+    padding: 2rem;
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
+  }
+
+  .forgotpin {
+    left: 0;
+    text-align: center;
+  }
+
+  .pininput {
+    flex-direction: row;
+    gap: 1rem;
+  }
+}
