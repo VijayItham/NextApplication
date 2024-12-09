@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { useState } from "react";
+import { useState , useEffect} from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
 import { forgotPassword, verifyOtp } from "@/app/redux/AppUserSlice";
@@ -24,10 +24,21 @@ export default function ForgotPassword() {
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [usernameSent, setUsernameSent] = useState(false);
+    const [userDetail, setUserDetail] = useState(null);
 
     const handleGoHome = () => {
         router.push("/");
     };
+
+    useEffect(() => {
+        // Check if window is defined to ensure code runs only in the browser
+        if (typeof window !== "undefined") {
+          const storedUserDetail = localStorage.getItem("userDetail");
+          if (storedUserDetail) {
+            setUserDetail(JSON.parse(storedUserDetail));
+          }
+        }
+      }, []);  
 
     const handleForgotPassword = async (e) => {
         e.preventDefault();
@@ -104,6 +115,11 @@ export default function ForgotPassword() {
         <Box
             className={styles.container}
         >
+              {userDetail ? (
+        <p>Welcome back, {userDetail.userName}</p>
+      ) : (
+        <p>No user details found.</p>
+      )}
             <Box
                 component="img"
                 src="/images/boy.svg"

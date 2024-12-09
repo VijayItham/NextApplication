@@ -10,6 +10,17 @@ import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 
 export default function AddAppRole() {
+  const [userDetail, setUserDetail] = useState(null);
+
+  useEffect(() => {
+    // Check if window is defined to ensure code runs only in the browser
+    if (typeof window !== "undefined") {
+      const storedUserDetail = localStorage.getItem("userDetail");
+      if (storedUserDetail) {
+        setUserDetail(JSON.parse(storedUserDetail));
+      }
+    }
+  }, []);
   const [roleName, setRoleName] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
@@ -21,6 +32,11 @@ export default function AddAppRole() {
     <div>
         <div style={{ position: 'relative', minHeight: '200px' }}>
           <h3>Add Users</h3>
+          {userDetail ? (
+        <p>Welcome back, {userDetail.userName}</p>
+      ) : (
+        <p>No user details found.</p>
+      )}
           <TextField
             placeholder="Add New Role"
             onChange={(e) => setRoleName(e.target.value)}

@@ -52,7 +52,6 @@ export default function Login() {
         router.push("/login/CreatePin");
       }
       else {
-        // localStorage.clear();
         enqueueSnackbar("Invalid login credentials.", {
           variant: "error",
           autoHideDuration: 1000,

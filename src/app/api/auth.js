@@ -1,3 +1,5 @@
+"use client"
+
 export const isLoggedIn = () => {
     let data = localStorage.getItem("userDetail");
     return data !== null; 
