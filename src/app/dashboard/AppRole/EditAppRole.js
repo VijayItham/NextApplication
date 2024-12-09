@@ -16,10 +16,10 @@ import { useDispatch } from "react-redux";
 export default function EditAppRole({ data, setIsEdit, isEdit }) {
     const { appRoleId, roleName } = data
     const [updateRoleName, setUpdateRoleName] = useState(roleName);
-     const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
     const handleEditSave = () => {
-        dispatch(updateAppRole({appRoleId,roleName:updateRoleName}))
+        dispatch(updateAppRole({ appRoleId, roleName: updateRoleName }))
         setIsEdit(false)
     }
 
@@ -27,14 +27,14 @@ export default function EditAppRole({ data, setIsEdit, isEdit }) {
         <Dialog open={isEdit} onClose={() => setIsEdit(false)}>
             <DialogTitle>Edit App Role</DialogTitle>
             <DialogContent>
-                    <TextField
-                    label="Role Name" 
-                        name="name"
-                        fullWidth
-                        margin="normal"
-                        value={updateRoleName}
-                        onChange={(e) => setUpdateRoleName(e.target.value)}
-                    />
+                <TextField
+                    label="Role Name"
+                    name="name"
+                    fullWidth
+                    margin="normal"
+                    value={updateRoleName}
+                    onChange={(e) => setUpdateRoleName(e.target.value)}
+                />
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => setIsEdit(false)} color="primary">

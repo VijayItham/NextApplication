@@ -1,5 +1,9 @@
 .container{
     display: flex;
+    position: fixed;
+    top: 64px;
+    left: 0;
+    right: 0;
 }
 
 .menu{

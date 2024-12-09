@@ -62,6 +62,7 @@ export default function AddAppUser({
       dispatch(fetchCity(stateId));
     }
   }, []);
+  
   const handleChange = async (e) => {
     if (e.target.name === "aadharImageFront") {
       const imagePath = e.target.files?.[0];

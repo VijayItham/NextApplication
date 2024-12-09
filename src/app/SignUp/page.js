@@ -25,6 +25,7 @@ import { addAppUser } from "@/app/redux/AppUserSlice";
 import { useRouter } from "next/navigation";
 
 export default function SignUp({ setMessage, setOpenSnackbar }) {
+  console.log(setMessage);
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
@@ -131,9 +132,8 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
         sx={{
           p: 3,
           backgroundColor: "white",
-          boxShadow: 3,
-          borderRadius: 2,
-          width: "100%",
+          boxShadow: 3, borderRadius: 2,
+          width: "100%", 
           maxWidth: "1000px",
         }}
       >

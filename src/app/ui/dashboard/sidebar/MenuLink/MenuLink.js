@@ -5,6 +5,7 @@ import styles from './menuLink.module.css'
 import { usePathname } from "next/navigation"
 
 const MenuLink=({item})=>{
+    console.log(item);
     const pathName = usePathname()
     return(
         <Link href={item.path} className={`${styles.container} ${pathName==item.path && styles.active}}`}>

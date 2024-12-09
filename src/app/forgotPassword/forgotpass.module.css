@@ -1,0 +1,168 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6f2eb;
+    height: 100vh;
+    position: fixed;
+    width: 100vw;
+    top: 65px;
+    left: 0;
+}
+
+.leftImg {
+    height: 34rem;
+    margin-right: 4rem;
+    margin-bottom: 2rem;
+}
+
+.box {
+    max-width: 440px;
+    background-color: #fff;
+    padding: 4rem;
+    border-radius: 50px;
+    box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
+    text-align: center;
+    margin-top: 2rem;
+    margin-bottom: 6rem;
+}
+
+.goHome {
+    background-color: #eeeeee;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    margin-bottom: 2rem;
+}
+
+.arrowIcon {
+    font-size: 30px;
+    color: #666666;
+    margin-top: 7px;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.title {
+    color: #333333;
+    margin-bottom: 1rem;
+}
+
+.description {
+    color: #666666;
+    font-size: 18px;
+    font-family: Montserrat;
+    word-spacing: 2px;
+}
+
+.form {
+    margin-top: 1rem;
+}
+
+.sendMe {
+    margin-top: 3px;
+    margin-bottom: 2px;
+    padding: 15px;
+    width: 8rem;
+    border-radius: 3rem;
+    background-color: #784800;
+    font-size: 13px;
+    position: relative;
+    right: 105px;
+}
+
+.verifyOtp {
+    margin-top: 3rem;
+    padding: 15px;
+    width: 8rem;
+    border-radius: 3rem;
+    background-color: #784800;
+    font-size: 13px;
+}
+
+.rightImg {
+    height: auto;
+    margin-left: 4rem;
+    max-height: 100%;
+    max-width: 100%;
+    margin-top: 2rem;
+}
+
+/* Responsivness  */
+
+@media (max-width: 1024px) {
+    .container {
+        flex-direction: row;
+        justify-content: flex-start;
+    }
+
+    .leftImg,
+    .rightImg {
+        height: auto;
+        margin: 0 auto 2rem;
+        max-width: 80%;
+    }
+
+    .box {
+        width: 90%;
+        padding: 2rem;
+    }
+
+    .sendMe,
+    .verifyOtp {
+        padding: 12px;
+        width: 7.5rem;
+        font-size: 12px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .leftImg,
+    .rightImg {
+        display: none;
+    }
+
+    .goHome {
+        width: 40px;
+        height: 40px;
+    }
+
+    .arrowIcon {
+        font-size: 24px;
+    }
+
+    .sendMe,
+    .verifyOtp {
+        padding: 10px;
+        width: 6.5rem;
+        font-size: 11px;
+    }
+}
+
+
+@media (max-width: 480px) {
+
+    .leftImg,
+    .rightImg {
+        display: none;
+    }
+
+    .sendMe,
+    .verifyOtp {
+        padding: 8px;
+        width: 6rem;
+        font-size: 10px;
+    }
+}

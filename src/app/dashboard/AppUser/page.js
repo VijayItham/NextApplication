@@ -52,6 +52,7 @@ export default function DisplayAppUser() {
       "createdBy",
     ])
   );
+  
   const handleAddUser = () => setIsAddUser(true);
   const selectedAllRowData = appUserData.filter(
     (item) => item.appUserId === selectedRow.appUserId

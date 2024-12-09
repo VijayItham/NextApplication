@@ -25,7 +25,7 @@ const DataTable = ({
 }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-
+  console.log('data==>', data)
   const [order, setOrder] = useState("asc");
   const [orderBy, setOrderBy] = useState("");
   const [searchQuery, setSearchQuery] = useState("");

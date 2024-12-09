@@ -30,16 +30,21 @@ const menuItems = [
         title: "Role Menu",
         path: "/dashboard/RoleMenu",
       },
+      {
+        title: "Wallet",
+        path: "/dashboard/Wallet",
+      },
+      
     ],
   },
 ];
 const Sidebar = () => {
   const router = useRouter();
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      router.push("/");
-    }
-  });
+  // useEffect(() => {
+  //   if (!isLoggedIn()) {
+  //     router.push("/");
+  //   }
+  // });
 
   console.log("isLoggedIn()", isLoggedIn());
   const user = getUserDetails();

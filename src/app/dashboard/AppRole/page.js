@@ -13,6 +13,7 @@ export default function AddAppRole() {
   const [roleName, setRoleName] = useState("");
   const dispatch = useDispatch();
   const router = useRouter();
+  
   const onSubmit = () => {
     dispatch(addAppRole(roleName));
   };

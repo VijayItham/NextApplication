@@ -46,6 +46,7 @@ export default function DisplayRoleMenu() {
     else{
       router.push('/')
     }
+    
   }, []);
   const handleRoleMenu = () => setIsAdd(true);
 

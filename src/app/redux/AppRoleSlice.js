@@ -1,6 +1,7 @@
-import { createSlice, current, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-import { getToken, getUserDetails } from "../common/auth";
+"use client";
+
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { getRequest, postCreate, postUpdate } from "../common/api";
 
 const initialState = {
   isLoading: false,
@@ -8,87 +9,27 @@ const initialState = {
 };
 
 export const fetchAppRole = createAsyncThunk("fetchAppRole", async () => {
-  const token = getToken();
-
-  if (!token) {
-    throw new Error("No token found");
-  }
-  const response = await axios.get(
-    "https://devrechargeapi.codetrex.in/api/AppRole/getAllAppRole",
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response.data.data;
+  const data = await getRequest("/AppRole/getAllAppRole").data;
+  return data.data;
 });
 
-export const addAppRole = createAsyncThunk("addAppRole", async (appRole) => {
-  const token = getToken();
-  const user = getUserDetails();
-  if (!token) {
-    throw new Error("No token found");
-  }
-  const data = {
-    roleName: appRole,
-    createdBy: user?.appUserId ?? null,
-  };
-  const response = await axios.post(
-    "https://devrechargeapi.codetrex.in/api/AppRole/addAppRole",
-    data,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response.data;
+export const addAppRole = createAsyncThunk("addAppRole", async (roleName) => {
+  return await postCreate("/AppRole/addAppRole", {roleName});
 });
 
-export const updateAppRole = createAsyncThunk("updateAppRole", async (data) => {
-  const token = getToken();
-  const user = getUserDetails();
-  if (!token) {
-    throw new Error("No token found");
+export const updateAppRole = createAsyncThunk(
+  "updateAppRole",
+  async (appRole) => {
+    return await postUpdate("/AppRole/updateAppRole", appRole);
   }
-  const updateData = {
-    ...data,
-    updatedBy: user?.appUserId ?? null,
-  };
-  const response = await axios.post(
-    `https://devrechargeapi.codetrex.in/api/AppRole/updateAppRole`,
-    updateData,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response.data;
-});
+);
 
-export const deleteAppRole = createAsyncThunk("deleteAppRole", async (data) => {
-  const token = getToken();
-  const user = getUserDetails();
-  if (!token) {
-    throw new Error("No token found");
+export const deleteAppRole = createAsyncThunk(
+  "deleteAppRole",
+  async (appRoleId) => {
+    return await postUpdate("/AppRole/deleteAppRole", appRoleId);
   }
-  const deleteData = {
-    appRoleId: data.appRoleId,
-    updatedBy:  user?.appUserId ?? null,
-  };
-  const response = await axios.post(
-    `https://devrechargeapi.codetrex.in/api/AppRole/deleteAppRole`,
-    deleteData,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    }
-  );
-  return response.data;
-});
+);
 
 const AppRoleSlice = createSlice({
   name: "appRoleSlice",
@@ -100,7 +41,8 @@ const AppRoleSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchAppRole.fulfilled, (state, action) => {
-        (state.isLoading = false), (state.appRoleData = action.payload);
+        state.isLoading = false;
+        state.appRoleData = action.payload;
       })
       .addCase(fetchAppRole.rejected, (state) => {
         state.isLoading = false;
@@ -109,7 +51,7 @@ const AppRoleSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(addAppRole.fulfilled, (state, action) => {
-        if (action.payload.statusCode == 200) {
+        if (action.payload.statusCode === 200) {
           state.isLoading = false;
           const { id, roleName } = action.payload.data;
           state.appRoleData.push({ appRoleId: id, roleName });
@@ -122,14 +64,12 @@ const AppRoleSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateAppRole.fulfilled, (state, action) => {
-        if (action.payload.statusCode == 200) {
+        if (action.payload.statusCode === 200) {
           state.isLoading = false;
           const { appRoleId, roleName } = action.meta.arg;
-          const appRoleData = current(state.appRoleData);
-          const updatedData = appRoleData.map((item) =>
+          state.appRoleData = state.appRoleData.map((item) =>
             item.appRoleId === appRoleId ? { appRoleId, roleName } : item
           );
-          state.appRoleData = updatedData;
         }
       })
       .addCase(updateAppRole.rejected, (state) => {
@@ -139,14 +79,12 @@ const AppRoleSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(deleteAppRole.fulfilled, (state, action) => {
-        if (action.payload.statusCode == 200) {
+        if (action.payload.statusCode === 200) {
           state.isLoading = false;
-          const { appRoleId, roleName } = action.meta.arg;
-          const appRoleData = current(state.appRoleData);
-          const filteredData = appRoleData.filter(
-            (item) => item.appRoleId != appRoleId
+          const { appRoleId } = action.meta.arg;
+          state.appRoleData = state.appRoleData.filter(
+            (item) => item.appRoleId !== appRoleId
           );
-          state.appRoleData = filteredData;
         }
       })
       .addCase(deleteAppRole.rejected, (state) => {

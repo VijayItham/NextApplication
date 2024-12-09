@@ -6,16 +6,21 @@ import Rightbar from "../ui/dashboard/rightbar/rightbar";
 import { isLoggedIn } from "../common/auth";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+import Scrollbar from "../components/scrollbar";
+
 
 const dashboard = () => {
   const router = useRouter();
+  console.log('dashboard===')
   useEffect(() => {
-    if (!isLoggedIn()) {
-      router.push("/");
-    }
+    // if (!isLoggedIn()) {
+    //   router.push("/");
+    // }
   });
+  
   return (
-    <div className={styles.wrapper}>
+    <>
+    {/* <div className={styles.wrapper} >
       {isLoggedIn() && (
         <div>
           <div className={styles.main}>
@@ -31,7 +36,9 @@ const dashboard = () => {
           </div>
         </div>
       )}
-    </div>
+    </div> */}
+    <Scrollbar/>
+    </>
   );
 };
 

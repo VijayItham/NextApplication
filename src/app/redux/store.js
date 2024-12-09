@@ -1,9 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import appRoleReducer from './AppRoleSlice';
 import countryStateCityReducer from './CountryStateCitySlice';
-import appUserReducer from './AppUserSlice';  // Ensure this is correct
+import appUserReducer from './AppUserSlice';  
 import menuReducer from './MenuSlice';
 import roleMenuReducer from './RoleMenuSlice';
+import walletReducer from "./WalletSlice";
 
 const store = configureStore({
     reducer: {
@@ -11,7 +12,8 @@ const store = configureStore({
         countryStateCityReducer,
         appUserReducer,
         menuReducer,
-        roleMenuReducer
+        roleMenuReducer,
+        walletReducer
     }
 });
 

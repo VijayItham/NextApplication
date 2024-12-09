@@ -1,7 +1,10 @@
 .container{
-    position: sticky;
-    top: 40px;
+    position: fixed;
+    top: 180px;
+    left: 0;
+    right: 0;
 }
+
 
 .user{
     display: flex;
