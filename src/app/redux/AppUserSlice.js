@@ -166,8 +166,13 @@ const AppUserSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(verifyPin.fulfilled, (state, action) => {
+        const userDetails = action?.payload?.userDetails ?? {};
+        if (userDetails.statusCode == 200) {
+          doLogin(userDetails.data[0], action.payload.token);
+          state.userDetail = userDetails.data[0];
+          state.token = action.payload.token;
+        }
         state.isLoading = false;
-        state.pinVerificationSuccess = true;
       })
 
       .addCase(verifyPin.rejected, (state, action) => {

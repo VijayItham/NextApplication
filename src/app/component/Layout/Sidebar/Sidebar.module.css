@@ -26,7 +26,7 @@
 
 .userTitle{
     font-size: 12px;
-    color: white;
+    color: black;
 }
 
 .list{
@@ -50,5 +50,5 @@
     background: none;
     border: none;
     width: 100px;
-    color: white;
+    color: black;
 }

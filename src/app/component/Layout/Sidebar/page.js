@@ -30,6 +30,18 @@ const menuItems = [
         title: "Role Menu",
         path: "/component/RoleMenu",
       },
+      {
+        title: "Fund Request",
+        path: "/component/FundRequest",
+      },
+      {
+        title: "Admin Fund Request",
+        path: "/component/Admin/AdminFundRequest",
+      },
+      {
+        title: "Operator Type",
+        path: "/component/Admin/OperatorType",
+      },
     ],
   },
 ];

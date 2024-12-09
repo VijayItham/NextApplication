@@ -6,22 +6,23 @@ import { omit, isEmpty } from "lodash";
 import { Button, Box, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-import { fetchAppUser } from "@/app/redux/AppUserSlice";
+import { fetchFundRequest } from "@/app/redux/FundRequestSlice";
 import DataTable from "../../common/DataTable";
 import LoadingSpinner from "../../common/Loading";
-import AddAppUser from "./AddAppUser";
-import DeleteAppUser from "./DeleteAppUser";
-import { column } from "@/app/constants/AppUserConst";
+import AddFundRequest from "./AddFundRequest";
+import DeleteFundRequest from "./DeleteFundRequest";
+import { column } from "@/app/constants/FundRequestConst";
 import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
 
-export default function DisplayAppUser() {
+export default function DisplayFundRequest() {
   const dispatch = useDispatch();
-  const { isLoading, appUserData } = useSelector((data) => data.appUserReducer);
+  const { isLoading, fundRequestData } = useSelector((data) => data.fundRequestReducer);
+  console.log('fundRequestData', fundRequestData)
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [selectedRow, setSelectedRow] = useState([]);
-  const [isAddUser, setIsAddUser] = useState(false);
+  const [isAddFundRequest, setIsAddFundRequest] = useState(false);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const router = useRouter();
@@ -29,43 +30,32 @@ export default function DisplayAppUser() {
 
   useEffect(() => {
     if (isLoggedIn()) {
-      dispatch(fetchAppUser());
+      dispatch(fetchFundRequest());
     }
     else{
       router.push('/')
     }
   }, []);
 
-  // Handle user data omitting unnecessary fields
-  const updatedUserData = appUserData.map((item) =>
-    omit(item, [
-      "middleName",
-      "appRoleId",
-      "password",
-      "address2",
-      "stateId",
-      "cityId",
-      "countryId",
-      "panImage",
-      "aadharImageBack",
-      "aadharImageFront",
-      "createdBy",
-    ])
-  );
-  const handleAddUser = () => setIsAddUser(true);
-  const selectedAllRowData = appUserData.filter(
-    (item) => item.appUserId === selectedRow.appUserId
+  const updatedFundRequestData = fundRequestData.map((item) =>item);
+
+
+  console.log('updatedFundRequestData', updatedFundRequestData)
+
+  const handleFundRequest = () => setIsAddFundRequest(true);
+  const selectedAllRowData = fundRequestData.filter(
+    (item) => item.fundRequestId === selectedRow.fundRequestId
   );
   return (
     <div style={{ position: 'relative', minHeight: '200px' }}>
       <Box mb={2}>
-        {!isAddUser && !isEdit &&  (
+        {!isAddFundRequest && !isEdit &&  (
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            onClick={handleAddUser}
+            onClick={handleFundRequest}
           >
-            Add User
+            Add Fund Request
           </Button>
         )}
       </Box>
@@ -79,23 +69,23 @@ export default function DisplayAppUser() {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        !isEmpty(updatedUserData) &&
-        !isAddUser &&
+        !isEmpty(updatedFundRequestData) &&
+        !isAddFundRequest &&
         !isEdit && (
           <DataTable
-            searchBy="userName"
+            searchBy="paymentMode"
             setIsEdit={setIsEdit}
             setIsDelete={setIsDelete}
             setSelectedRow={setSelectedRow}
-            data={updatedUserData}
+            data={updatedFundRequestData}
             column={column}
           />
         )
       )}
-      {(isAddUser || isEdit) && (
-        <AddAppUser
+      {(isAddFundRequest || isEdit) && (
+        <AddFundRequest
           setIsEdit={setIsEdit}
-          setIsAddUser={setIsAddUser}
+          setIsAddFundRequest={setIsAddFundRequest}
           isEdit={isEdit}
           setOpenSnackbar={setOpenSnackbar}
           setMessage={setMessage}
@@ -103,7 +93,7 @@ export default function DisplayAppUser() {
         />
       )}
       {isDelete && (
-        <DeleteAppUser
+        <DeleteFundRequest
           data={selectedRow}
           setOpenSnackbar={setOpenSnackbar}
           setMessage={setMessage}

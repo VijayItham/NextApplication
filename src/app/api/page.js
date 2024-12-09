@@ -14,7 +14,7 @@ export const getRequest = async (endpoint) => {
       Authorization: `Bearer ${token}`,
     },
   });
-
+  console.log('response.data', response.data)
   return response.data;
 };
 
