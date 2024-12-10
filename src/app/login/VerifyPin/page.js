@@ -4,8 +4,8 @@ import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import styles from "./verifypin.module.css";
-import { verifyPin } from "../../redux/AppUserSlice";
+import styles from "./verifyPin.module.css";
+import { verifyPin } from "@/app/redux/AppUserSlice";
 import { useDispatch } from "react-redux";
 
 export default function VerifyPin() {
@@ -16,17 +16,15 @@ export default function VerifyPin() {
   const [loading, setLoading] = useState(false);
 
   const handleForgotPin = () => {
-    router.push("/forgotPin");
+    router.push("/login/ForgotPin");
   };
 
-  // Verify the PIN
   const verifyPinCode = async (fullPin) => {
     try {
       setLoading(true);
       const result = await dispatch(
         verifyPin(fullPin ) 
       ).unwrap();
-      console.log(result);
 
       if (result?.userDetails?.message === "Data Found") {
         router.push("/component/Dashboard");
@@ -87,22 +85,15 @@ export default function VerifyPin() {
       enqueueSnackbar('Please enter a complete 4-digit PIN.', { variant: 'warning' });
       return;
     }
-    
     verifyPinCode(fullPin)
    
   };
 
- 
-
   return (
     <Box className={styles.container}>
-  
       <Box component="img" src="/images/boy.svg" alt="Boy Illustration" className={styles.leftImage} />
-
-
       <Box className={styles.verifycontainer}>
         <Box component="img" src="/images/Codetrex_logo.png" alt="Codetrex Logo" className={styles.codetrexlogo} />
-
         <Box className={styles.pininput}>
           {Array(4)
             .fill(0)
@@ -141,12 +132,7 @@ export default function VerifyPin() {
           variant="contained"
           fullWidth
           onClick={handleSubmit}
-          className={styles.verifypin}
-          sx={{
-            "&:hover": {
-              backgroundColor: "#5e3700",
-            },
-          }}
+          className={styles.verifyPin}
         >
           {loading ? <CircularProgress size={24} /> : "Verify PIN"}
         </Button>

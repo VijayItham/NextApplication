@@ -14,8 +14,10 @@ import DeleteFundRequest from "./DeleteFundRequest";
 import { column } from "@/app/constants/FundRequestConst";
 import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 export default function DisplayFundRequest() {
+  const pathName = usePathname();
   const dispatch = useDispatch();
   const { isLoading, fundRequestData } = useSelector((data) => data.fundRequestReducer);
   console.log('fundRequestData', fundRequestData)
@@ -47,8 +49,9 @@ export default function DisplayFundRequest() {
     (item) => item.fundRequestId === selectedRow.fundRequestId
   );
   return (
-    <div style={{ position: 'relative', minHeight: '200px' }}>
-      <Box mb={2}>
+    <div style={{ position:'fixed', width: "80vw", top: "5.9rem", bottom: 0, height:"100vh",  backgroundColor: "#FBF8F3",   left: "17.5rem", overflowY: "auto",}}>
+      <Box sx={{display:"flex"}}>
+      <Box mb={2} sx={{marginTop:"10px"}}>
         {!isAddFundRequest && !isEdit &&  (
           <Button
             variant="contained"
@@ -58,6 +61,8 @@ export default function DisplayFundRequest() {
             Add Fund Request
           </Button>
         )}
+      </Box>
+      <Box sx={{marginTop:"5px", textAlign:"center", color:"#333333", position:"relative", left:"20rem" ,fontSize:"25px"}}>{pathName.split('/').pop()}</Box>
       </Box>
       <Snackbar
         open={openSnackbar}

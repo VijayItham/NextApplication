@@ -13,10 +13,12 @@ import DataTable from "../../common/DataTable";
 import LoadingSpinner from "../../common/Loading";
 import AddMenu from "./AddMenu";
 import DeleteMenu from "./DeleteMenu";
+import { usePathname } from "next/navigation";
 
 import { column } from "@/app/constants/AppMenuConst";
 
 export default function DisplayMenu() {
+  const pathName = usePathname();
   const router = useRouter();
   const dispatch = useDispatch();
   const { isLoading, menuData } = useSelector((data) => {
@@ -41,8 +43,11 @@ export default function DisplayMenu() {
   const selectedAllRowData = menuData.filter(
     (item) => item.menuId === selectedRow.menuId
   );
+
   return (
-    <div style={{ position: 'relative', minHeight: '200px' }}>
+    <Box style={{ position: 'fixed', width: "81vw", top: "5.8rem", bottom: 0, height:"100vh",   backgroundColor: "#FBF8F3",   left: "17.5rem", right:"30px", overflowY: "auto"}}>
+       
+       <Box sx={{display:"flex",}}>
       <Box mb={2}>
         {!isAdd && !isEdit && isLoggedIn() && (
           <Button
@@ -53,6 +58,9 @@ export default function DisplayMenu() {
             Add Menu
           </Button>
         )}
+       
+      </Box>
+       <Box sx={{marginTop:"5px", textAlign:"center", color:"#333333", position:"relative", left:"20rem" ,fontSize:"25px"}}>{pathName.split('/').pop()}</Box>
       </Box>
       <Snackbar
         open={openSnackbar}
@@ -96,6 +104,6 @@ export default function DisplayMenu() {
           setIsDelete={setIsDelete}
         />
       )}
-    </div>
+    </Box>
   );
 }

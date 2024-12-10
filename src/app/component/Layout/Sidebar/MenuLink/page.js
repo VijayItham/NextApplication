@@ -4,12 +4,12 @@ import Link from "next/link"
 import styles from './menuLink.module.css'
 import { usePathname } from "next/navigation"
 
-const MenuLink=({item})=>{
-    const pathName = usePathname()
-    return(
-        <Link href={item.path} className={`${styles.container} ${pathName==item.path && styles.active}}`}>
-            {item.title}
-        </Link>
+const MenuLink = ({ item }) => {
+    console.log("item", item);
+    return (
+            <Link href={item.pageName} style={{ textDecoration: "none", color:"#333333" }} >
+                {item.menuName}
+            </Link>
     )
 }
 

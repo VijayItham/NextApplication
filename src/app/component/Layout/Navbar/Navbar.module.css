@@ -1,41 +1,23 @@
+
 .container{
-    padding: 20px;
-    border-radius: 10px;
-    background-color: aqua;
-    display: flex;
+    padding: 30px;
+    position: relative;
+    width: 78.5%;
     align-items: center;
-    justify-content: space-between;
+    margin-left: 15.6rem;
+    overflow: hidden;
+    bottom: 20px;
+    background-color: #faf8f2;
+    border-bottom: 2px solid #EFDCBA;
+    /* border: 2px solid red; */
 }
 
-.title{
-    color: rebeccapurple;
-    font-weight: bold;
-    text-transform: capitalize;
-}
 
-.menu{
-    display: flex;
-    align-items: center;
-    gap: 20px;
-}
 
-.search{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background-color: brown;
-    padding: 10px;
-    border-radius: 10px;
-}
 
-.input{
-    background-color: transparent;
-    border: none;
-    color: blueviolet;
 
-}
 
-.icons{
-    display: flex;
-    gap: 20px;
-}
+
+
+
+

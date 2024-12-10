@@ -1,0 +1,42 @@
+.container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    width: 100vw;
+    overflow-y: auto;
+    align-items: center;
+    height: 100vh;
+    font-family: Montserrat;
+    background-color: #f6f2eb;
+    margin-top: 4.5rem;
+}
+
+.box {
+    margin-top: 10rem;
+    margin-bottom: 8rem;
+}
+
+.content {
+    padding: 63px;
+    margin-top: 18rem;
+    background-color: #f6f2eb;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    border-radius: 2px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.title {
+    color: #333333;
+    font-size: 2rem;
+}
+
+.button {
+    margin-top: 1.5rem !important;
+    padding: 15px !important;
+    border-radius: 2rem !important;
+    background-color: #784800 !important;
+    font-size: 13px !important;
+    color: white !important;
+    width: 10rem !important;
+}

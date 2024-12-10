@@ -73,7 +73,7 @@ const DataTable = ({
   );
   const keys = Object.keys(paginatedRows?.[0]??[]);
   return (
-    <Paper>
+    <Paper >
       <TextField
         label="Search"
         variant="outlined"
@@ -113,7 +113,7 @@ const DataTable = ({
                   {keys.map((key) => (
                     <TableCell key={key}>{row[key]}</TableCell>
                   ))}
-                  <TableCell>
+                  <TableCell style={{width:"11rem"}}>
                     <Button
                       variant="contained"
                       color="primary"
@@ -125,7 +125,7 @@ const DataTable = ({
                       variant="contained"
                       color="secondary"
                       onClick={() => handleDelete(row)}
-                      style={{ marginLeft: "2px" }}
+                      sx={{marginLeft:"8px"}}
                     >
                       Delete
                     </Button>
@@ -145,6 +145,7 @@ const DataTable = ({
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{height:"200px", position:"relative", right:"25rem"}}
       />
     </Paper>
   );
