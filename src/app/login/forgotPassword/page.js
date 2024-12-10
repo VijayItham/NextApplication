@@ -13,8 +13,8 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
-import { forgotPassword, verifyOtp } from "../../redux/AppUserSlice";
-import styles from "./forgotpass.module.css";
+import { forgotPassword, verifyOtp } from "@/app/redux/AppUserSlice";
+import styles from "./ForgotPassword.module.css";
 
 export default function ForgotPassword() {
     const dispatch = useDispatch();
@@ -24,27 +24,19 @@ export default function ForgotPassword() {
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [usernameSent, setUsernameSent] = useState(false);
+    const [userDetail, setUserDetail] = useState(null);
 
     const handleGoHome = () => {
         router.push("/");
-    };
+    }; 
 
     const handleForgotPassword = async (e) => {
         e.preventDefault();
 
-        if (!username) {
-            enqueueSnackbar("Please enter your username.", {
-                variant: "error",
-                autoHideDuration: 1000,
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
-            return;
-        }
 
         try {
             setLoading(true);
             const result = await dispatch(forgotPassword(username)).unwrap();
-            console.log(result);
 
             if (result?.statusCode === 200) {
                 enqueueSnackbar("OTP sent successfully. Check your email.", {
@@ -61,12 +53,7 @@ export default function ForgotPassword() {
                 });
             }
         } catch (err) {
-            console.error(err);
-            enqueueSnackbar("Error sending OTP. Please try again.", {
-                variant: "error",
-                autoHideDuration: 1000,
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
+            console.log(err);
         } finally {
             setLoading(false);
         }
@@ -85,7 +72,6 @@ export default function ForgotPassword() {
         try {
             setLoading(true);
             const result = await dispatch(verifyOtp({ username, otp })).unwrap();
-            console.log(result);
 
             if (result?.statusCode === 200) {
                 enqueueSnackbar("OTP verified successfully.", {
@@ -93,7 +79,7 @@ export default function ForgotPassword() {
                     autoHideDuration: 1000,
                     anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
-                router.push("/login/updatepassword");
+                router.push("/login/UpdatePassword");
             } else {
                 enqueueSnackbar("Invalid OTP.", {
                     variant: "error",

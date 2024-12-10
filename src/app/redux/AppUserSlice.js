@@ -3,15 +3,18 @@ import {
   getRequest,
   postCreate,
   postUpdate,
-  postRequest
+  postRequest,
+  postReq
 } from "../api/page";
 
-import { doLogin, doLogout, getToken } from "../api/auth";
+import { doLogin, doLogout, getToken,} from "../api/auth";
 
 const initialState = {
   isLoading: false,
   appUserData: [],
+  dashboardData:[],
   userDetail: {},
+  menu: [],
 };
 
 export const onLogout = () => async (dispatch) => {
@@ -63,18 +66,30 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+export const getMenuByUserRole = createAsyncThunk(
+  "getMenuByUserRole",
+  async (username ) => {
+    return await postReq("/Menu/getMenuByUserRole", username );
+  }
+);
+
+export const getDashboard = createAsyncThunk(
+  "getDashboard",
+  async (username) => {
+    return await  getRequest(`/Dashboard/getDashboard/${username}`);
+  }
+);
+
+
 export const fetchAppUser = createAsyncThunk("fetchAppUser", async () => {
   const data = await getRequest("/AppUser/getAllAppUser");
   return data.data;
 });
 
-export const addAppUser = createAsyncThunk("addAppUser", async (userData) => {
+export const addAppUser = createAsyncThunk("addAppUser", async (finalFormData) => {
+  console.log("hello");
   const data = {
-    ...userData,
-    aadharImageBack: "",
-    address2: "",
-    middleName: "",
-    panImage: "",
+   finalFormData
   };
   return await postCreate("/AppUser/addAppUser", data);
 });
@@ -226,7 +241,30 @@ const AppUserSlice = createSlice({
       })
       .addCase(updatePassword.rejected, (state) => {
         state.isLoading = false;
-      });
+      })
+
+      .addCase(getDashboard.pending, (state) => {
+        state.isLoadingoading = true;
+      })
+      .addCase(getDashboard.fulfilled, (state, action) => {
+        state.isLoadingoading = false;
+        state.dashboardData = action.payload;
+      })
+      .addCase(getDashboard.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(getMenuByUserRole.pending, (state) => {
+        state.isLoadingoading = true;
+      })
+      .addCase(getMenuByUserRole.fulfilled, (state, action) => {
+        state.isLoadingoading = false;
+        state.menu = action.payload;
+        console.log("menu", state.menu)
+      })
+      .addCase(getMenuByUserRole.rejected, (state) => {
+        state.isLoading = false;
+      })
+
   },
 });
 
