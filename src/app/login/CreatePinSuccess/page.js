@@ -2,18 +2,18 @@
 
 import { Box, Typography, Button, } from "@mui/material";
 import { useRouter } from "next/navigation";
-import  styles from "./CreatePinSuccess.module.css"
+import styles from "./CreatePinSuccess.module.css"
 
 export default function PinCreateSuccess() {
     const router = useRouter();
 
-    const handleDashboard = () =>{
+    const handleDashboard = () => {
         router.push("/component/Dashboard");
     }
 
     return (
         <Box
-            className = {styles.container}
+            className={styles.container}
         >
             <Box
                 component="img"
@@ -23,18 +23,16 @@ export default function PinCreateSuccess() {
             />
 
             <Box
-                className = {styles.box}
+                className={styles.box}
             >
-
-
-                <Box className = {styles.content}>
+                <Box className={styles.content}>
                     <Typography variant="h4" component="h3" className={styles.title}>
-                     Pin Created Successfully
+                        Pin Created Successfully
                     </Typography>
                     <Button
                         type="submit"
                         variant="contained"
-                       className={styles.dashboard}
+                        className={styles.dashboard}
                         onClick={handleDashboard}
                     >
                         Dashboard

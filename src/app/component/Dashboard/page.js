@@ -8,21 +8,17 @@ import { useEffect } from "react";
 import styles from "./DashBoard.module.css";
 import Rightbar from "./RecentActivity/page";
 import { isLoggedIn } from "@/app/api/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { getUserDetails } from "@/app/api/auth";
+import { useDispatch} from "react-redux";
 import { getDashboard } from "@/app/redux/AppUserSlice";
 import { usePathname } from "next/navigation";
 
 export default function DashBoard() {
   const pathName = usePathname();
   const dispatch = useDispatch();
-  const dashboardData = useSelector((state) => state.appUserReducer.dashboardData);
 
-  let username = null;
-  const userDetail = localStorage.getItem("userDetail");
-  if (userDetail) {
-      const parsedUserDetail = JSON.parse(userDetail);
-      username = parsedUserDetail.userName; 
-  } 
+  const details = getUserDetails()
+  const username = details?.userName;
 
   useEffect(() => {
     if (username) {
@@ -30,10 +26,8 @@ export default function DashBoard() {
     }
   }, [dispatch, username])
 
-
   return (
    <>
-      {/* Right Scrollable Section */}
       <Box
         className={styles.rightSection}
       >

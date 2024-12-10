@@ -14,7 +14,6 @@ export const getRequest = async (endpoint) => {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log('response.data', response.data)
   return response.data;
 };
 
@@ -23,16 +22,12 @@ export const postRequest = async (endpoint, data) => {
   return response.data;
 };
 
-export const postReq = async (endpoint, username) => {
-  console.log(username);
+export const postReq = async (endpoint, data) => {
   const token = getToken();
   if (!token) {
     throw new Error("No token found");
   }
 
-  const data = {
-    username
-  };
 
   const response = await axios.post(`${BASE_URL}${endpoint}`, data,{
     headers: {

@@ -24,11 +24,10 @@ export default function ForgotPassword() {
     const [otp, setOtp] = useState("");
     const [loading, setLoading] = useState(false);
     const [usernameSent, setUsernameSent] = useState(false);
-    const [userDetail, setUserDetail] = useState(null);
 
     const handleGoHome = () => {
         router.push("/");
-    }; 
+    };
 
     const handleForgotPassword = async (e) => {
         e.preventDefault();
@@ -113,7 +112,7 @@ export default function ForgotPassword() {
                     onClick={handleGoHome}
                 >
                     <ArrowBackIcon
-                       className={styles.arrowIcon}
+                        className={styles.arrowIcon}
                     />
                 </Box>
 
@@ -213,7 +212,7 @@ export default function ForgotPassword() {
                                     type="button"
                                     variant="contained"
                                     onClick={handleVerifyOtp}
-                                   className={styles.verifyOtp}
+                                    className={styles.verifyOtp}
                                 >
                                     {loading ? <CircularProgress size={24} /> : "Verify OTP"}
                                 </Button>
@@ -227,7 +226,7 @@ export default function ForgotPassword() {
                 component="img"
                 src="/images/girl.svg"
                 alt="Girl Illustration"
-               className={styles.rightImg}
+                className={styles.rightImg}
             />
         </Box>
 

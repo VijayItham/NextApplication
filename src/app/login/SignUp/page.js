@@ -109,21 +109,21 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-  
-    const appRoleId = "F931AD04-9E49-4B84-9DE4-7968BB1F26F0"; 
-  
+
+    const appRoleId = "F931AD04-9E49-4B84-9DE4-7968BB1F26F0";
+
     const finalFormData = {
       ...formData,
       appRoleId,
     };
-  
+
     try {
-      await dispatch(addAppUser(finalFormData)).unwrap(); 
+      await dispatch(addAppUser(finalFormData)).unwrap();
     } catch (error) {
       console.error("Error saving user data:", error);
     }
   };
-  
+
 
   const onCancel = () => {
     router.push('/')
@@ -278,7 +278,7 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
                   name="countryId"
                   value={formData.countryId}
                   onChange={handleChange}
-                  sx={{border:"brown"}}
+                  sx={{ border: "brown" }}
                   required
                 >
                   {countryList.map(({ cid, countryName }) => (
@@ -343,7 +343,7 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
             </Grid>
 
             {/* Business Details */}
-             <Grid item xs={12}>
+            <Grid item xs={12}>
               <hr />
             </Grid>
             <Grid item xs={12}>
@@ -384,8 +384,8 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
                 required
                 sx={inputStyles}
               />
-            </Grid> 
-             <Grid item xs={4}>
+            </Grid>
+            <Grid item xs={4}>
               <TextField
                 fullWidth
                 name="businessAddress"
@@ -471,7 +471,7 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
                 required
                 sx={inputStyles}
               />
-            </Grid> 
+            </Grid>
           </Grid>
           <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
             <Grid item>

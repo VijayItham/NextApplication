@@ -18,14 +18,8 @@ export default function UpdatePassword() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const userDetail = localStorage.getItem("userDetail");
-    let username = null;
-    
-    if (userDetail) {
-        const parsedUserDetail = JSON.parse(userDetail);
-        username = parsedUserDetail.userName; 
-    } 
-
+    const details = getUserDetails();
+    const username = details?.userName;
 
     const handleGoHome = () => {
         router.push("/");

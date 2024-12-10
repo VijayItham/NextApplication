@@ -9,26 +9,25 @@ import { getMenuByUserRole } from "@/app/redux/AppUserSlice";
 import { useSelector, useDispatch } from "react-redux";
 import MenuLink from "./MenuLink/page";
 import { useRouter } from "next/navigation";
+import { getUserDetails } from "@/app/api/auth";
 
 export default function Sidebar() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const menu = useSelector((state) => state.appUserReducer.menu);
+  const menu = useSelector((state) => state?.appUserReducer?.menu);
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState("");
 
-  let username = null;
-  const userDetail = localStorage.getItem("userDetail");
-  if (userDetail) {
-    const parsedUserDetail = JSON.parse(userDetail);
-    username = parsedUserDetail.userName;
-  } else {
-    console.log("No user detail found in localStorage.");
-  }
+ const details = getUserDetails();
+ const username = details?.userName;
+
+ const data = {
+  username
+ }
 
   useEffect(() => {
     if (username) {
-      dispatch(getMenuByUserRole(username));
+      dispatch(getMenuByUserRole(data));
     }
   }, [dispatch, username]);
 

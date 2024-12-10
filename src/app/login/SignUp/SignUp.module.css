@@ -11,7 +11,7 @@
     margin-top: 4.5rem;
 }
 
-.box{
+.box {
     margin-top: 10rem;
     margin-bottom: 8rem;
 }
@@ -20,18 +20,16 @@
     padding: 63px;
     margin-top: 18rem;
     background-color: #f6f2eb;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
     border-radius: 2px;
     width: 100%;
     max-width: 1000px;
 }
 
-.title{
+.title {
     color: #333333;
     font-size: 2rem;
 }
-
-
 
 .button {
     margin-top: 1.5rem !important;
@@ -41,4 +39,4 @@
     font-size: 13px !important;
     color: white !important;
     width: 10rem !important;
-  }
+}

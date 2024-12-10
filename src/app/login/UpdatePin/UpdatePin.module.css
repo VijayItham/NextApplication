@@ -97,7 +97,8 @@
         justify-content: center;
     }
 
-    .leftImg, .rightImg {
+    .leftImg,
+    .rightImg {
         height: 30rem;
         margin: 1rem auto;
     }
@@ -121,7 +122,8 @@
         justify-content: center;
     }
 
-    .leftImg, .rightImg {
+    .leftImg,
+    .rightImg {
         display: none;
     }
 

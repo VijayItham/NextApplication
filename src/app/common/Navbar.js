@@ -20,7 +20,6 @@ export default function Navbar() {
 
   return (
     <Box className={isComponentPage ? styles.header : styles.header1}>
-      {/* Logo */}
       <Box className={isComponentPage ? styles.logoContainer : styles.logoContainer1}>
         <img
           src="/images/Codetrex_logo.png"
@@ -31,7 +30,6 @@ export default function Navbar() {
 
       {isComponentPage ? (
         <>
-          {/* Search Box */}
           <Box className={styles.searchBox}>
             <TextField
               variant="outlined"
@@ -51,7 +49,6 @@ export default function Navbar() {
             <SearchIcon className={styles.searchIcon} />
           </Box>
 
-          {/* Dynamic Menu */}
           <Box className={styles.menuContainer}>
             {menu.map((item, index) => (
               <Box key={index} className={styles.menuItem}>
@@ -64,7 +61,6 @@ export default function Navbar() {
             ))}
           </Box>
 
-          {/* Notifications */}
           <Box className={styles.notifications}>
             <Badge badgeContent={3} color="error">
               <NotificationsNoneIcon
@@ -72,7 +68,6 @@ export default function Navbar() {
               />
             </Badge>
 
-            {/* Profile */}
             <Box className={styles.profile}>
               <Box>
                 <Typography className={styles.profileName}>{user.userName}</Typography>

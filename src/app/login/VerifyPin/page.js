@@ -19,7 +19,6 @@ export default function VerifyPin() {
     router.push("/login/ForgotPin");
   };
 
-  // Verify the PIN
   const verifyPinCode = async (fullPin) => {
     try {
       setLoading(true);
@@ -86,22 +85,15 @@ export default function VerifyPin() {
       enqueueSnackbar('Please enter a complete 4-digit PIN.', { variant: 'warning' });
       return;
     }
-    
     verifyPinCode(fullPin)
    
   };
 
- 
-
   return (
     <Box className={styles.container}>
-  
       <Box component="img" src="/images/boy.svg" alt="Boy Illustration" className={styles.leftImage} />
-
-
       <Box className={styles.verifycontainer}>
         <Box component="img" src="/images/Codetrex_logo.png" alt="Codetrex Logo" className={styles.codetrexlogo} />
-
         <Box className={styles.pininput}>
           {Array(4)
             .fill(0)

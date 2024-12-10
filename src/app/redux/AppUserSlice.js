@@ -68,8 +68,8 @@ export const updatePassword = createAsyncThunk(
 
 export const getMenuByUserRole = createAsyncThunk(
   "getMenuByUserRole",
-  async (username ) => {
-    return await postReq("/Menu/getMenuByUserRole", username );
+  async (data) => {
+    return await postReq("/Menu/getMenuByUserRole", data );
   }
 );
 

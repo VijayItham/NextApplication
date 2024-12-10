@@ -8,10 +8,9 @@ import Navbar from "./common/Navbar";
 
 export default function RootLayout({ children }) {
   const router = useRouter();
-  console.log('isLoggedIn123', isLoggedIn())
   useEffect(() => {
     if (!isLoggedIn()) {
-      router.push("/"); // Redirect to the login page
+      router.push("/"); 
     }
   }),[router];
   return (

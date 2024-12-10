@@ -1,4 +1,4 @@
-"use client" 
+"use client"
 
 import { Box, Button, Typography, TextField, FormControlLabel, Checkbox, CircularProgress, IconButton } from "@mui/material";
 import { useState } from "react";
@@ -29,10 +29,10 @@ export default function Login() {
 
   const validateUsername = (value) => {
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    const isValidPhone = /^\d{10}$/.test(value); 
+    const isValidPhone = /^\d{10}$/.test(value);
     console.log(isValidPhone);
-    const isValidUsername = /^[a-zA-Z0-9_]{3,20}$/.test(value); 
-  
+    const isValidUsername = /^[a-zA-Z0-9_]{3,20}$/.test(value);
+
     return value.length > 0 && (isValidEmail || isValidPhone || isValidUsername);
   };
 
@@ -88,16 +88,12 @@ export default function Login() {
       <Box
         className={styles.container}
       >
-
-        {/* Left Image */}
-        <Box
+         <Box
           component="img"
           src="/images/boy.svg"
           alt="Boy-img"
           className={styles.leftImage}
         />
-
-        {/* Login Form */}
         <Box
           className={styles.formContainer}
         >
@@ -153,7 +149,6 @@ export default function Login() {
                   },
                 }}
               />
-
               <TextField
                 margin="normal"
                 required
@@ -196,7 +191,6 @@ export default function Login() {
                   },
                 }}
               />
-
               <Box className={styles.checkboxandforgotpassword}>
                 <FormControlLabel
                   control={
@@ -214,15 +208,13 @@ export default function Login() {
                 />
                 <Box className={styles.forgotPassword} onClick={handleForgotPassword}>Forgot password ?</Box>
               </Box>
-
-
-              <Box className= {styles.containerBtn}>
+              <Box className={styles.containerBtn}>
                 <Button
                   type="submit"
                   variant="contained"
                   className={styles.button}
                 >
-                 {loading ? <CircularProgress size={24}/> : "Login Now"} 
+                  {loading ? <CircularProgress size={24} /> : "Login Now"}
                 </Button>
                 <Button
                   type="submit"
@@ -236,8 +228,6 @@ export default function Login() {
             </Box>
           </Box>
         </Box>
-
-        {/* Right Image */}
         <Box
           component="img"
           src="/images/girl.svg"

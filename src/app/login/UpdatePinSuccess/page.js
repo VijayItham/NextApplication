@@ -7,13 +7,13 @@ import styles from "./UpdatePinSuccess.module.css"
 export default function UpdatePinSuccess() {
     const router = useRouter();
 
-    const handleDashboard = () =>{
+    const handleDashboard = () => {
         router.push("/");
     }
 
     return (
         <Box
-         className = {styles.container}
+            className={styles.container}
         >
             <Box
                 component="img"
@@ -23,18 +23,17 @@ export default function UpdatePinSuccess() {
             />
 
             <Box
-                className = {styles.box}
+                className={styles.box}
             >
 
-
-                <Box className = {styles.content}>
+                <Box className={styles.content}>
                     <Typography variant="h4" component="h3" className={styles.title}>
-                     Updated pin Successfully
+                        Updated pin Successfully
                     </Typography>
                     <Button
                         type="submit"
                         variant="contained"
-                       className={styles.login}
+                        className={styles.login}
                         onClick={handleDashboard}
                     >
                         Login Now

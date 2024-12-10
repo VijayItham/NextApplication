@@ -26,14 +26,12 @@ export default function ForgotPin() {
   const [loading, setLoading] = useState(false);
   const [emailSent, setEmailSent] = useState(false);
 
-  const userDetail = localStorage.getItem("userDetail");
-  
-  const username = JSON.parse(userDetail || "{}")?.userName; 
+  const details = getUserDetails();
+  const username = details?.userName;
 
   const handleGoHome = () => router.push("/");
 
   const handleForgotPin = async (e) => {
-    
     e.preventDefault();
 
     try {
@@ -95,15 +93,12 @@ export default function ForgotPin() {
 
   return (
     <Box className={styles.container}>
-      {/* Left Image */}
       <Box
         component="img"
         src="/images/boy.svg"
         alt="Boy Illustration"
         className={styles.leftImg}
       />
-
-      {/* Form Container */}
       <Box className={styles.formContainer}>
         <Box className={styles.arrowBox} onClick={handleGoHome}>
           <ArrowBackIcon className={styles.arrowIcon} />
@@ -180,7 +175,6 @@ export default function ForgotPin() {
         </Box>
       </Box>
 
-      {/* Right Image */}
       <Box
         component="img"
         src="/images/girl.svg"

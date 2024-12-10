@@ -13,7 +13,6 @@
   overflow: hidden;
 }
 
-/* Left Image */
 .leftImage {
   width: 11rem;
   margin-bottom: 2rem;
@@ -22,14 +21,12 @@
   margin-top: 3rem;
 }
 
-/* Codetrex Logo */
 .codetrexlogo {
   width: 11rem;
   margin-bottom: 2rem;
   max-width: 100%;
 }
 
-/* Verify Container */
 .verifycontainer {
   max-width: 580px;
   background-color: #fff;
@@ -40,7 +37,6 @@
   margin-bottom: 0;
 }
 
-/* Pin Input */
 .pininput {
   display: flex;
   justify-content: center;
@@ -48,7 +44,6 @@
   margin-bottom: 2rem;
 }
 
-/* Forgot Pin */
 .forgotpin {
   cursor: pointer !important;
   color: #784800 !important;
@@ -58,14 +53,12 @@
   left: 6rem !important;
 }
 
-/* Verify Pin Button */
 .verifyPin {
   border-radius: 40px !important;
   padding: 10px !important;
-  background-color: #784800 !important ;
+  background-color: #784800 !important;
 }
 
-/* Right Image */
 .rightImg {
   width: 15rem;
   margin-left: 3rem;
@@ -74,7 +67,6 @@
   margin-top: 3rem;
 }
 
-/* Responsive Styles */
 @media (max-width: 900px) {
   .container {
     padding: 3rem;
@@ -91,7 +83,7 @@
   }
 
   .rightImg {
-      display: none;
+    display: none;
   }
 }
 

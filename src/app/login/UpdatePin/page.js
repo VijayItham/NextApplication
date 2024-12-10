@@ -21,6 +21,19 @@ export default function UpdatePin() {
         router.push("/");
     }
 
+    const handlePin = (e) =>{
+            const value = e.target.value;
+            if (/^\d{0,4}$/.test(value)) {
+                setPin(value);
+            }
+            if (value.length !== 4 && value.length > 0) {
+                setError("PIN must be exactly 4 digits.");
+            } else {
+                setError("");
+            }
+
+    }
+
     useEffect(() => {
         const token = getToken();
         if (!token) {
@@ -108,18 +121,7 @@ export default function UpdatePin() {
                                 name="pin"
                                 autoFocus
                                 value={pin}
-                                onChange={(e) => {
-                                    const value = e.target.value;
-                                    if (/^\d{0,4}$/.test(value)) {
-                                        setPin(value);
-                                    }
-                                    if (value.length !== 4 && value.length > 0) {
-                                        setError("PIN must be exactly 4 digits.");
-                                    } else {
-                                        setError("");
-                                    }
-
-                                }}
+                                onChange={handlePin}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
