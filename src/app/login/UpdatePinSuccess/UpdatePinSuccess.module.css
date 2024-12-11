@@ -7,7 +7,7 @@
     height: 100vh;
     position: fixed;
     width: 100vw;
-    top: 5rem;
+    top: 65px;
     left: 0;
 }
 
@@ -17,26 +17,38 @@
     margin-bottom: 2rem;
 }
 
-.createpincontainer {
-    max-width: 30rem;
+.box {
+    width: 360px;
     background-color: #fff;
-    padding: 4rem;
+    padding: 2.5rem;
     border-radius: 50px;
     box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
     text-align: center;
     margin-top: 2rem;
-    margin-bottom: 6rem;
+    margin-bottom: 15rem;
 }
 
-.submitbtn {
-    margin-top: 6px !important;
-    margin-bottom: 4px !important;
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.title {
+    color: #333333;
+    margin-top: 1rem;
+    width: 25rem;
+}
+
+
+.login {
+    margin-top: 2rem !important;
+
     padding: 15px !important;
-    width: 8rem !important;
     border-radius: 3rem !important;
     background-color: #784800 !important;
     font-size: 13px !important;
-    margin-right: 22rem !important;
+    width: 7rem !important;
 }
 
 .rightImg {

@@ -7,7 +7,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { getToken } from "../../api/auth";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import styles from "./createpin.module.css";
+import styles from "./CreatePin.module.css";
 
 export default function CreatePin() {
     const dispatch = useDispatch();
@@ -40,16 +40,16 @@ export default function CreatePin() {
     }, [pin, confirmPin]);
 
     async function createPin() {
+
         try {
             setLoading(true);
             setError("");
             const result = await dispatch(
                 updatePin(pin ) 
               ).unwrap();
-              console.log(result);
 
             if (result?.userDetails?.message === "Data Found") {
-                router.push("/login/pincreatesuccessfully")
+                router.push("/login/CreatePinSuccess")
             }
         } catch (err) {
             console.log(err);

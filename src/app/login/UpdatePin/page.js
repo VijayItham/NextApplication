@@ -1,76 +1,87 @@
 "use client";
-import { Box, Typography, TextField, Button, CircularProgress } from "@mui/material";
-import { useState, useEffect } from "react";
+import { Box, Typography, TextField, Button, Snackbar, Alert } from "@mui/material";
+import { useEffect, useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
+import { updatePin } from "@/app/redux/AppUserSlice";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { getToken } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
-import { useSnackbar } from "notistack";
-import { useDispatch} from "react-redux";
-import { updatePassword } from "@/app/redux/AppUserSlice";
-import styles from "./UpdatePassword.module.css";
+import { useDispatch } from "react-redux";
+import styles from "./UpdatePin.module.css";
 
-
-export default function UpdatePassword() {
+export default function UpdatePin() {
     const dispatch = useDispatch();
-    const { enqueueSnackbar } = useSnackbar();
     const router = useRouter();
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [pin, setPin] = useState("");
+    const [confirmPin, setConfirmPin] = useState("");
+    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-
-    const details = getUserDetails();
-    const username = details?.userName;
 
     const handleGoHome = () => {
         router.push("/");
     }
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handlePin = (e) =>{
+            const value = e.target.value;
+            if (/^\d{0,4}$/.test(value)) {
+                setPin(value);
+            }
+            if (value.length !== 4 && value.length > 0) {
+                setError("PIN must be exactly 4 digits.");
+            } else {
+                setError("");
+            }
 
-        if (password !== confirmPassword) {
-            enqueueSnackbar("Passwords do not match. Please try again.", {
-                variant: "error",
-                autoHideDuration: 3000,
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
+    }
 
-            setPassword("");
-            setConfirmPassword("");
-            return;
+    useEffect(() => {
+        const token = getToken();
+        if (!token) {
+            router.push("/");
         }
+    }, [router]);
 
+    useEffect(() => {
+        if (pin.length > 0 && pin.length !== 4) {
+            setError("PIN must be exactly 4 digits.");
+        } else if (pin !== confirmPin && confirmPin.length > 0) {
+            setError("PINs do not match.");
+        } else {
+            setError("");
+        }
+    }, [pin, confirmPin]);
+
+    async function createPin() {
         try {
             setLoading(true);
-            const result = await dispatch(updatePassword({ username, password })).unwrap();
+            setError("");
+            const result = await dispatch(
+                updatePin(pin ) 
+              ).unwrap();
 
-            if (result?.statusCode === 200) {
-                enqueueSnackbar("Password updated successfully!", {
-                    variant: "success",
-                    autoHideDuration: 3000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
-                });
-                setPassword("");
-                setConfirmPassword("");
-                router.push("/login/UpdatePasswordSuccess");
-            } else {
-                enqueueSnackbar("Failed to update password.", {
-                    variant: "error",
-                    autoHideDuration: 3000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
-                });
+            if (result?.userDetails?.message === "Data Found") {
+                router.push("/login/UpdatePinSuccess");
             }
         } catch (err) {
             console.log(err);
         } finally {
             setLoading(false);
         }
-    };
+    }
 
+
+    const handleSubmit = async (event) => {
+
+        event.preventDefault();
+
+        createPin();
+        setPin("");
+        setConfirmPin("");
+    };
     return (
         <>
             <Box
-                className = {styles.container}
+                className={styles.container}
             >
                 <Box
                     component="img"
@@ -85,29 +96,32 @@ export default function UpdatePassword() {
                     <Box className={styles.arrowBox} onClick={handleGoHome}>
                         <ArrowBackIcon className={styles.arrowIcon} />
                     </Box>
-                    <Box className={styles.content}>
-                        <Typography variant="h4" component="h3" className={styles.title}>
-                            Password reset?
+
+                    <Box className = {styles.content}>
+                        <Typography variant="h4" component="h3">
+                            Update Pin?
                         </Typography>
                         <Typography className={styles.description} >
-                            Create your password and confirm your password
+                            Enter your pin and confirm your pin
                         </Typography>
 
+                        {error && (
+                            <Typography className={styles.error}>
+                                {error}
+                            </Typography>
+                        )}
 
                         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                id="password"
-                                placeholder="Password"
-                                name="password"
-                                className={styles.textField}
+                                id="pin"
+                                placeholder="Pin"
+                                name="pin"
                                 autoFocus
-                                value={password}
-                                onChange={(e) => {
-                                    setPassword(e.target.value)
-                                }}
+                                value={pin}
+                                onChange={handlePin}
                                 InputProps={{
                                     startAdornment: (
                                         <InputAdornment position="start">
@@ -129,19 +143,20 @@ export default function UpdatePassword() {
                                     },
                                 }}
                             />
-
                             <TextField
                                 margin="normal"
                                 required
                                 fullWidth
-                                name="confirmPassword"
-                                className={styles.textField}
-                                placeholder="Confirm Password"
-                                id="confirmPassword"
-                                autoComplete="confirm-password"
-                                value={confirmPassword}
+                                name="confirmPin"
+                                placeholder="Confirm Pin"
+                                id="confirmPin"
+                                autoComplete="current-password"
+                                value={confirmPin}
                                 onChange={(e) => {
-                                    setConfirmPassword(e.target.value)
+                                    const value = e.target.value;
+                                    if (/^\d{0,4}$/.test(value)) {
+                                        setConfirmPin(value);
+                                    }
                                 }}
                                 InputProps={{
                                     startAdornment: (
@@ -168,10 +183,10 @@ export default function UpdatePassword() {
                             <Button
                                 type="submit"
                                 variant="contained"
+                                className={styles.submitbtn}
                                 disabled={loading}
-                                className={styles.submitBtn}
                             >
-                                {loading ? <CircularProgress size={24} /> : "Submit"}
+                                Submit
                             </Button>
                         </Box>
                     </Box>

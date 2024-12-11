@@ -1,37 +1,51 @@
-"use client";
-import Card from "./Card/card";
-import styles from "../Layout/layout.module.css";
-import Rightbar from "./RecentActivity/page";
-import { isLoggedIn } from "../../api/auth";
+
+"use client"
+
+import React from "react";
+import { Box, } from "@mui/material";
+import OutlinedCard from "./Card/Card";
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import styles from "./DashBoard.module.css";
+import Rightbar from "./RecentActivity/page";
+import { isLoggedIn } from "@/app/api/auth";
+import { getUserDetails } from "@/app/api/auth";
+import { useDispatch} from "react-redux";
+import { getDashboard } from "@/app/redux/AppUserSlice";
+import { usePathname } from "next/navigation";
 
-const Dashboard = () => {
-  const router = useRouter();
-  console.log('Dashboard')
+export default function DashBoard() {
+  const pathName = usePathname();
+  const dispatch = useDispatch();
+
+  const details = getUserDetails()
+  const username = details?.userName;
+
   useEffect(() => {
-    if (!isLoggedIn()) {
-      router.push("/");
+    if (username) {
+      dispatch(getDashboard(username));
     }
-  });
-  return (
-    <div className={styles.wrapper}>
-      {isLoggedIn() && (
-        <div>
-          <div className={styles.main}>
-            <div className={styles.cards}>
-              <Card />
-              <Card />
-              <Card />
-            </div>
-          </div>
-          <div className={styles.side}>
-            <Rightbar />
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
+  }, [dispatch, username])
 
-export default Dashboard;
+  return (
+   <>
+      <Box
+        className={styles.rightSection}
+      >
+        {isLoggedIn() && (
+          <Box>
+            <Box sx={{marginTop:"5px", textAlign:"center", marginRight:"8rem", fontSize:"25px"}}>{pathName.split('/').pop()}</Box>
+            <Box className={styles.cardContainer}>
+              <OutlinedCard />
+            </Box>
+            <Rightbar />
+          </Box>
+        )}
+      </Box>
+      </>
+  );
+}
+
+
+
+
+

@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  font-family: Montserrat;
   justify-content: center;
   background-color: #f6f2eb;
   width: 100vw;
@@ -11,22 +12,6 @@
   top: 45px;
   left: 0;
 }
-
-.loadingOverlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.7);
-  z-index: 9999;
-}
-
 
 .leftImage {
   display: block;
@@ -40,7 +25,8 @@
   display: block;
   margin-top: 2rem;
   max-width: 100%;
-  height: 32rem
+  height: 32rem;
+  margin-left: 3rem;
 }
 
 .formContainer {
@@ -50,7 +36,6 @@
   border-radius: 50px;
   box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
   text-align: center;
-  margin: 0 2rem;
 }
 
 .title {
@@ -61,7 +46,6 @@
 .description {
   color: #666666;
   font-size: 16px;
-  font-family: Montserrat;
   text-align: start;
   line-height: 1.5;
   letter-spacing: 0.5px;
@@ -89,14 +73,29 @@
   cursor: pointer;
 }
 
+.containerBtn {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .button {
-  margin-top: 1.5rem;
-  margin-right: 16.5rem;
-  padding: 15px;
-  border-radius: 3rem;
-  background-color: #784800;
-  font-size: 13px;
-  width: 35%;
+  margin-top: 1.5rem !important;
+  padding: 15px !important;
+  border-radius: 3rem !important;
+  background-color: #784800 !important;
+  font-size: 13px !important;
+  width: 35% !important;
+}
+
+@media (max-width: 900px) {
+  .leftImage {
+    display: none;
+  }
+
+  .rightImage {
+    display: none;
+  }
 
 }
 
@@ -107,7 +106,7 @@
 
   .leftImage,
   .rightImage {
-    display: none; 
+    display: none;
   }
 
   .formContainer {
@@ -128,11 +127,23 @@
   }
 }
 
-@media (max-width: 900px) {
-  .leftImage {
-    display: none;
+@media (max-width: 480px) {
+  .formContainer {
+    padding: 1.5rem;
+    width: 90%;
   }
-  .rightImage {
-    display: none;
+
+  .title {
+    font-size: 1.3rem;
+  }
+
+  .description {
+    font-size: 0.75rem;
+  }
+
+  .button {
+    font-size: 0.75rem;
+    padding: 12px;
+    width: 30%;
   }
 }
