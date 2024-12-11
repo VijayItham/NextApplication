@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteOperatorCommission } from "../../../redux/OperatorCommissionSlice";
+import { deleteOperatorCommission } from "../../redux/OperatorCommissionSlice";
 import {
     Button,
     Dialog,

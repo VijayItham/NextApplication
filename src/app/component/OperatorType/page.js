@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { addOperatorType } from "../../../redux/OperatorTypeSlice";
+import { useState } from "react";
+import { addOperatorType } from "../../redux/OperatorTypeSlice";
 import DisplayOperatorType from "./DisplayOperatorType";
 import { TextField, Button } from "@mui/material";
-import { isLoggedIn } from "../../../api/auth";
 import { useRouter } from "next/navigation";
 
 import { useDispatch } from "react-redux";

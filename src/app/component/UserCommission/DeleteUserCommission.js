@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteOperator } from "../../../redux/OperatorSlice";
+import { deleteUserCommission } from "../../redux/UserCommissionSlice";
 import {
     Button,
     Dialog,
@@ -8,19 +8,19 @@ import {
     DialogContent,
     DialogTitle,
 } from "@mui/material";
-import { fetchOperator } from "@/app/redux/OperatorSlice";
+import { fetchUserCommission } from "@/app/redux/UserCommissionSlice";
 
 import { useDispatch } from "react-redux";
 
-export default function DeleteOperator({ data, setIsDelete, isDelete, setMessage, setOpenSnackbar }) {
+export default function DeleteUserCommission({ data, setIsDelete, isDelete, setMessage, setOpenSnackbar }) {
     const dispatch = useDispatch();
 
     const handleConfirmDelete = async() => {
-       await dispatch(deleteOperator(data.operatorId))
+       await dispatch(deleteUserCommission(data.userCommissionId))
         setIsDelete(false)
         setMessage("Data Deleted Succefully!")
         setOpenSnackbar(true);
-        dispatch(fetchOperator());
+        dispatch(fetchUserCommission());
     }
 
     return (

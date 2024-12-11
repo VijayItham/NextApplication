@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { updateOperatorType } from "../../../redux/OperatorTypeSlice";
+import { updateOperatorType } from "../../redux/OperatorTypeSlice";
 import {
     Button,
     Dialog,

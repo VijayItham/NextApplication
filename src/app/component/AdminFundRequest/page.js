@@ -8,10 +8,10 @@ import AddIcon from "@mui/icons-material/Add";
 
 import { fetchFundRequest } from "@/app/redux/FundRequestSlice";
 import DataTable from "./DataTable";
-import LoadingSpinner from "../../../common/Loading";
+import LoadingSpinner from "../../common/Loading";
 import ConfirmFundRequest from "./ConfirmFundRequest";
 import { column } from "@/app/constants/FundRequestConst";
-import { isLoggedIn } from "../../../api/auth";
+import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
 
 export default function DisplayFundRequest() {

@@ -1,14 +1,14 @@
 "use client"
 
 import { useDispatch, useSelector } from "react-redux"
-import { fetchOperatorType } from "../../../redux/OperatorTypeSlice"
+import { fetchOperatorType } from "../../redux/OperatorTypeSlice"
 import { useEffect, useState } from "react";
-import DataTable from "../../../common/DataTable"
-import { column } from "../../../constants/OperatorTypeConst";
+import DataTable from "../../common/DataTable"
+import { column } from "../../constants/OperatorTypeConst";
 import { isEmpty } from 'lodash';
 import EditOperatorType from "./EditOperatorType";
 import DeleteOperatorType from "./DeleteOperatorType";
-import LoadingSpinner from "../../../common/Loading"
+import LoadingSpinner from "../../common/Loading"
 
 export default function DisplayOperatorType() {
   const [isEdit, setIsEdit] = useState(false);

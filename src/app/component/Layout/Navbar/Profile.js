@@ -5,7 +5,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { doLogout } from '../api/auth';
+import { doLogout } from '../../../api/auth'
 
 export default function Profile() {
     const router = useRouter();
