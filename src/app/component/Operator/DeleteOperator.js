@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteOperatorType } from "../../../redux/OperatorTypeSlice";
+import { deleteOperator } from "../../redux/OperatorSlice";
 import {
     Button,
     Dialog,
@@ -8,15 +8,19 @@ import {
     DialogContent,
     DialogTitle,
 } from "@mui/material";
+import { fetchOperator } from "@/app/redux/OperatorSlice";
 
 import { useDispatch } from "react-redux";
 
-export default function DeleteOperatorType({ data, setIsDelete, isDelete }) {
+export default function DeleteOperator({ data, setIsDelete, isDelete, setMessage, setOpenSnackbar }) {
     const dispatch = useDispatch();
 
-    const handleConfirmDelete = () => {
-        dispatch(deleteOperatorType(data))
+    const handleConfirmDelete = async() => {
+       await dispatch(deleteOperator(data.operatorId))
         setIsDelete(false)
+        setMessage("Data Deleted Succefully!")
+        setOpenSnackbar(true);
+        dispatch(fetchOperator());
     }
 
     return (

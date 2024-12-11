@@ -1,6 +1,4 @@
 "use client";
-
-import { deleteFundRequest } from "../../../redux/FundRequestSlice";
 import {
   Button,
   Dialog,
@@ -10,7 +8,7 @@ import {
   TextField
 } from "@mui/material";
 import { fetchFundRequest, updateFundRequestByAdmin } from "@/app/redux/FundRequestSlice";
-import {getUserDetails} from '../../../api/auth'
+import {getUserDetails} from '../../api/auth'
 
 import { useDispatch } from "react-redux";
 import { useState } from "react";

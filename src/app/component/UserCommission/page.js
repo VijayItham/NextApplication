@@ -6,54 +6,55 @@ import { omit, isEmpty } from "lodash";
 import { Button, Box, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
-import { fetchOperator } from "@/app/redux/OperatorSlice";
-import DataTable from "../../../common/DataTable";
-import LoadingSpinner from "../../../common/Loading";
-import AddOperator from "./AddOperator";
-import DeleteOperator from "./DeleteOperator";
-import { column } from "@/app/constants/OperatorConst";
-import { isLoggedIn } from "../../../api/auth";
+import { fetchUserCommission } from "@/app/redux/UserCommissionSlice";
+import DataTable from "../../common/DataTable";
+import LoadingSpinner from "../../common/Loading";
+import AddUserCommission from "./AddUserCommission";
+import DeleteUserCommission from "./DeleteUserCommission";
+import { column } from "@/app/constants/UserCommissionConst";
+import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
 
-export default function DisplayOperator() {
+export default function DisplayUserCommission() {
   const dispatch = useDispatch();
-  const { isLoading, operatorData } = useSelector((data) => data.operatorReducer);
+  const { isLoading, userCommissionData } = useSelector((data) => data.userCommissionReducer);
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [selectedRow, setSelectedRow] = useState([]);
-  const [isAddOperator, setIsAddOperator] = useState(false);
+  const [isAddUserCommission, setIsAddUserCommission] = useState(false);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const router = useRouter();
 
+  console.log('userCommissionData==>', userCommissionData)
 
   useEffect(() => {
     if (isLoggedIn()) {
-      dispatch(fetchOperator());
+      dispatch(fetchUserCommission());
     }
     else{
       router.push('/')
     }
   }, []);
 
-  const updatedUserData = operatorData.map((item) =>item);
+  const updatedUserCommissionData = userCommissionData.map((item) => item);
   
-  console.log('updatedUserData===>', updatedUserData)
-   
-  const handleAddOperator = () => setIsAddOperator(true);
-  const selectedAllRowData = operatorData.filter(
-    (item) => item.operatorId === selectedRow.operatorId
+   console.log('updatedUserCommissionData', updatedUserCommissionData)
+  const handleAddUserCommission = () => setIsAddUserCommission(true);
+  const selectedAllRowData = userCommissionData.filter(
+    (item) => item.userCommissionId === selectedRow.userCommissionId
   );
+  console.log('selectedAllRowData', selectedAllRowData)
   return (
     <div style={{ position: 'relative', minHeight: '200px' }}>
       <Box mb={2}>
-        {!isAddOperator && !isEdit &&  (
+        {!isAddUserCommission && !isEdit &&  (
           <Button
             variant="contained"
             startIcon={<AddIcon />}
-            onClick={handleAddOperator}
+            onClick={handleAddUserCommission}
           >
-            Add Operator
+            Add User Commission 
           </Button>
         )}
       </Box>
@@ -67,23 +68,23 @@ export default function DisplayOperator() {
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        !isEmpty(updatedUserData) &&
-        !isAddOperator &&
+        !isEmpty(updatedUserCommissionData) &&
+        !isAddUserCommission &&
         !isEdit && (
           <DataTable
-            searchBy="operatorTypeName"
+            searchBy="userName"
             setIsEdit={setIsEdit}
             setIsDelete={setIsDelete}
             setSelectedRow={setSelectedRow}
-            data={updatedUserData}
+            data={updatedUserCommissionData}
             column={column}
           />
         )
       )}
-      {(isAddOperator || isEdit) && (
-        <AddOperator
+      {(isAddUserCommission || isEdit) && (
+        <AddUserCommission
           setIsEdit={setIsEdit}
-          setIsAddOperator={setIsAddOperator}
+          setIsAddUserCommission={setIsAddUserCommission}
           isEdit={isEdit}
           setOpenSnackbar={setOpenSnackbar}
           setMessage={setMessage}
@@ -91,7 +92,7 @@ export default function DisplayOperator() {
         />
       )}
       {isDelete && (
-        <DeleteOperator
+        <DeleteUserCommission
           data={selectedRow}
           setOpenSnackbar={setOpenSnackbar}
           setMessage={setMessage}

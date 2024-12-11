@@ -4,7 +4,7 @@ import { SnackbarProvider } from "notistack";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { isLoggedIn } from "./api/auth";
-import Navbar from "./common/Navbar";
+import Navbar from "./login/Navbar/page";
 
 export default function RootLayout({ children }) {
   const router = useRouter();
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
         >
         <Providers>
-          <Navbar/>
+           <Navbar/>
           {children}</Providers>
         </SnackbarProvider>
       </body>
