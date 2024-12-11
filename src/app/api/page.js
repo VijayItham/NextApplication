@@ -61,6 +61,21 @@ export const postCreate = async (endpoint, data) => {
   return response.data;
 };
 
+export const postGenrate = async (endpoint, data) => {
+  console.log(data)
+  const dataWitCreatedBy = {
+    ...data,
+  };
+
+  const response = await axios.post(
+    `${BASE_URL}${endpoint}`,
+    dataWitCreatedBy
+  );
+  console.log(response);
+  return response.data;
+
+};
+
 export const postUpdate = async (endpoint, data) => {
   const token = getToken();
   if (!token) {

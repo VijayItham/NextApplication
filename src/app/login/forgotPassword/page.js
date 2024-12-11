@@ -44,13 +44,7 @@ export default function ForgotPassword() {
                     anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
                 setUsernameSent(true);
-            } else {
-                enqueueSnackbar(result?.message || "Error sending OTP.", {
-                    variant: "error",
-                    autoHideDuration: 1000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
-                });
-            }
+            } 
         } catch (err) {
             console.log(err);
         } finally {
@@ -59,14 +53,6 @@ export default function ForgotPassword() {
     };
 
     const handleVerifyOtp = async () => {
-        if (!otp) {
-            enqueueSnackbar("Please enter the OTP.", {
-                variant: "error",
-                autoHideDuration: 1000,
-                anchorOrigin: { vertical: "top", horizontal: "center" },
-            });
-            return;
-        }
 
         try {
             setLoading(true);

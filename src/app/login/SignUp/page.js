@@ -25,31 +25,37 @@ import {
 import { addAppUser } from "@/app/redux/AppUserSlice";
 import { useRouter } from "next/navigation";
 import styles from "./SignUp.module.css";
+import { useSnackbar } from "notistack";
 import { orderBy } from "lodash";
 
 export default function SignUp({ setMessage, setOpenSnackbar }) {
+  const enqueueSnackbar = useSnackbar();
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
     lastName: "",
     password: "",
     email: "",
+    middleName: "",
     phoneNumber: "",
     address1: "",
+    address2: "",
     zipCode: "",
     panNumber: "",
     aadharNumber: "",
+    panImage: "",
     aadharImageFront: "",
+    aadharImageBack: "",
     countryId: "96",
     stateId: "",
     cityId: "",
     createdBy: "F931AD04-9E49-4B84-9DE4-7968BB1F26F0",
-    businessName: "",
-    businessAddress: "",
-    businessCountryId: "96",
-    businessStateId: "",
-    businessCityId: "",
-    businessZip: "",
+    // businessName: "",
+    // businessAddress: "",
+    // businessCountryId: "96",
+    // businessStateId: "",
+    // businessCityId: "",
+    // businessZip: "",
   });
 
   const [isBusinessSameAsUser, setIsBusinessSameAsUser] = useState(false);
@@ -119,13 +125,33 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
 
     try {
       await dispatch(addAppUser(finalFormData)).unwrap();
+      setFormData({
+        userName: "",
+        firstName: "",
+        lastName: "",
+        password: "",
+        email: "",
+        middleName: "",
+        phoneNumber: "",
+        address1: "",
+        address2: "",
+        zipCode: "",
+        panNumber: "",
+        aadharNumber: "",
+        panImage: "",
+        aadharImageFront: "",
+        aadharImageBack: "",
+        countryId: "96",
+        stateId: "",
+        cityId: "",
+      });
     } catch (error) {
       console.error("Error saving user data:", error);
     }
   };
 
 
-  const onCancel = () => {
+  const handleLogin = () => {
     router.push('/')
   };
 
@@ -343,7 +369,7 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
             </Grid>
 
             {/* Business Details */}
-            <Grid item xs={12}>
+            {/* <Grid item xs={12}>
               <hr />
             </Grid>
             <Grid item xs={12}>
@@ -471,7 +497,7 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
                 required
                 sx={inputStyles}
               />
-            </Grid>
+            </Grid> */}
           </Grid>
           <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
             <Grid item>
@@ -480,8 +506,8 @@ export default function SignUp({ setMessage, setOpenSnackbar }) {
               </Button>
             </Grid>
             <Grid item>
-              <Button onClick={onCancel} variant="outlined" className={styles.button}>
-                Cancel
+              <Button onClick={handleLogin} variant="outlined" className={styles.button}>
+                Login Now
               </Button>
             </Grid>
           </Grid>

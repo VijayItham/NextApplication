@@ -4,7 +4,8 @@ import {
   postCreate,
   postUpdate,
   postRequest,
-  postReq
+  postReq,
+  postGenrate
 } from "../api/page";
 
 import { doLogin, doLogout, getToken,} from "../api/auth";
@@ -87,11 +88,8 @@ export const fetchAppUser = createAsyncThunk("fetchAppUser", async () => {
 });
 
 export const addAppUser = createAsyncThunk("addAppUser", async (finalFormData) => {
-  console.log("hello");
-  const data = {
-   finalFormData
-  };
-  return await postCreate("/AppUser/addAppUser", data);
+ 
+  return await postGenrate("/AppUser/addAppUser", finalFormData);
 });
 
 export const updateAppUser = createAsyncThunk("updateAppUser", async (data) => {

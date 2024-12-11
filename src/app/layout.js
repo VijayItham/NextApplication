@@ -22,7 +22,8 @@ export default function RootLayout({ children }) {
         >
         <Providers>
           <Navbar/>
-          {children}</Providers>
+          {children}
+        </Providers>
         </SnackbarProvider>
       </body>
     </html>
