@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography, TextField, Button, Snackbar, Alert } from "@mui/material";
+import { Box, Typography, TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { updatePin } from "../../redux/AppUserSlice";
@@ -20,7 +20,6 @@ export default function CreatePin() {
     const handleGoHome = () => {
         router.push("/");
     }
-
 
     useEffect(() => {
         const token = getToken();
@@ -58,7 +57,6 @@ export default function CreatePin() {
         }
     }
 
-
     const handleSubmit = async (event) => {
 
         event.preventDefault();
@@ -67,7 +65,6 @@ export default function CreatePin() {
         setPin("");
         setConfirmPin("");
     };
-
 
     return (
         <>

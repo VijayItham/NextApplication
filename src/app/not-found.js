@@ -6,7 +6,7 @@ export default function NotFound() {
       display: 'flex', 
       justifyContent: 'center', 
       alignItems: 'center', 
-      height: '100vh',  // Full viewport height
+      height: '100vh', 
       textAlign: 'center'
     }}>
       <div>

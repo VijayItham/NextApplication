@@ -23,7 +23,6 @@ const RechargeSlice = createSlice({
       state.isLoading = true;
     })
     .addCase(addRecharge.fulfilled, (state, action) => {
-      console.log('action===>', action)
         state.rechargeData=action.payload;
     })
     .addCase(addRecharge.rejected, (state) => {

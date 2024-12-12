@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getRequest,
-  postCreate,
+  postSetup,
   postUpdate,
   postRequest,
   postReq
@@ -11,6 +11,7 @@ import { doLogin, doLogout, getToken,} from "../api/auth";
 
 const initialState = {
   isLoading: false,
+  addAppUserData :[],
   appUserData: [],
   dashboardData:[],
   userDetail: {},
@@ -82,16 +83,12 @@ export const getDashboard = createAsyncThunk(
 
 
 export const fetchAppUser = createAsyncThunk("fetchAppUser", async () => {
-  const data = await getRequest("/AppUser/getAllAppUser");
-  return data.data;
+  const response = await getRequest("/AppUser/getAllAppUser");
+  return response.data;
 });
 
 export const addAppUser = createAsyncThunk("addAppUser", async (finalFormData) => {
-  console.log("hello");
-  const data = {
-   finalFormData
-  };
-  return await postCreate("/AppUser/addAppUser", data);
+  return await postSetup("/AppUser/addAppUser", finalFormData);
 });
 
 export const updateAppUser = createAsyncThunk("updateAppUser", async (data) => {
@@ -121,7 +118,8 @@ const AppUserSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchAppUser.fulfilled, (state, action) => {
-        (state.isLoading = false), (state.appUserData = action.payload);
+        state.isLoading = false, 
+        state.appUserData = action.payload
       })
       .addCase(fetchAppUser.rejected, (state) => {
         state.isLoading = false;
@@ -130,9 +128,8 @@ const AppUserSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(addAppUser.fulfilled, (state, action) => {
-        if (action.payload.statusCode == 200) {
-          state.isLoading = false;
-        }
+        state.isLoading = false;
+        state.addAppUserData = action.payload;
       })
       .addCase(addAppUser.rejected, (state) => {
         state.isLoading = false;
@@ -200,9 +197,6 @@ const AppUserSlice = createSlice({
       .addCase(updatePin.fulfilled, (state, action) => {
         state.isLoading = false;
         const response = action.payload;
-        if (response.userDetails?.statusCode === 200) {
-          console.log("Pin updated successfully:", response.message);
-        }
       })
       .addCase(updatePin.rejected, (state, action) => {
         state.isLoading = false;
@@ -247,7 +241,7 @@ const AppUserSlice = createSlice({
         state.isLoadingoading = true;
       })
       .addCase(getDashboard.fulfilled, (state, action) => {
-        state.isLoadingoading = false;
+        state.isLoading = false;
         state.dashboardData = action.payload;
       })
       .addCase(getDashboard.rejected, (state) => {
@@ -259,7 +253,6 @@ const AppUserSlice = createSlice({
       .addCase(getMenuByUserRole.fulfilled, (state, action) => {
         state.isLoadingoading = false;
         state.menu = action.payload;
-        console.log("menu", state.menu)
       })
       .addCase(getMenuByUserRole.rejected, (state) => {
         state.isLoading = false;

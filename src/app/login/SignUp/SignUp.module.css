@@ -11,19 +11,36 @@
     margin-top: 4.5rem;
 }
 
+.leftImage {
+    display: block;
+    margin-right: 4rem;
+    max-width: 100%;
+    height: 32rem
+}
+
+.rightImage {
+    display: block;
+    max-width: 100%;
+    height: 32rem;
+    margin-left: 8rem;
+}
+
 .box {
-    margin-top: 10rem;
-    margin-bottom: 8rem;
+    width: 40vw;
+    margin-right: 5rem; 
 }
 
 .content {
-    padding: 63px;
-    margin-top: 18rem;
-    background-color: #f6f2eb;
-    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    padding: 55px;
+    background-color: #fff;
+    box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
     border-radius: 2px;
     width: 100%;
     max-width: 1000px;
+    position: relative;
+    border-radius: 50px;
+    bottom: 3rem;
+    height: 63vh;
 }
 
 .title {
@@ -31,8 +48,12 @@
     font-size: 2rem;
 }
 
+.groupBtn{
+  position: relative;
+  bottom: 1.5rem;
+}
+
 .button {
-    margin-top: 1.5rem !important;
     padding: 15px !important;
     border-radius: 2rem !important;
     background-color: #784800 !important;

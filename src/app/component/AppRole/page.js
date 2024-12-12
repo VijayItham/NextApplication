@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { addAppRole } from "../../redux/AppRoleSlice";
 import DisplayAppRole from "./DisplayAppRole";
 import { TextField, Button } from "@mui/material";
-import { isLoggedIn } from "../../api/auth";
+import {Box} from "@mui/material";
 import { useRouter } from "next/navigation";
+import styles from "./AppRole.module.css";
 
 import { useDispatch } from "react-redux";
 
@@ -18,8 +19,7 @@ export default function AddAppRole() {
   };
 
   return (
-    <div>
-        <div style={{ position: 'relative', minHeight: '200px' }}>
+        <Box className={styles.container}>
           <h3>Add Users</h3>
           <TextField
             placeholder="Add New Role"
@@ -36,8 +36,7 @@ export default function AddAppRole() {
           </Button>
           <br />
           <DisplayAppRole />
-        </div>
+        </Box>
       
-    </div>
   );
 }

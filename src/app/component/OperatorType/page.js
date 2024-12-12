@@ -5,6 +5,8 @@ import { addOperatorType } from "../../redux/OperatorTypeSlice";
 import DisplayOperatorType from "./DisplayOperatorType";
 import { TextField, Button } from "@mui/material";
 import { useRouter } from "next/navigation";
+import styles from "./OperatorType.module.css"
+import {Box} from "@mui/material";
 
 import { useDispatch } from "react-redux";
 
@@ -17,8 +19,8 @@ export default function AddOperatorType() {
   };
 
   return (
-    <div>
-        <div style={{ position: 'relative', minHeight: '200px' }}>
+  
+        <Box className = {styles.container}>
           <h3>Add Operator</h3>
           <TextField
             placeholder="Add Operator"
@@ -35,8 +37,8 @@ export default function AddOperatorType() {
           </Button>
           <br />
           <DisplayOperatorType />
-        </div>
+        </Box>
       
-    </div>
+  
   );
 }

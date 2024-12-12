@@ -10,6 +10,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import { getUserDetails } from "@/app/api/auth";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
@@ -41,13 +42,11 @@ export default function ForgotPin() {
       if (result?.statusCode === 200) {
         enqueueSnackbar("OTP sent successfully. Check your email.", {
           variant: "success",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
         });
         setEmailSent(true);
       } else {
         enqueueSnackbar(result?.message || "Error sending OTP.", {
           variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
         });
       }
     } catch (error) {
@@ -63,7 +62,6 @@ export default function ForgotPin() {
     if (!otp) {
       enqueueSnackbar("Please enter the OTP.", {
         variant: "error",
-        anchorOrigin: { vertical: "top", horizontal: "center" },
       });
       return;
     }
@@ -75,13 +73,11 @@ export default function ForgotPin() {
       if (result?.statusCode === 200) {
         enqueueSnackbar("OTP verified successfully.", {
           variant: "success",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
         });
         router.push("/login/UpdatePin");
       } else {
         enqueueSnackbar(result?.message || "Invalid OTP.", {
           variant: "error",
-          anchorOrigin: { vertical: "top", horizontal: "center" },
         });
       }
     } catch (error) {

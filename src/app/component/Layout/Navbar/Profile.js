@@ -23,7 +23,7 @@ export default function Profile() {
     }
 
     const handleProfile = () =>{
-        router.push("/component/Dashboard/Profile");
+        router.push("/component/UserProfile");
     }
 
     const closeBox = () => {

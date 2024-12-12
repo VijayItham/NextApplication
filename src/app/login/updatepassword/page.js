@@ -1,12 +1,13 @@
 "use client";
 import { Box, Typography, TextField, Button, CircularProgress } from "@mui/material";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { updatePassword } from "@/app/redux/AppUserSlice";
+import { getUserDetails } from "@/app/api/auth";
 import styles from "./UpdatePassword.module.css";
 
 
@@ -32,7 +33,6 @@ export default function UpdatePassword() {
             enqueueSnackbar("Passwords do not match. Please try again.", {
                 variant: "error",
                 autoHideDuration: 3000,
-                anchorOrigin: { vertical: "top", horizontal: "center" },
             });
 
             setPassword("");
@@ -48,7 +48,6 @@ export default function UpdatePassword() {
                 enqueueSnackbar("Password updated successfully!", {
                     variant: "success",
                     autoHideDuration: 3000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
                 setPassword("");
                 setConfirmPassword("");
@@ -57,7 +56,6 @@ export default function UpdatePassword() {
                 enqueueSnackbar("Failed to update password.", {
                     variant: "error",
                     autoHideDuration: 3000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
             }
         } catch (err) {
@@ -70,7 +68,7 @@ export default function UpdatePassword() {
     return (
         <>
             <Box
-                className = {styles.container}
+                className={styles.container}
             >
                 <Box
                     component="img"
@@ -78,7 +76,6 @@ export default function UpdatePassword() {
                     alt="Boy Illustration"
                     className={styles.leftImg}
                 />
-
                 <Box
                     className={styles.box}
                 >
@@ -92,7 +89,6 @@ export default function UpdatePassword() {
                         <Typography className={styles.description} >
                             Create your password and confirm your password
                         </Typography>
-
 
                         <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                             <TextField
@@ -176,8 +172,6 @@ export default function UpdatePassword() {
                         </Box>
                     </Box>
                 </Box>
-
-                {/* Right Image */}
                 <Box
                     component="img"
                     src="/images/girl.svg"

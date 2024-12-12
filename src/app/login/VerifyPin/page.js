@@ -32,10 +32,6 @@ export default function VerifyPin() {
           enqueueSnackbar('Login successful!', {
             variant: "success",
             autoHideDuration: 3000,
-            anchorOrigin: {
-              vertical: "top",
-              horizontal: "center",
-            },
             style: { backgroundColor: "#4caf50", color: "#fff" },
           });
         }, 1000); 
@@ -44,10 +40,6 @@ export default function VerifyPin() {
         enqueueSnackbar('Incorrect PIN. Please try again.', {
           variant: 'error',
           autoHideDuration: 1000,
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "center",
-          },
           style: { backgroundColor: "#f44336", color: "#fff" },
         });
       }

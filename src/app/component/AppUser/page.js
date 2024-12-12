@@ -14,10 +14,12 @@ import DeleteAppUser from "./DeleteAppUser";
 import { column } from "@/app/constants/AppUserConst";
 import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
+import styles from "./AppUser.module.css"
 
 export default function DisplayAppUser() {
   const dispatch = useDispatch();
   const { isLoading, appUserData } = useSelector((data) => data.appUserReducer);
+  console.log("abhishek",appUserData);
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [selectedRow, setSelectedRow] = useState([]);
@@ -36,7 +38,6 @@ export default function DisplayAppUser() {
     }
   }, []);
 
-  // Handle user data omitting unnecessary fields
   const updatedUserData = appUserData.map((item) =>
     omit(item, [
       "middleName",
@@ -57,7 +58,7 @@ export default function DisplayAppUser() {
     (item) => item.appUserId === selectedRow.appUserId
   );
   return (
-    <div style={{ position: 'relative', minHeight: '200px' }}>
+    <Box className={styles.container}>
       <Box mb={2}>
         {!isAddUser && !isEdit &&  (
           <Button
@@ -111,6 +112,6 @@ export default function DisplayAppUser() {
           setIsDelete={setIsDelete}
         />
       )}
-    </div>
+    </Box>
   );
 }
