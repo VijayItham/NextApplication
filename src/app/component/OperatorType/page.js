@@ -21,6 +21,7 @@ export default function AddOperatorType() {
   return (
   
         <Box className = {styles.container}>
+              <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
           <h3>Add Operator</h3>
           <TextField
             placeholder="Add Operator"
@@ -37,6 +38,7 @@ export default function AddOperatorType() {
           </Button>
           <br />
           <DisplayOperatorType />
+          </Box>
         </Box>
       
   

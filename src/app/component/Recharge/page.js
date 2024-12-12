@@ -59,6 +59,7 @@ export default function Recharge() {
 
   return (
     <Box className = {styles.container}>
+        <Box sx={{ width:"90%", margin:"20px auto", marginRight:"5rem"}}>
     <Box
       component="form"
       onSubmit={onSubmit}
@@ -150,6 +151,7 @@ export default function Recharge() {
           </Button>
         </Grid>
       </Grid>
+    </Box>
     </Box>
     </Box>
   );

@@ -59,6 +59,7 @@ export default function DisplayAppUser() {
   );
   return (
     <Box className={styles.container}>
+       <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
       <Box mb={2}>
         {!isAddUser && !isEdit &&  (
           <Button
@@ -112,6 +113,7 @@ export default function DisplayAppUser() {
           setIsDelete={setIsDelete}
         />
       )}
+      </Box>
     </Box>
   );
 }

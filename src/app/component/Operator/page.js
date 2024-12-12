@@ -47,6 +47,7 @@ export default function DisplayOperator() {
   );
   return (
     <Box className={styles.container}>
+      <Box sx={{ width:"95%", margin:"20px auto"}}>
       <Box mb={2}>
         {!isAddOperator && !isEdit &&  (
           <Button
@@ -100,6 +101,7 @@ export default function DisplayOperator() {
           setIsDelete={setIsDelete}
         />
       )}
+      </Box>
       </Box>
   );
 }

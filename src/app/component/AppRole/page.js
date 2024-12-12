@@ -20,6 +20,7 @@ export default function AddAppRole() {
 
   return (
         <Box className={styles.container}>
+           <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
           <h3>Add Users</h3>
           <TextField
             placeholder="Add New Role"
@@ -36,7 +37,7 @@ export default function AddAppRole() {
           </Button>
           <br />
           <DisplayAppRole />
+          </Box>
         </Box>
-      
   );
 }
