@@ -8,7 +8,7 @@ import {
   TextField
 } from "@mui/material";
 import { fetchFundRequest, updateFundRequestByAdmin } from "@/app/redux/FundRequestSlice";
-import {getUserDetails} from '../../api/auth'
+import {getUserDetails} from '../../api/authCookies'
 
 import { useDispatch } from "react-redux";
 import { useState } from "react";

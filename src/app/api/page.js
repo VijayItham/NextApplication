@@ -1,5 +1,5 @@
 import axios from "axios";
-import { getToken, getUserId } from "./auth";
+import { getToken, getUserId } from "./authCookies";
 
 const BASE_URL = "https://devrechargeapi.codetrex.in/api";
 

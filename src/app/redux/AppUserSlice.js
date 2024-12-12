@@ -7,7 +7,7 @@ import {
   postReq
 } from "../api/page";
 
-import { doLogin, doLogout, getToken,} from "../api/auth";
+import { doLogin, doLogout, getToken,} from "../api/authCookies";
 
 const initialState = {
   isLoading: false,

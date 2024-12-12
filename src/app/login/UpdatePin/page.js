@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { updatePin } from "@/app/redux/AppUserSlice";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { getToken } from "@/app/api/auth";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import styles from "./UpdatePin.module.css";
@@ -33,13 +32,6 @@ export default function UpdatePin() {
             }
 
     }
-
-    useEffect(() => {
-        const token = getToken();
-        if (!token) {
-            router.push("/");
-        }
-    }, [router]);
 
     useEffect(() => {
         if (pin.length > 0 && pin.length !== 4) {

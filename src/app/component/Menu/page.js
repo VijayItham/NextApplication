@@ -2,10 +2,9 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { omit, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import { Button, Box, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { isLoggedIn } from "../../api/auth";;
 import { useRouter } from "next/navigation";
 
 import { fetchMenu } from "../../redux/MenuSlice";
@@ -32,12 +31,7 @@ export default function DisplayMenu() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
-    if(isLoggedIn()){
-      dispatch(fetchMenu());
-    }
-    else{
-      router.push('/')
-    }
+    dispatch(fetchMenu());
   }, []);
   const handleMenu = () => setIsAdd(true);
   const selectedAllRowData = menuData.filter(
@@ -49,7 +43,7 @@ export default function DisplayMenu() {
        
        <Box sx={{display:"flex",}}>
       <Box mb={2}>
-        {!isAdd && !isEdit && isLoggedIn() && (
+        {!isAdd && !isEdit && (
           <Button
             variant="contained"
             startIcon={<AddIcon />}
