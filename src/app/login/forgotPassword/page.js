@@ -41,14 +41,12 @@ export default function ForgotPassword() {
                 enqueueSnackbar("OTP sent successfully. Check your email.", {
                     variant: "success",
                     autoHideDuration: 1000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
                 setUsernameSent(true);
             } else {
                 enqueueSnackbar(result?.message || "Error sending OTP.", {
                     variant: "error",
                     autoHideDuration: 1000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
             }
         } catch (err) {
@@ -63,7 +61,6 @@ export default function ForgotPassword() {
             enqueueSnackbar("Please enter the OTP.", {
                 variant: "error",
                 autoHideDuration: 1000,
-                anchorOrigin: { vertical: "top", horizontal: "center" },
             });
             return;
         }
@@ -76,14 +73,12 @@ export default function ForgotPassword() {
                 enqueueSnackbar("OTP verified successfully.", {
                     variant: "success",
                     autoHideDuration: 1000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
                 router.push("/login/UpdatePassword");
             } else {
                 enqueueSnackbar("Invalid OTP.", {
                     variant: "error",
                     autoHideDuration: 1000,
-                    anchorOrigin: { vertical: "top", horizontal: "center" },
                 });
             }
         } catch (err) {

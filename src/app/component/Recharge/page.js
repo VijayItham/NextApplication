@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addRecharge } from "@/app/redux/RechargeSlice";
 import { fetchOperator } from "@/app/redux/OperatorSlice";
 import {getUserDetails} from '../../api/auth'
+import styles from "./Recharge.module.css";
 import _  from "lodash";
 
 export default function Recharge() {
@@ -57,6 +58,7 @@ export default function Recharge() {
   };
 
   return (
+    <Box className = {styles.container}>
     <Box
       component="form"
       onSubmit={onSubmit}
@@ -148,6 +150,7 @@ export default function Recharge() {
           </Button>
         </Grid>
       </Grid>
+    </Box>
     </Box>
   );
 }

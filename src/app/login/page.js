@@ -16,12 +16,12 @@ import { fetchUserLogin } from "../redux/AppUserSlice";
 import styles from "./Login.module.css";
 
 export default function Login() {
-
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isValid, setIsValid] = useState(null);
+  const [rememberMe, setRememberMe] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -30,7 +30,6 @@ export default function Login() {
   const validateUsername = (value) => {
     const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
     const isValidPhone = /^\d{10}$/.test(value);
-    console.log(isValidPhone);
     const isValidUsername = /^[a-zA-Z0-9_]{3,20}$/.test(value);
 
     return value.length > 0 && (isValidEmail || isValidPhone || isValidUsername);
@@ -54,10 +53,6 @@ export default function Login() {
         enqueueSnackbar("Invalid login credentials.", {
           variant: "error",
           autoHideDuration: 1000,
-          anchorOrigin: {
-            vertical: "top",
-            horizontal: "center",
-          },
           style: { backgroundColor: "#f44336", color: "#fff" },
         });
       }
@@ -83,12 +78,16 @@ export default function Login() {
     router.push("/login/SignUp");
   }
 
+  const handleRememberMe = (e) => {
+    setRememberMe(e.target.checked);
+  }
+
   return (
     <>
       <Box
         className={styles.container}
       >
-         <Box
+        <Box
           component="img"
           src="/images/boy.svg"
           alt="Boy-img"
@@ -196,6 +195,8 @@ export default function Login() {
                   control={
                     <Checkbox
                       value="remember"
+                      checked={rememberMe}
+                      onChange={handleRememberMe}
                       sx={{
                         color: brown[800],
                         "&.Mui-checked": {

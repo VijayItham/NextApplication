@@ -32,7 +32,6 @@ export const updateFundRequestByAdmin = createAsyncThunk(
   }
 );
 
-
 export const deleteFundRequest = createAsyncThunk(
   "deleteFundRequest",
   async (fundRequestId) => {
@@ -84,7 +83,6 @@ const FundRequestSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(updateFundRequestByAdmin.fulfilled, (state, action) => {
-        console.log('action21111', action)
         if (action.payload.statusCode === 200) {
           state.isLoading = false;
         }

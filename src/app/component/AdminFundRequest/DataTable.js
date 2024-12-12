@@ -55,8 +55,6 @@ const DataTable = ({
     setIsApprove(true);
   };
 
-  console.log('data-->', data,'searchBy-->', searchBy)
-
   const filteredRows = data
     .filter((row) =>
       row[searchBy].toLowerCase().includes(searchQuery.toLowerCase())

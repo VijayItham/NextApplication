@@ -2,7 +2,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { omit, isEmpty } from "lodash";
+import {  isEmpty } from "lodash";
 import { Button, Box, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -14,6 +14,7 @@ import DeleteOperator from "./DeleteOperator";
 import { column } from "@/app/constants/OperatorConst";
 import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
+import styles from "./Operator.module.css";
 
 export default function DisplayOperator() {
   const dispatch = useDispatch();
@@ -45,7 +46,7 @@ export default function DisplayOperator() {
     (item) => item.operatorId === selectedRow.operatorId
   );
   return (
-    <div style={{ position: 'relative', minHeight: '200px' }}>
+    <Box className={styles.container}>
       <Box mb={2}>
         {!isAddOperator && !isEdit &&  (
           <Button
@@ -99,6 +100,6 @@ export default function DisplayOperator() {
           setIsDelete={setIsDelete}
         />
       )}
-    </div>
+    </Box>
   );
 }
