@@ -100,6 +100,6 @@ export default function DisplayOperator() {
           setIsDelete={setIsDelete}
         />
       )}
-    </Box>
+      </Box>
   );
 }

@@ -36,7 +36,7 @@ export default function Sidebar() {
   };
 
   const handleMenuClick = (pageName, path) => {
-    setSelectedMenu(menuName);
+    setSelectedMenu(pageName);
     router.push(`/component/${pageName}`); 
   };
 
