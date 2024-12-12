@@ -12,7 +12,6 @@ import LoadingSpinner from "../../common/Loading";
 import AddAppUser from "./AddAppUser";
 import DeleteAppUser from "./DeleteAppUser";
 import { column } from "@/app/constants/AppUserConst";
-import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
 
 export default function DisplayAppUser() {
@@ -28,12 +27,7 @@ export default function DisplayAppUser() {
 
 
   useEffect(() => {
-    if (isLoggedIn()) {
       dispatch(fetchAppUser());
-    }
-    else{
-      router.push('/')
-    }
   }, []);
 
   // Handle user data omitting unnecessary fields

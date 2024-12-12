@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { Box, TextField, Badge, Typography } from "@mui/material";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import SearchIcon from '@mui/icons-material/Search';
-import { getUserDetails } from "../../../api/auth";
+import { getUserDetails } from "../../../api/authCookies";
 import { useSelector } from "react-redux";
 import Profile from "./Profile";
 import styles from "./Navbar.module.css";

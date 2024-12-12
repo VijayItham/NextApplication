@@ -12,7 +12,7 @@ import LoadingSpinner from "../../common/Loading";
 import AddUserCommission from "./AddUserCommission";
 import DeleteUserCommission from "./DeleteUserCommission";
 import { column } from "@/app/constants/UserCommissionConst";
-import { isLoggedIn } from "../../api/auth";
+import { isLoggedIn } from "../../api/authCookies";
 import { useRouter } from "next/navigation";
 
 export default function DisplayUserCommission() {
@@ -29,12 +29,7 @@ export default function DisplayUserCommission() {
   console.log('userCommissionData==>', userCommissionData)
 
   useEffect(() => {
-    if (isLoggedIn()) {
       dispatch(fetchUserCommission());
-    }
-    else{
-      router.push('/')
-    }
   }, []);
 
   const updatedUserCommissionData = userCommissionData.map((item) => item);

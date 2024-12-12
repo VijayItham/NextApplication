@@ -9,7 +9,7 @@ import { getMenuByUserRole } from "@/app/redux/AppUserSlice";
 import { useSelector, useDispatch } from "react-redux";
 import MenuLink from "./MenuLink/page";
 import { useRouter } from "next/navigation";
-import { getUserDetails } from "@/app/api/auth";
+import { getUserDetails } from "@/app/api/authCookies";
 
 export default function Sidebar() {
   const router = useRouter();

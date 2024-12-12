@@ -8,11 +8,11 @@ import Navbar from "./login/Navbar/page";
 
 export default function RootLayout({ children }) {
   const router = useRouter();
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      router.push("/"); 
-    }
-  }),[router];
+  // useEffect(() => {
+  //   if (!isLoggedIn()) {
+  //     router.push("/"); 
+  //   }
+  // }),[router];
   return (
     <html lang="en">
       <body>

@@ -2,7 +2,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { omit, isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import { Button, Box, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -12,8 +12,6 @@ import LoadingSpinner from "../../common/Loading";
 import AddFundRequest from "./AddFundRequest";
 import DeleteFundRequest from "./DeleteFundRequest";
 import { column } from "@/app/constants/FundRequestConst";
-import { isLoggedIn } from "../../api/auth";
-import { useRouter } from "next/navigation";
 import { usePathname } from "next/navigation";
 
 export default function DisplayFundRequest() {
@@ -27,16 +25,9 @@ export default function DisplayFundRequest() {
   const [isAddFundRequest, setIsAddFundRequest] = useState(false);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const router = useRouter();
-
 
   useEffect(() => {
-    if (isLoggedIn()) {
       dispatch(fetchFundRequest());
-    }
-    else{
-      router.push('/')
-    }
   }, []);
 
   const updatedFundRequestData = fundRequestData.map((item) =>item);

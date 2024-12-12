@@ -1,10 +1,9 @@
 "use client";
-import { Box, Typography, TextField, Button, Snackbar, Alert } from "@mui/material";
+import { Box, Typography, TextField, Button } from "@mui/material";
 import { useEffect, useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import { updatePin } from "../../redux/AppUserSlice";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import { getToken } from "../../api/auth";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import styles from "./CreatePin.module.css";
@@ -20,14 +19,6 @@ export default function CreatePin() {
     const handleGoHome = () => {
         router.push("/");
     }
-
-
-    useEffect(() => {
-        const token = getToken();
-        if (!token) {
-            router.push("/");
-        }
-    }, [router]);
 
     useEffect(() => {
         if (pin.length > 0 && pin.length !== 4) {
