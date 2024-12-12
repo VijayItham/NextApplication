@@ -14,6 +14,7 @@ import DeleteOperatorCommission from "./DeleteOperatorCommission";
 import { column } from "@/app/constants/OperatorCommissionConst";
 import { isLoggedIn } from "../../api/auth";
 import { useRouter } from "next/navigation";
+import styles from "./OperatorCommision.module.css";
 
 export default function DisplayOperatorCommission() {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ export default function DisplayOperatorCommission() {
   );
   console.log('selectedAllRowData', selectedAllRowData)
   return (
-    <div style={{ position: 'relative', minHeight: '200px' }}>
+    <Box className={styles.container}>
       <Box mb={2}>
         {!isAddOperatorCommission && !isEdit &&  (
           <Button
@@ -103,6 +104,6 @@ export default function DisplayOperatorCommission() {
           setIsDelete={setIsDelete}
         />
       )}
-    </div>
+    </Box>
   );
 }

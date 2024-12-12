@@ -39,7 +39,7 @@ export default function DisplayMenu() {
   );
 
   return (
-    <Box style={{ position: 'fixed', width: "81vw", top: "5.8rem", bottom: 0, height:"100vh",   backgroundColor: "#FBF8F3",   left: "17.5rem", right:"30px", overflowY: "auto"}}>
+    <Box sx={{ position: 'fixed', width: "81vw", top: "5.8rem", bottom: 0, height:"100vh",   backgroundColor: "#FBF8F3",   left: "17.5rem", right:"30px", overflowY: "auto"}}>
        
        <Box sx={{display:"flex",}}>
       <Box mb={2}>

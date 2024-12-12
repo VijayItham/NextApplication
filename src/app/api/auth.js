@@ -4,7 +4,6 @@ export const isLoggedIn = () => {
   };
   
   export const doLogin = (data, token) => {
-    console.log('data111', data,'token111')
     localStorage.setItem("userDetail", JSON.stringify(data)); 
     localStorage.setItem("token", token);
   };

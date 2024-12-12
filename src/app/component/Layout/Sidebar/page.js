@@ -35,9 +35,9 @@ export default function Sidebar() {
     setIsMenuOpen((prevState) => !prevState);
   };
 
-  const handleMenuClick = (menuName, path) => {
+  const handleMenuClick = (pageName, path) => {
     setSelectedMenu(menuName);
-    router.push(path); 
+    router.push(`/component/${pageName}`); 
   };
 
   const navigateToDashboard = () => {
@@ -97,7 +97,7 @@ export default function Sidebar() {
                 backgroundColor: selectedMenu === item.menuName ? "#784800" : "#7848001A",
               },
             }}
-            onClick={() => handleMenuClick(item.menuName, item.path)} 
+            onClick={() => handleMenuClick(item.pageName, item.path)} 
           >
             <Box
               sx={{

@@ -49,7 +49,6 @@ export default function CreatePin() {
         }
     }
 
-
     const handleSubmit = async (event) => {
 
         event.preventDefault();
@@ -58,7 +57,6 @@ export default function CreatePin() {
         setPin("");
         setConfirmPin("");
     };
-
 
     return (
         <>

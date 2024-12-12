@@ -21,6 +21,8 @@ export default function DisplayRoleMenu() {
   const { isLoading, roleMenuData } = useSelector((data) => {
     return data.roleMenuReducer
   });
+
+  console.log("role ->", roleMenuData)
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [selectedRow, setSelectedRow] = useState([]);
@@ -41,7 +43,7 @@ export default function DisplayRoleMenu() {
   useEffect(() => {
     dispatch(fetchRoleMenu());
   }, []);
-  const handleRoleMenu = () => setIsAdd(true);
+  const handleRoleMenu = () => setIsAdd(true);    
 
   const selectedAllRowData = roleMenuData.filter(
     (item) => item.roleMenuId === selectedRow.roleMenuId

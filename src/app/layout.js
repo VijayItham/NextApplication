@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body>
       <SnackbarProvider
           maxSnack={3}
-          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
         >
         <Providers>
            <Navbar/>
