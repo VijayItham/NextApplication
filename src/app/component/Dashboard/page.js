@@ -4,7 +4,7 @@ import React from "react";
 import { Box } from "@mui/material";
 import OutlinedCard from "./Card/card";
 import { useEffect } from "react";
-import styles from "./DashBoard.module.css";
+import styles from './Dashboard.module.css'
 import Rightbar from "./RecentActivity/page";
 import { useDispatch } from "react-redux";
 import { getDashboard } from "@/app/redux/AppUserSlice";

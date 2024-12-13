@@ -4,7 +4,7 @@ import { Box, TextField, Button, CircularProgress } from "@mui/material";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import styles from "./verifyPin.module.css";
+import styles from "./VerifyPin.module.css";
 import { verifyPin } from "@/app/redux/AppUserSlice";
 import { useDispatch } from "react-redux";
 
