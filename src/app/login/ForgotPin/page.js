@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { getUserDetails } from "@/app/api/auth";
+import { getUserDetails } from "@/app/api/authCookies";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
@@ -28,7 +28,7 @@ export default function ForgotPin() {
   const [emailSent, setEmailSent] = useState(false);
 
   const details = getUserDetails();
-  const username = details?.userName;
+  const username = details?.userName??'';
 
   const handleGoHome = () => router.push("/");
 

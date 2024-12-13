@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
 import { updatePassword } from "@/app/redux/AppUserSlice";
-import { getUserDetails } from "@/app/api/auth";
+import { getUserDetails } from "@/app/api/authCookies";
 import styles from "./UpdatePassword.module.css";
 
 
@@ -20,7 +20,7 @@ export default function UpdatePassword() {
     const [loading, setLoading] = useState(false);
 
     const details = getUserDetails();
-    const username = details?.userName;
+    const username = details?.userName??'';
 
     const handleGoHome = () => {
         router.push("/");

@@ -10,7 +10,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import InputAdornment from "@mui/material/InputAdornment";
-import { getUserDetails } from '@/app/api/auth';
+import { getUserDetails } from '@/app/api/authCookies';
 import { updatePassword } from '@/app/redux/AppUserSlice';
 import { useSnackbar } from "notistack";
 import { useDispatch } from 'react-redux';
@@ -25,7 +25,7 @@ export default function UserProfile() {
   const [loading, setLoading] = useState(false);
 
   const details = getUserDetails();
-  const username = details.userName;
+  const username = details?.userName??'';
 
   const inputStyles = {
     marginBottom: "1rem",
@@ -135,67 +135,67 @@ export default function UserProfile() {
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">User Name:</Typography>
-                    <Typography variant="body1">{details.userName}</Typography>
+                    <Typography variant="body1">{username}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">First Name:</Typography>
-                    <Typography variant="body1">{details.firstName}</Typography>
+                    <Typography variant="body1">{details?.firstName??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">Last Name:</Typography>
-                    <Typography variant="body1">{details.lastName}</Typography>
+                    <Typography variant="body1">{details?.lastName??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">Password:</Typography>
-                    <Typography variant="body1">{details.password}</Typography>
+                    <Typography variant="body1">{details?.password??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={6}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">Email:</Typography>
-                    <Typography variant="body1">{details.email}</Typography>
+                    <Typography variant="body1">{details?.email??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">Phone Number:</Typography>
-                    <Typography variant="body1">{details.phoneNumber}</Typography>
+                    <Typography variant="body1">{details?.phoneNumber??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">Address:</Typography>
-                    <Typography variant="body1">{details.address1}</Typography>
+                    <Typography variant="body1">{details?.address1??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">Country:</Typography>
-                    <Typography variant="body1">{details.countryName}</Typography>
+                    <Typography variant="body1">{details?.countryName??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">State:</Typography>
-                    <Typography variant="body1">{details.stateName}</Typography>
+                    <Typography variant="body1">{details?.stateName??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">City:</Typography>
-                    <Typography variant="body1">{details.cityName}</Typography>
+                    <Typography variant="body1">{details?.cityName??''}</Typography>
                   </Box>
                 </Grid>
                 <Grid item xs={4}>
                   <Box className={styles.columnStyles}>
                     <Typography variant="subtitle1" fontWeight="bold">Zip Code:</Typography>
-                    <Typography variant="body1">{details.zipCode}</Typography>
+                    <Typography variant="body1">{details?.zipCode??''}</Typography>
                   </Box>
                 </Grid>
               </Grid>
