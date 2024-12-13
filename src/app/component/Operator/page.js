@@ -2,7 +2,7 @@
 
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import {  isEmpty } from "lodash";
+import { isEmpty } from "lodash";
 import { Button, Box, Snackbar } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 
@@ -12,9 +12,6 @@ import LoadingSpinner from "../../common/Loading";
 import AddOperator from "./AddOperator";
 import DeleteOperator from "./DeleteOperator";
 import { column } from "@/app/constants/OperatorConst";
-import { isLoggedIn } from "../../api/auth";
-import { useRouter } from "next/navigation";
-import styles from "./Operator.module.css";
 
 export default function DisplayOperator() {
   const dispatch = useDispatch();
@@ -25,29 +22,20 @@ export default function DisplayOperator() {
   const [isAddOperator, setIsAddOperator] = useState(false);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const router = useRouter();
-
 
   useEffect(() => {
-    if (isLoggedIn()) {
-      dispatch(fetchOperator());
-    }
-    else{
-      router.push('/')
-    }
+    dispatch(fetchOperator());
   }, []);
 
   const updatedUserData = operatorData.map((item) =>item);
-  
-  console.log('updatedUserData===>', updatedUserData)
    
   const handleAddOperator = () => setIsAddOperator(true);
   const selectedAllRowData = operatorData.filter(
     (item) => item.operatorId === selectedRow.operatorId
   );
+
   return (
-    <Box className={styles.container}>
-      <Box sx={{ width:"95%", margin:"20px auto"}}>
+    <div style={{ position: 'relative', minHeight: '200px' }}>
       <Box mb={2}>
         {!isAddOperator && !isEdit &&  (
           <Button
@@ -101,7 +89,6 @@ export default function DisplayOperator() {
           setIsDelete={setIsDelete}
         />
       )}
-      </Box>
-      </Box>
+    </div>
   );
 }

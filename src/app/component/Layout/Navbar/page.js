@@ -66,7 +66,7 @@ export default function Navbar() {
 
             <Box className={styles.profile}>
               <Box>
-                <Typography className={styles.profileName}>{user.userName}</Typography>
+                <Typography className={styles.profileName}>{user?.userName??''}</Typography>
                 <Typography className={styles.profileBalance}>Rs. {balance}</Typography>
               </Box>
               <Profile />

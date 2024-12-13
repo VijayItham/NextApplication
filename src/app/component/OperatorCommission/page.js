@@ -12,9 +12,6 @@ import LoadingSpinner from "../../common/Loading";
 import AddOperatorCommission from "./AddOperatorCommission";
 import DeleteOperatorCommission from "./DeleteOperatorCommission";
 import { column } from "@/app/constants/OperatorCommissionConst";
-import { isLoggedIn } from "../../api/auth";
-import { useRouter } from "next/navigation";
-import styles from "./OperatorCommision.module.css";
 
 export default function DisplayOperatorCommission() {
   const dispatch = useDispatch();
@@ -25,17 +22,9 @@ export default function DisplayOperatorCommission() {
   const [isAddOperatorCommission, setIsAddOperatorCommission] = useState(false);
   const [message, setMessage] = useState("");
   const [openSnackbar, setOpenSnackbar] = useState(false);
-  const router = useRouter();
-
-  console.log('selectedRow==>', selectedRow)
 
   useEffect(() => {
-    if (isLoggedIn()) {
       dispatch(fetchOperatorCommission());
-    }
-    else{
-      router.push('/')
-    }
   }, []);
 
   const updatedOperatorCommissionData = operatorCommissionData.map((item) => 
@@ -43,15 +32,14 @@ export default function DisplayOperatorCommission() {
     "maxAmountDistribution",
   ]));
   
-   console.log('updatedOperatorCommissionData', updatedOperatorCommissionData)
   const handleAddOperatorCommission = () => setIsAddOperatorCommission(true);
+  
   const selectedAllRowData = operatorCommissionData.filter(
     (item) => item.operatorCommissionId === selectedRow.operatorCommissionId
   );
 
   return (
-    <Box className={styles.container}>
-       <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
+    <div style={{ position: 'relative', minHeight: '200px' }}>
       <Box mb={2}>
         {!isAddOperatorCommission && !isEdit &&  (
           <Button
@@ -105,7 +93,6 @@ export default function DisplayOperatorCommission() {
           setIsDelete={setIsDelete}
         />
       )}
-      </Box>
-    </Box>
+    </div>
   );
 }
