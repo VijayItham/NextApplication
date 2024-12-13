@@ -6,7 +6,7 @@ import { updatePin } from "../../redux/AppUserSlice";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import styles from "./CreatePin.module.css";
+import styles from "./createpin.module.css";
 
 export default function CreatePin() {
     const dispatch = useDispatch();
