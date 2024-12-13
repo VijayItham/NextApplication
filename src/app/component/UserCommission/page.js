@@ -42,6 +42,7 @@ export default function DisplayUserCommission() {
   console.log('selectedAllRowData', selectedAllRowData)
   return (
     <div style={{ position: 'fixed', minHeight: '200px',bottom: 0,  width: "81vw", top: "5.8rem", left: "17.5rem",backgroundColor: "#FBF8F3", }}>
+        <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
       <Box mb={2}>
         {!isAddUserCommission && !isEdit &&  (
           <Button
@@ -95,6 +96,7 @@ export default function DisplayUserCommission() {
           setIsDelete={setIsDelete}
         />
       )}
+      </Box>
     </div>
   );
 }

@@ -48,9 +48,10 @@ export default function DisplayOperatorCommission() {
   const selectedAllRowData = operatorCommissionData.filter(
     (item) => item.operatorCommissionId === selectedRow.operatorCommissionId
   );
-  console.log('selectedAllRowData', selectedAllRowData)
+
   return (
     <Box className={styles.container}>
+       <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
       <Box mb={2}>
         {!isAddOperatorCommission && !isEdit &&  (
           <Button
@@ -104,6 +105,7 @@ export default function DisplayOperatorCommission() {
           setIsDelete={setIsDelete}
         />
       )}
+      </Box>
     </Box>
   );
 }

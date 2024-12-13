@@ -18,7 +18,6 @@ export default function DisplayFundRequest() {
   const pathName = usePathname();
   const dispatch = useDispatch();
   const { isLoading, fundRequestData } = useSelector((data) => data.fundRequestReducer);
-  console.log('fundRequestData', fundRequestData)
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [selectedRow, setSelectedRow] = useState([]);
@@ -41,6 +40,7 @@ export default function DisplayFundRequest() {
   );
   return (
     <div style={{ position:'fixed', width: "80vw", top: "5.9rem", bottom: 0, height:"100vh",  backgroundColor: "#FBF8F3",   left: "17.5rem", overflowY: "auto",}}>
+       <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
       <Box sx={{display:"flex"}}>
       <Box mb={2} sx={{marginTop:"10px"}}>
         {!isAddFundRequest && !isEdit &&  (
@@ -97,6 +97,7 @@ export default function DisplayFundRequest() {
           setIsDelete={setIsDelete}
         />
       )}
+      </Box>
     </div>
   );
 }

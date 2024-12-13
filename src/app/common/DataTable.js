@@ -78,6 +78,7 @@ const DataTable = ({
         label="Search"
         variant="outlined"
         fullWidth
+        sx={{width:"95%", marginLeft:"2rem"}}
         margin="normal"
         onChange={(e) => setSearchQuery(e.target.value)}
       />
