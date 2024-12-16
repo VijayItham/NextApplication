@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/navigation";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { getUserDetails } from "@/app/api/authCookies";
+import { getUserDetails } from "@/app/pages/api/authCookies";
 import { useState } from "react";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";

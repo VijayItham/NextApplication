@@ -1,4 +1,7 @@
+"use client"
+import Image from "next/image";
 export default function LoadingSpinner() {
+ 
   return (
     <div style={{
       position: 'absolute', 
@@ -13,13 +16,11 @@ export default function LoadingSpinner() {
       zIndex: 9999, 
       pointerEvents: 'none' 
     }}>
-      <img 
-        height={50}
+      <Image  height={50}
         width={50}
         src='/images/loading.gif'
         alt="Loading..."
-        style={{ pointerEvents: 'all' }} 
-      />
+        style={{ pointerEvents: 'all' }} />
     </div>
   );
 }

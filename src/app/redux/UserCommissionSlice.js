@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getRequest, postCreate, postUpdate } from "../api/page";
+import { getRequest, postCreate, postUpdate } from "../pages/api/page";
 
 const initialState = {
   isLoading: false,
@@ -10,7 +10,6 @@ const initialState = {
 
 export const fetchUserCommission = createAsyncThunk("fetchUserCommission", async () => {
   const data = await getRequest("/UserCommission/GetAllUserCommission");
-  console.log('data123', data)
   return data.data;
 });
 
@@ -28,8 +27,7 @@ export const updateUserCommission = createAsyncThunk(
 export const deleteUserCommission = createAsyncThunk(
   "deleteUserCommission",
   async (userCommissionId) => {
-    console.log('userCommissionId123123', userCommissionId)
-    return await postUpdate("/UserCommission/deleteUserCommission", {userCommissionId});
+    return await postUpdate("/UserCommission/deleteUserCommission", { userCommissionId });
   }
 );
 

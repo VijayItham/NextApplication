@@ -14,6 +14,8 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
+import styles from "./DataTable.module.css"
 
 const DataTable = ({
   data,
@@ -71,17 +73,32 @@ const DataTable = ({
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
-  const keys = Object.keys(paginatedRows?.[0]??[]);
+
+  const keys = Object.keys(paginatedRows?.[0] ?? []);
+  
   return (
-    <Paper >
+    <Paper sx={{ borderRadius: '10px', marginTop: "31px" }}>
+      <SearchIcon className={styles.searchIcon} />
       <TextField
-        label="Search"
         variant="outlined"
+        placeholder="Search for records"
         fullWidth
-        sx={{width:"95%", marginLeft:"2rem"}}
+        sx={{
+          width: "35%", marginLeft: "5px",
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": {
+              borderColor: "#784800"
+            },
+            "& input": {
+              position: "relative",
+              left: "2.5rem",
+            },
+          },
+        }}
         margin="normal"
         onChange={(e) => setSearchQuery(e.target.value)}
       />
+
       <TableContainer>
         <Table>
           <TableHead>
@@ -97,7 +114,7 @@ const DataTable = ({
                       <h4>{header.title}</h4>
                     </TableSortLabel>
                   ) : (
-                   header.hide
+                    header.hide
                   )}
                 </TableCell>
               ))}
@@ -114,7 +131,7 @@ const DataTable = ({
                   {keys.map((key) => (
                     <TableCell key={key}>{row[key]}</TableCell>
                   ))}
-                  <TableCell style={{width:"11rem"}}>
+                  <TableCell style={{ width: "11rem" }}>
                     <Button
                       variant="contained"
                       color="primary"
@@ -126,7 +143,7 @@ const DataTable = ({
                       variant="contained"
                       color="secondary"
                       onClick={() => handleDelete(row)}
-                      sx={{marginLeft:"8px"}}
+                      sx={{ marginLeft: "8px" }}
                     >
                       Delete
                     </Button>
@@ -146,7 +163,7 @@ const DataTable = ({
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-        sx={{height:"200px", position:"relative", right:"25rem"}}
+        sx={{ height: "200px", position: "relative", right: "25rem" }}
       />
     </Paper>
   );

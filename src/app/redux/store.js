@@ -1,3 +1,5 @@
+"use client"
+
 import { configureStore } from "@reduxjs/toolkit";
 import appRoleReducer from "./AppRoleSlice";
 import countryStateCityReducer from "./CountryStateCitySlice";

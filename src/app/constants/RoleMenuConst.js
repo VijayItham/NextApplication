@@ -1,3 +1,4 @@
+"use client"
 export const column = [
     { field: 'roleMenuId', title: 'Role Menu ID', isSortable: true, isResizable: false, sorDirection: 'asc' },
     { field: 'menuName', title: 'Menu Name', isSortable: true, isResizable: false, sorDirection: 'asc' },

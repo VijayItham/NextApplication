@@ -8,7 +8,7 @@ export default function PinCreateSuccess() {
     const router = useRouter();
 
     const handleDashboard = () => {
-        router.push("/component/Dashboard");
+        router.push("/pages/Dashboard");
     }
 
     return (
@@ -39,8 +39,6 @@ export default function PinCreateSuccess() {
                     </Button>
                 </Box>
             </Box>
-
-            {/* Right Image */}
             <Box
                 component="img"
                 src="/images/girl.svg"

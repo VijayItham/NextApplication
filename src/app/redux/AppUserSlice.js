@@ -1,3 +1,4 @@
+"use client"
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getRequest,
@@ -5,9 +6,9 @@ import {
   postUpdate,
   postRequest,
   postReq
-} from "../api/page";
+} from "../pages/api/page";
 
-import { doLogin, doLogout, getToken,} from "../api/authCookies";
+import { doLogin, doLogout, getToken,} from "../pages/api/authCookies";
 
 const initialState = {
   isLoading: false,
@@ -108,7 +109,7 @@ const AppUserSlice = createSlice({
   name: "appUserSlice",
   initialState,
   reducers: {
-    logout: (state) => {
+    logout: () => {
       return initialState;
     },
   },
@@ -187,26 +188,24 @@ const AppUserSlice = createSlice({
         state.isLoading = false;
       })
 
-      .addCase(verifyPin.rejected, (state, action) => {
+      .addCase(verifyPin.rejected, (state) => {
         state.isLoading = false;
         state.pinVerificationSuccess = false;
       })
       .addCase(updatePin.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(updatePin.fulfilled, (state, action) => {
-        state.isLoading = false;
-        const response = action.payload;
-      })
-      .addCase(updatePin.rejected, (state, action) => {
+      .addCase(updatePin.fulfilled, (state) => {
         state.isLoading = false;
       })
-      .addCase(forgotPassword.pending, (state, action) => {
+      .addCase(updatePin.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(forgotPassword.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(forgotPassword.fulfilled, (state, action) => {
         if (action.payload.statusCode == 200) {
-          doLogin({ userName: action.meta.arg }, action.payload.token);
           state.isLoading = false;
           state.otpSent = true;
         }
@@ -229,16 +228,15 @@ const AppUserSlice = createSlice({
       .addCase(verifyOtp.rejected, (state) => {
         state.isLoading = false;
       })
-      .addCase(updatePassword.fulfilled, (state, action) => {
+      .addCase(updatePassword.fulfilled, (state) => {
         state.isLoading = false;
-        const response = action.payload;
       })
       .addCase(updatePassword.rejected, (state) => {
         state.isLoading = false;
       })
 
       .addCase(getDashboard.pending, (state) => {
-        state.isLoadingoading = true;
+        state.isLoading = true;
       })
       .addCase(getDashboard.fulfilled, (state, action) => {
         state.isLoading = false;

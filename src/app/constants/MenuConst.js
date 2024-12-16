@@ -1,3 +1,5 @@
+"use client"
+
 const MenuList = [
     { id: 1, name: 'role', value: 'Role' },
     { id: 2, name: 'user', value: 'User' },

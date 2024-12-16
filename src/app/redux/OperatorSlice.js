@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getRequest, postCreate, postUpdate } from "../api/page";
+import { getRequest, postCreate, postUpdate } from "../pages/api/page";
 
 const initialState = {
   isLoading: false,
@@ -10,7 +10,6 @@ const initialState = {
 
 export const fetchOperator = createAsyncThunk("fetchOperator", async () => {
   const data = await getRequest("/Operator/getAllOperator");
-  console.log('data', data)
   return data.data;
 });
 

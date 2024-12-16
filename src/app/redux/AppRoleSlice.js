@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getRequest, postCreate, postUpdate } from "../api/page";
+import { getRequest, postCreate, postUpdate } from "../pages/api/page";
 
 const initialState = {
   isLoading: false,
@@ -9,7 +9,7 @@ const initialState = {
 };
 
 export const fetchAppRole = createAsyncThunk("fetchAppRole", async () => {
-  const data = await getRequest("/AppRole/getAllAppRole").data;
+  const data = await getRequest("/AppRole/getAllAppRole");
   return data.data;
 });
 

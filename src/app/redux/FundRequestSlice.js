@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getRequest, postCreate, postUpdate } from "../api/page";
+import { getRequest, postCreate, postUpdate } from "../pages/api/page";
 
 const initialState = {
   isLoading: false,
@@ -10,7 +10,6 @@ const initialState = {
 
 export const fetchFundRequest = createAsyncThunk("fetchFundRequest", async () => {
   const data = await getRequest("/FundRequest/getAllFundRequest");
-  console.log('fetchFundRequest==>', data)
   return data.data;
 });
 
@@ -35,7 +34,6 @@ export const updateFundRequestByAdmin = createAsyncThunk(
 export const deleteFundRequest = createAsyncThunk(
   "deleteFundRequest",
   async (fundRequestId) => {
-    console.log('fundRequestId123213', fundRequestId)
     return await postUpdate("/FundRequest/deleteFundRequest", {fundRequestId});
   }
 );
@@ -51,7 +49,6 @@ const FundRequestSlice = createSlice({
       })
       .addCase(fetchFundRequest.fulfilled, (state, action) => {
         state.isLoading = false;
-        console.log('action===>',action)
         state.fundRequestData = action.payload;
       })
       .addCase(fetchFundRequest.rejected, (state) => {
