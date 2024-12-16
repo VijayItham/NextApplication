@@ -3,16 +3,16 @@
 import * as React from 'react';
 import { Box } from "@mui/material";
 import styles from "./UserProfile.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Typography, Grid, TextField, Button, CircularProgress } from "@mui/material";
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 import InputAdornment from "@mui/material/InputAdornment";
-import { getUserDetails } from '@/app/api/authCookies';
+import { getUserDetails } from '../api/authCookies';
 import { updatePassword } from '@/app/redux/AppUserSlice';
-//import LoadingSpinner from '@/app/common/Loading';
+import LoadingSpinner from '@/app/common/Loading';
 import { useSnackbar } from "notistack";
 import { useDispatch } from 'react-redux';
 
@@ -21,13 +21,21 @@ export default function UserProfile() {
   const { enqueueSnackbar } = useSnackbar();
   const [value, setValue] = useState('1');
   const [oldPassword, setOldPassword] = useState("");
-  //const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState(null);
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const details = getUserDetails();
-  const username = details?.userName??'';
+  useEffect(() => {
+    const userDetails = getUserDetails();
+    setDetails(userDetails);
+  }, []);
+
+  if (!details) {
+    return <Typography><LoadingSpinner/></Typography>; 
+  }
+
+  const username = details.userName || "";
 
   const inputStyles = {
     marginBottom: "1rem",
