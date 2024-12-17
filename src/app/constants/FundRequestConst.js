@@ -1,3 +1,4 @@
+"use client"
 export const column = [
     { field: 'fundRequestId', title: 'Fund Request ID', isSortable: true, isResizable: false, sorDirection: 'asc' },
     { field: 'paymentMode', title: 'Payment Mode', isSortable: true, isResizable: false, sorDirection: 'asc' },

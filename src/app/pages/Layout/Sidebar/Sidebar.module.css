@@ -1,0 +1,30 @@
+.leftSection {
+  width: 16vw;
+  padding: 2rem;
+  position: fixed;
+  top: 57px;
+  bottom: 0;
+  left: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  border-right: 1.5px solid #EFDCBA;
+  background-color: #faf8f2;
+  z-index: 1000;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  width: 150px;
+  padding: 1rem;
+  margin: 3px 0 0 2rem;
+  border: 1px solid #7848001A;
+  border-radius: 48px;
+  background-color:#7848001A;
+}
+
+.menu-header {
+  display: flex;
+  align-items: center;
+  margin: 18px 0 10px 3rem;
+}

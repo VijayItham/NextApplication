@@ -183,8 +183,6 @@ export default function CreatePin() {
                         </Box>
                     </Box>
                 </Box>
-
-                {/* Right Image */}
                 <Box
                     component="img"
                     src="/images/girl.svg"

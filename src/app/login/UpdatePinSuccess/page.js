@@ -40,8 +40,6 @@ export default function UpdatePinSuccess() {
                     </Button>
                 </Box>
             </Box>
-
-            {/* Right Image */}
             <Box
                 component="img"
                 src="/images/girl.svg"

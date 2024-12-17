@@ -7,7 +7,7 @@ export function middleware(request) {
     const loggedIn = allowedPaths.includes(request.nextUrl.pathname);
     if(loggedIn){
         if(token){
-           return NextResponse.redirect(new URL("/component", request.url))
+           return NextResponse.redirect(new URL("/pages", request.url))
         }
     }
     else{

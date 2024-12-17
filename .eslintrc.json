@@ -7,8 +7,15 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "plugin:@next/next/recommended"
   ],
+  "settings": {
+    "react": {
+      "version": "detect" 
+    }
+  },
+
   "parserOptions": {
     "ecmaVersion": 2021,
     "sourceType": "module",
@@ -18,7 +25,8 @@
   },
   "plugins": ["react", "prettier"],
   "rules": {
-    "prettier/prettier": "error",
-    "react/prop-types": "off"  // You can enable this if you use prop-types
+    "prettier/prettier": "off",
+    "react/prop-types": "off" ,
+    "react/react-in-jsx-scope": "off"
   }
 }

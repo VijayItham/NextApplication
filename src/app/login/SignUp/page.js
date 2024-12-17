@@ -123,6 +123,7 @@ export default function SignUp() {
         countryId: "96",
         stateId: "",
         cityId: "",
+        createdBy: "F931AD04-9E49-4B84-9DE4-7968BB1F26F0",
       });
     } catch (error) {
       console.error("Error saving user data:", error);

@@ -1,7 +1,7 @@
 "use client";
 
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getRequest } from "../api/page";
+import { getRequest } from "../pages/api/page";
 
 const initialState = {
   isLoading: false,
@@ -10,7 +10,6 @@ const initialState = {
 
 export const fetchAmountType = createAsyncThunk("fetchAmountType", async () => {
   const data = await getRequest("/AmountType/getAllAmountType");
-  console.log('data', data)
   return data.data;
 });
 

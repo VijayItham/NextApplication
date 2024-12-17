@@ -1,3 +1,4 @@
+"use client"
 export const column = [
     { field: 'operatorCommissionId', title: 'Operator Com ID', isSortable: true, isResizable: false, sorDirection: 'asc' },
     { field: 'operatorId', title: 'Operator ID', isSortable: true, isResizable: false, sorDirection: 'asc' },

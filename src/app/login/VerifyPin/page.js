@@ -27,7 +27,7 @@ export default function VerifyPin() {
       ).unwrap();
 
       if (result?.userDetails?.message === "Data Found") {
-        router.push("/component/Dashboard");
+        router.push("/pages/Dashboard");
         setTimeout(() => {
           enqueueSnackbar('Login successful!', {
             variant: "success",
@@ -73,7 +73,6 @@ export default function VerifyPin() {
     const fullPin = pin.join("");
 
     if (fullPin.length < 4) {
-      setError("Please enter a complete 4-digit PIN.");
       enqueueSnackbar('Please enter a complete 4-digit PIN.', { variant: 'warning' });
       return;
     }

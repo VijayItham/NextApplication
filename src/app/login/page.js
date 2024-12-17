@@ -6,8 +6,6 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import LockIcon from "@mui/icons-material/Lock";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
-import ErrorIcon from "@mui/icons-material/Error";
 import { brown } from '@mui/material/colors';
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
@@ -20,20 +18,11 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [isValid, setIsValid] = useState(null);
   const [rememberMe, setRememberMe] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
   const { enqueueSnackbar } = useSnackbar();
-
-  const validateUsername = (value) => {
-    const isValidEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-    const isValidPhone = /^\d{10}$/.test(value);
-    const isValidUsername = /^[a-zA-Z0-9_]{3,20}$/.test(value);
-
-    return value.length > 0 && (isValidEmail || isValidPhone || isValidUsername);
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -119,7 +108,6 @@ export default function Login() {
                 onChange={(e) => {
                   const value = e.target.value;
                   setUserName(value);
-                  setIsValid(validateUsername(value));
                 }}
                 InputProps={{
                   startAdornment: (
@@ -127,12 +115,6 @@ export default function Login() {
                       <Typography variant="h6" component="span">
                         {"@"}
                       </Typography>
-                    </InputAdornment>
-                  ),
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      {isValid === true && <CheckCircleIcon color="success" />}
-                      {isValid === false && <ErrorIcon color="error" />}
                     </InputAdornment>
                   ),
                 }}
