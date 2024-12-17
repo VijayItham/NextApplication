@@ -14,8 +14,8 @@ import {
   TextField,
   Button,
 } from "@mui/material";
-import SearchIcon from '@mui/icons-material/Search';
-import styles from "./DataTable.module.css"
+import SearchIcon from "@mui/icons-material/Search";
+import styles from "./DataTable.module.css";
 
 const DataTable = ({
   data,
@@ -75,19 +75,20 @@ const DataTable = ({
   );
 
   const keys = Object.keys(paginatedRows?.[0] ?? []);
-  
+
   return (
-    <Paper sx={{ borderRadius: '10px', marginTop: "31px" }}>
+    <Paper sx={{ borderRadius: "10px", marginTop: "31px" }}>
       <SearchIcon className={styles.searchIcon} />
       <TextField
         variant="outlined"
         placeholder="Search for records"
         fullWidth
         sx={{
-          width: "35%", marginLeft: "5px",
+          width: "35%",
+          marginLeft: "5px",
           "& .MuiOutlinedInput-root": {
             "&.Mui-focused fieldset": {
-              borderColor: "#784800"
+              borderColor: "#784800",
             },
             "& input": {
               position: "relative",
@@ -98,26 +99,27 @@ const DataTable = ({
         margin="normal"
         onChange={(e) => setSearchQuery(e.target.value)}
       />
-
       <TableContainer>
         <Table>
           <TableHead>
             <TableRow>
-              {column.map((header) => (
-                <TableCell key={header.field}>
-                  {header.isSortable ? (
-                    <TableSortLabel
-                      active={orderBy === header.field}
-                      direction={orderBy === header.field ? order : "asc"}
-                      onClick={() => handleSortRequest(header.field)}
-                    >
+              {column
+                .filter((header) => header.isVisible) // Show only columns where isVisible is true
+                .map((header) => (
+                  <TableCell key={header.field}>
+                    {header.isSortable ? (
+                      <TableSortLabel
+                        active={orderBy === header.field}
+                        direction={orderBy === header.field ? order : "asc"}
+                        onClick={() => handleSortRequest(header.field)}
+                      >
+                        <h4>{header.title}</h4>
+                      </TableSortLabel>
+                    ) : (
                       <h4>{header.title}</h4>
-                    </TableSortLabel>
-                  ) : (
-                    header.hide
-                  )}
-                </TableCell>
-              ))}
+                    )}
+                  </TableCell>
+                ))}
               <TableCell>
                 <h4>Actions</h4>
               </TableCell>
@@ -128,21 +130,26 @@ const DataTable = ({
               const rowKey = keys.map((key) => row[key]).join("-");
               return (
                 <TableRow key={rowKey}>
-                  {keys.map((key) => (
-                    <TableCell key={key}>{row[key]}</TableCell>
-                  ))}
+                  {keys
+                    .filter((key) => {
+                      const header = column.find((col) => col.field === key);
+                      return header && header.isVisible; // Show only if isVisible is true
+                    })
+                    .map((key) => (
+                      <TableCell key={key}>{row[key]}</TableCell>
+                    ))}
                   <TableCell style={{ width: "11rem" }}>
                     <Button
                       variant="contained"
                       color="primary"
-                      onClick={() => handleEdit(row)}
+                      onClick={() => handleEdit(row)} // Pass the full row data, including hidden properties
                     >
                       Edit
                     </Button>
                     <Button
                       variant="contained"
                       color="secondary"
-                      onClick={() => handleDelete(row)}
+                      onClick={() => handleDelete(row)} // Pass the full row data, including hidden properties
                       sx={{ marginLeft: "8px" }}
                     >
                       Delete

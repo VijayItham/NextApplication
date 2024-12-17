@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { TextField, Box, Typography, Grid, Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { updateMenu, addMenu, fetchMenu } from "../../redux/MenuSlice";
@@ -11,23 +11,23 @@ export default function AddMenu({
   setIsEdit,
   setMessage,
   setOpenSnackbar,
-  // data,
+  data,
 }) {
   const [formData, setFormData] = useState({
     menuName: "",
-    // pageName: "",
+    pageName: "",
     controllerName: "",
     actionName: "",
     displayOrder: 0,
   });
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (isEdit) {
-  //     const { countryId, stateId } = data;
-  //     setFormData(data);
-  //   }
-  // }, []);
+  useEffect(() => {
+    // if (isEdit) {
+    //   const { countryId, stateId } = data;
+    setFormData(data);
+    //}
+  }, []);
   const handleChange = async (e) => {
     setFormData({
       ...formData,
