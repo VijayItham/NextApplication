@@ -4,19 +4,17 @@ import React from "react";
 import { Box } from "@mui/material";
 import OutlinedCard from "./Card/card";
 import { useEffect } from "react";
-import styles from './Dashboard.module.css'
+import styles from "./Dashboard.module.css";
 import Rightbar from "./RecentActivity/page";
 import { useDispatch } from "react-redux";
 import { getDashboard } from "@/app/redux/AppUserSlice";
-import { usePathname } from "next/navigation";
 import { getUserDetails } from "../api/authCookies";
 
 export default function DashBoard() {
-  const pathName = usePathname();
   const dispatch = useDispatch();
 
-  const details = getUserDetails()
-  const username = details?.userName ?? '';
+  const details = getUserDetails();
+  const username = details?.userName ?? "";
   useEffect(() => {
     if (username) {
       dispatch(getDashboard(username));

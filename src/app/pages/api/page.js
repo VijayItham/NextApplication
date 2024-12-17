@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
 import axios from "axios";
-import { getToken,  getUserId } from "./authCookies";
+import { getToken, getUserId } from "./authCookies";
 
 const BASE_URL = "https://devrechargeapi.codetrex.in/api";
 
@@ -30,9 +30,9 @@ export const postReq = async (endpoint, data) => {
     throw new Error("No token found");
   }
 
-  const response = await axios.post(`${BASE_URL}${endpoint}`, data,{
+  const response = await axios.post(`${BASE_URL}${endpoint}`, data, {
     headers: {
-      Authorization: `Bearer ${token}`, 
+      Authorization: `Bearer ${token}`,
     },
   });
 
@@ -67,10 +67,7 @@ export const postSetup = async (endpoint, data) => {
     ...data,
   };
 
-  const response = await axios.post(
-    `${BASE_URL}${endpoint}`,
-    dataWitCreatedBy
-  );
+  const response = await axios.post(`${BASE_URL}${endpoint}`, dataWitCreatedBy);
   return response.data;
 };
 
@@ -97,4 +94,3 @@ export const postUpdate = async (endpoint, data) => {
 
   return response.data;
 };
-
