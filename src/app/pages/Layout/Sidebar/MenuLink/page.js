@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 "use client";
 
@@ -6,11 +6,11 @@ import Link from "next/link";
 import styles from './MenuLink.module.css';
 
 const MenuLink = ({ item = {}, selectedMenu }) => {
-  const { pageName = "", menuName = "" } = item; 
+  const { pageName = "", menuName = "" } = item;
 
   return (
     <Link
-      href={pageName || "/"} 
+      href={pageName || "/"}
       className={styles.link}
       style={{
         color: selectedMenu === pageName ? "#FFFFFF" : "#333333",

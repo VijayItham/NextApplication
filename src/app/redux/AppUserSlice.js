@@ -1,20 +1,20 @@
-"use client"
+"use client";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   getRequest,
   postSetup,
   postUpdate,
   postRequest,
-  postReq
+  postReq,
 } from "../pages/api/page";
 
-import { doLogin, doLogout, getToken,} from "../pages/api/authCookies";
+import { doLogin, doLogout, getToken } from "../pages/api/authCookies";
 
 const initialState = {
   isLoading: false,
-  addAppUserData :[],
+  addAppUserData: [],
   appUserData: [],
-  dashboardData:[],
+  dashboardData: [],
   userDetail: {},
   menu: [],
 };
@@ -44,7 +44,7 @@ export const updatePin = createAsyncThunk("updatePin", async (pin) => {
 export const forgotPassword = createAsyncThunk(
   "forgotPassword",
   async (username) => {
-    return await postRequest("/Authentication/getOTP", {username});
+    return await postRequest("/Authentication/getOTP", { username });
   }
 );
 
@@ -71,26 +71,28 @@ export const updatePassword = createAsyncThunk(
 export const getMenuByUserRole = createAsyncThunk(
   "getMenuByUserRole",
   async (data) => {
-    return await postReq("/Menu/getMenuByUserRole", data );
+    return await postReq("/Menu/getMenuByUserRole", data);
   }
 );
 
 export const getDashboard = createAsyncThunk(
   "getDashboard",
   async (username) => {
-    return await  getRequest(`/Dashboard/getDashboard/${username}`);
+    return await getRequest(`/Dashboard/getDashboard/${username}`);
   }
 );
-
 
 export const fetchAppUser = createAsyncThunk("fetchAppUser", async () => {
   const response = await getRequest("/AppUser/getAllAppUser");
   return response.data;
 });
 
-export const addAppUser = createAsyncThunk("addAppUser", async (finalFormData) => {
-  return await postSetup("/AppUser/addAppUser", finalFormData);
-});
+export const addAppUser = createAsyncThunk(
+  "addAppUser",
+  async (finalFormData) => {
+    return await postSetup("/AppUser/addAppUser", finalFormData);
+  }
+);
 
 export const updateAppUser = createAsyncThunk("updateAppUser", async (data) => {
   return await postUpdate("/AppUser/updateAppUser", data);
@@ -119,8 +121,7 @@ const AppUserSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchAppUser.fulfilled, (state, action) => {
-        state.isLoading = false, 
-        state.appUserData = action.payload
+        (state.isLoading = false), (state.appUserData = action.payload);
       })
       .addCase(fetchAppUser.rejected, (state) => {
         state.isLoading = false;
@@ -161,7 +162,7 @@ const AppUserSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(fetchUserLogin.fulfilled, (state, action) => {
-        const loginDetail = action?.payload?.loginDetails ?? {};
+        const loginDetail = action?.payload ?? {};
         if (loginDetail.statusCode == 200) {
           doLogin(loginDetail.data[0], action.payload.token);
           state.userDetail = loginDetail.data[0];
@@ -179,7 +180,7 @@ const AppUserSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(verifyPin.fulfilled, (state, action) => {
-        const userDetails = action?.payload?.userDetails ?? {};
+        const userDetails = action?.payload ?? {};
         if (userDetails.statusCode == 200) {
           doLogin(userDetails.data[0], action.payload.token);
           state.userDetail = userDetails.data[0];
@@ -254,8 +255,7 @@ const AppUserSlice = createSlice({
       })
       .addCase(getMenuByUserRole.rejected, (state) => {
         state.isLoading = false;
-      })
-
+      });
   },
 });
 

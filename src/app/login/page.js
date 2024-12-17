@@ -1,12 +1,21 @@
-"use client"
+"use client";
 
-import { Box, Button, Typography, TextField, FormControlLabel, Checkbox, CircularProgress, IconButton } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  TextField,
+  FormControlLabel,
+  Checkbox,
+  CircularProgress,
+  IconButton,
+} from "@mui/material";
 import { useState } from "react";
 import InputAdornment from "@mui/material/InputAdornment";
 import Visibility from "@mui/icons-material/Visibility";
 import LockIcon from "@mui/icons-material/Lock";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
-import { brown } from '@mui/material/colors';
+import { brown } from "@mui/material/colors";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
@@ -33,12 +42,11 @@ export default function Login() {
         fetchUserLogin({ userName, password })
       ).unwrap();
 
-      if (result?.loginDetails?.data[0]?.hasPin === "True") {
+      if (result?.data[0]?.hasPin === "True") {
         router.push("/login/VerifyPin");
-      } else if (result?.loginDetails?.data[0]?.hasPin === "False") {
+      } else if (result?.data[0]?.hasPin === "False") {
         router.push("/login/CreatePin");
-      }
-      else {
+      } else {
         enqueueSnackbar("Invalid login credentials.", {
           variant: "error",
           autoHideDuration: 1000,
@@ -57,7 +65,7 @@ export default function Login() {
 
   const handleForgotPassword = () => {
     router.push("/login/ForgotPassword");
-  }
+  };
 
   const handleTogglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -65,35 +73,42 @@ export default function Login() {
 
   const handleRegister = () => {
     router.push("/login/SignUp");
-  }
+  };
 
   const handleRememberMe = (e) => {
     setRememberMe(e.target.checked);
-  }
+  };
 
   return (
     <>
-      <Box
-        className={styles.container}
-      >
+      <Box className={styles.container}>
         <Box
           component="img"
           src="/images/boy.svg"
           alt="Boy-img"
           className={styles.leftImage}
         />
-        <Box
-          className={styles.formContainer}
-        >
-          <Box sx={{ display: "flex", flexDirection: "column", alignItems: "start" }}>
+        <Box className={styles.formContainer}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "start",
+            }}
+          >
             <Typography variant="h4" component="h2" className={styles.title}>
               Login
             </Typography>
             <Typography className={styles.description}>
-              Access your personalized dashboard to explore services, track progress, and stay updated.....
+              Access your personalized dashboard to explore services, track
+              progress, and stay updated.....
             </Typography>
 
-            <Box component="form" onSubmit={handleSubmit} className={styles.textfield}>
+            <Box
+              component="form"
+              onSubmit={handleSubmit}
+              className={styles.textfield}
+            >
               <TextField
                 margin="normal"
                 required
@@ -155,7 +170,11 @@ export default function Login() {
                         onClick={handleTogglePasswordVisibility}
                         edge="end"
                       >
-                        {showPassword ? <VisibilityOff color="disabled" /> : <Visibility color="disabled" />}
+                        {showPassword ? (
+                          <VisibilityOff color="disabled" />
+                        ) : (
+                          <Visibility color="disabled" />
+                        )}
                       </IconButton>
                     </InputAdornment>
                   ),
@@ -189,7 +208,12 @@ export default function Login() {
                   }
                   label="Remember me"
                 />
-                <Box className={styles.forgotPassword} onClick={handleForgotPassword}>Forgot password ?</Box>
+                <Box
+                  className={styles.forgotPassword}
+                  onClick={handleForgotPassword}
+                >
+                  Forgot password ?
+                </Box>
               </Box>
               <Box className={styles.containerBtn}>
                 <Button
@@ -219,6 +243,5 @@ export default function Login() {
         />
       </Box>
     </>
-  )
-
+  );
 }

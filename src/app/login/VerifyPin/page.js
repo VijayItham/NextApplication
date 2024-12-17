@@ -22,23 +22,20 @@ export default function VerifyPin() {
   const verifyPinCode = async (fullPin) => {
     try {
       setLoading(true);
-      const result = await dispatch(
-        verifyPin(fullPin ) 
-      ).unwrap();
+      const result = await dispatch(verifyPin(fullPin)).unwrap();
 
-      if (result?.userDetails?.message === "Data Found") {
+      if (result?.message === "Data Found") {
         router.push("/pages/Dashboard");
         setTimeout(() => {
-          enqueueSnackbar('Login successful!', {
+          enqueueSnackbar("Login successful!", {
             variant: "success",
             autoHideDuration: 3000,
             style: { backgroundColor: "#4caf50", color: "#fff" },
           });
-        }, 1000); 
-        
+        }, 1000);
       } else {
-        enqueueSnackbar('Incorrect PIN. Please try again.', {
-          variant: 'error',
+        enqueueSnackbar("Incorrect PIN. Please try again.", {
+          variant: "error",
           autoHideDuration: 1000,
           style: { backgroundColor: "#f44336", color: "#fff" },
         });
@@ -66,25 +63,35 @@ export default function VerifyPin() {
     }
   };
 
-
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const fullPin = pin.join("");
 
     if (fullPin.length < 4) {
-      enqueueSnackbar('Please enter a complete 4-digit PIN.', { variant: 'warning' });
+      enqueueSnackbar("Please enter a complete 4-digit PIN.", {
+        variant: "warning",
+      });
       return;
     }
-    verifyPinCode(fullPin)
-   
+    verifyPinCode(fullPin);
   };
 
   return (
     <Box className={styles.container}>
-      <Box component="img" src="/images/boy.svg" alt="Boy Illustration" className={styles.leftImage} />
+      <Box
+        component="img"
+        src="/images/boy.svg"
+        alt="Boy Illustration"
+        className={styles.leftImage}
+      />
       <Box className={styles.verifycontainer}>
-        <Box component="img" src="/images/Codetrex_logo.png" alt="Codetrex Logo" className={styles.codetrexlogo} />
+        <Box
+          component="img"
+          src="/images/Codetrex_logo.png"
+          alt="Codetrex Logo"
+          className={styles.codetrexlogo}
+        />
         <Box className={styles.pininput}>
           {Array(4)
             .fill(0)
@@ -115,7 +122,11 @@ export default function VerifyPin() {
             ))}
         </Box>
 
-        <Button variant="body2" className={styles.forgotpin} onClick={handleForgotPin}>
+        <Button
+          variant="body2"
+          className={styles.forgotpin}
+          onClick={handleForgotPin}
+        >
           Forgot PIN?
         </Button>
 
@@ -129,7 +140,12 @@ export default function VerifyPin() {
         </Button>
       </Box>
 
-      <Box component="img" src="/images/girl.svg" alt="Girl Illustration" className={styles.rightImg} />
+      <Box
+        component="img"
+        src="/images/girl.svg"
+        alt="Girl Illustration"
+        className={styles.rightImg}
+      />
     </Box>
   );
 }
