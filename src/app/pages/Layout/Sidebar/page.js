@@ -100,7 +100,7 @@ export default function Sidebar() {
             }}
             onClick={() => handleMenuClick(item?.pageName)}
           >
-            <PermIdentityIcon sx={{color:"#666666", fontSize:"1.5rem" ,color: selectedMenu === item?.pageName ? "white" : "#666666",}}/>
+            <PermIdentityIcon sx={{fontSize:"1.5rem" ,color: selectedMenu === item?.pageName ? "white" : "#666666",}}/>
             <Typography
               variant="h6"
               sx={{
