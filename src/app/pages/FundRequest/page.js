@@ -11,11 +11,9 @@ import LoadingSpinner from "../../common/Loading";
 import AddFundRequest from "./AddFundRequest";
 import DeleteFundRequest from "./DeleteFundRequest";
 import { column } from "@/app/constants/UserCommissionConst";
-import { usePathname } from "next/navigation";
 import styles from "./FundRequest.module.css";
 
 export default function DisplayFundRequest() {
-  const pathName = usePathname();
   const dispatch = useDispatch();
   const { isLoading, fundRequestData } = useSelector((data) => data.fundRequestReducer);
   const [isEdit, setIsEdit] = useState(false);

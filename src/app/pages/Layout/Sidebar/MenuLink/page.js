@@ -3,7 +3,7 @@
 "use client";
 
 import Link from "next/link";
-import styles from "./menuLink.module.css";
+import styles from './MenuLink.module.css';
 
 const MenuLink = ({ item = {}, selectedMenu }) => {
   const { pageName = "", menuName = "" } = item; 
