@@ -10,13 +10,11 @@ import DataTable from "../../common/DataTable";
 import LoadingSpinner from "../../common/Loading";
 import AddMenu from "./AddMenu";
 import DeleteMenu from "./DeleteMenu";
-import { usePathname } from "next/navigation";
 import styles from "./Menu.module.css";
 
 import { column } from "@/app/constants/AppMenuConst";
 
 export default function DisplayMenu() {
-  const pathName = usePathname();
   const dispatch = useDispatch();
   const { isLoading, menuData } = useSelector((data) => {
     return data.menuReducer;
