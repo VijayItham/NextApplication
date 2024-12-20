@@ -21,6 +21,7 @@ import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
 import { fetchUserLogin } from "../redux/AppUserSlice";
 import styles from "./Login.module.css";
+import "../../app/globals.css";
 
 export default function Login() {
   const [userName, setUserName] = useState("");

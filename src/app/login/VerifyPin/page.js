@@ -7,6 +7,7 @@ import { useSnackbar } from "notistack";
 import styles from "./VerifyPin.module.css";
 import { verifyPin } from "@/app/redux/AppUserSlice";
 import { useDispatch } from "react-redux";
+import "../../globals.css";
 
 export default function VerifyPin() {
   const dispatch = useDispatch();
@@ -60,6 +61,10 @@ export default function VerifyPin() {
 
     if (value !== "" && index < 3) {
       document.getElementById(`pin-input-${index + 1}`).focus();
+    }
+
+    if (value === "" && index > 0) {
+      document.getElementById(`pin-input-${index - 1}`).focus();
     }
   };
 

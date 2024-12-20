@@ -14,12 +14,12 @@ import {
 import { useDispatch } from "react-redux";
 
 export default function EditAppRole({ data, setIsEdit, isEdit }) {
-    const { appRoleId, roleName } = data
+    const {id, appRoleId, roleName } = data
     const [updateRoleName, setUpdateRoleName] = useState(roleName);
      const dispatch = useDispatch();
 
     const handleEditSave = () => {
-        dispatch(updateAppRole({appRoleId,roleName:updateRoleName}))
+        dispatch(updateAppRole({id, appRoleId,roleName:updateRoleName}))
         setIsEdit(false)
     }
 

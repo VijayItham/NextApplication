@@ -10,7 +10,7 @@ import DataTable from "../../common/DataTable";
 import LoadingSpinner from "../../common/Loading";
 import AddFundRequest from "./AddFundRequest";
 import DeleteFundRequest from "./DeleteFundRequest";
-import { column } from "@/app/constants/UserCommissionConst";
+import { column } from "@/app/constants/FundRequestConst";
 import styles from "./FundRequest.module.css";
 
 export default function DisplayFundRequest() {
@@ -34,7 +34,7 @@ export default function DisplayFundRequest() {
     (item) => item.fundRequestId === selectedRow.fundRequestId
   );
   return (
-    <div style={{ position:'fixed', width: "81vw", top: "9.5rem", bottom: 0, height:"100vh",  backgroundColor: "#FBF8F3",   left: "17.5rem", overflowY: "auto",}}>
+    <div style={{ position:'fixed', width: "82.5vw", top: "9.5rem", bottom: 0, height:"100vh",  backgroundColor: "#FBF8F3",   left: "17.5rem", overflowY: "auto",}}>
        <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
       <Box sx={{display:"flex"}}>
       <Box mb={2} sx={{marginTop:"10px"}}>

@@ -24,21 +24,6 @@ export const postRequest = async (endpoint, data) => {
   return response.data;
 };
 
-export const postReq = async (endpoint, data) => {
-  const token = getToken();
-  if (!token) {
-    throw new Error("No token found");
-  }
-
-  const response = await axios.post(`${BASE_URL}${endpoint}`, data, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-
-  return response.data.data;
-};
-
 export const postCreate = async (endpoint, data) => {
   const token = getToken();
   if (!token) {

@@ -1,8 +1,15 @@
 .container {
-    width: 81%;
-    top: 9.5rem;
-    left: 17.4rem;
-    background-color: #f6f2eb;
-    position: fixed;
-    bottom: 1px;
+  width: 81%;
+  top: 9.5rem;
+  left: 17.4rem;
+  background-color: #f6f2eb;
+  position: fixed;
+  bottom: 1px;
+}
+
+.btn {
+  padding: 12px 25px !important;
+  background-color: #784800 !important;
+  font-size: 13px !important;
+  width: 70px !important
 }

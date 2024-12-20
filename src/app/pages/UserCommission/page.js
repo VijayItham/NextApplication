@@ -37,7 +37,7 @@ export default function DisplayUserCommission() {
   );
 
   return (
-    <div style={{ position: 'fixed', minHeight: '200px',bottom: 0,  width: "81vw", top: "4.8rem", left: "17.5rem",backgroundColor: "#FBF8F3", }}>
+    <div style={{ position: 'fixed', minHeight: '200px',bottom: 0,  width: "81vw", top: "9.5rem", left: "17.5rem",backgroundColor: "#FBF8F3", overflowY:"auto" }}>
         <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
       <Box mb={2}>
         {!isAddUserCommission && !isEdit &&  (

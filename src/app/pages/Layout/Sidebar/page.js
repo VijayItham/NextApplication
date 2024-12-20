@@ -9,28 +9,20 @@ import { getMenuByUserRole } from "@/app/redux/AppUserSlice";
 import { useSelector, useDispatch } from "react-redux";
 import MenuLink from "./MenuLink/page";
 import { useRouter } from "next/navigation";
-import { getUserDetails } from "../../api/authCookies";
-import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+import PermIdentityIcon from "@mui/icons-material/PermIdentity";
 
 export default function Sidebar() {
   const router = useRouter();
   const dispatch = useDispatch();
-  const menu = useSelector((state) => state?.appUserReducer?.menu);
+  const response = useSelector((state) => state?.appUserReducer?.menu);
+  const menu = response?.data;
+  
   const [isMenuOpen, setIsMenuOpen] = useState(true);
   const [selectedMenu, setSelectedMenu] = useState("");
 
-  const details = getUserDetails();
-  const username = details?.userName;
-
-  const data = {
-    username,
-  };
-
   useEffect(() => {
-    if (username) {
-      dispatch(getMenuByUserRole(data));
-    }
-  }, [dispatch, username]);
+    dispatch(getMenuByUserRole());
+  }, [dispatch]);
 
   const toggleMenu = () => {
     setIsMenuOpen((prevState) => !prevState);
@@ -49,7 +41,7 @@ export default function Sidebar() {
   return (
     <Box className={styles.leftSection}>
       <Box className={styles.menuItem}>
-        <GridViewIcon sx={{ marginLeft: "1rem", color:"#784800" }} />
+        <GridViewIcon sx={{ marginLeft: "1rem", color: "#784800" }} />
         <Box
           sx={{
             marginLeft: "1rem",
@@ -58,7 +50,6 @@ export default function Sidebar() {
             cursor: "pointer",
             borderRadius: "41px",
             padding: "5px",
-            
           }}
           onClick={navigateToDashboard}
         >
@@ -70,12 +61,21 @@ export default function Sidebar() {
         <Typography
           variant="h6"
           gutterBottom
-          sx={{ marginLeft: "3rem", color: "#666666", fontFamily: "Montserrat" }}
+          sx={{
+            marginLeft: "3rem",
+            color: "#666666",
+            fontFamily: "Montserrat",
+          }}
         >
           MENU
         </Typography>
         <KeyboardArrowUpIcon
-          sx={{ marginLeft: "5.5rem", marginTop: "2px", color: "#666666", cursor: "pointer" }}
+          sx={{
+            marginLeft: "5.5rem",
+            marginTop: "2px",
+            color: "#666666",
+            cursor: "pointer",
+          }}
           onClick={toggleMenu}
         />
       </Box>
@@ -91,16 +91,23 @@ export default function Sidebar() {
               marginLeft: "2.5rem",
               cursor: "pointer",
               marginBottom: "1rem",
-              backgroundColor: selectedMenu === item?.pageName ? "#784800" : "transparent",
+              backgroundColor:
+                selectedMenu === item?.pageName ? "#784800" : "transparent",
               borderRadius: "41px",
               padding: "17px",
               "&:hover": {
-                backgroundColor: selectedMenu === item?.pageName ? "#784800" : "#7848001A",
+                backgroundColor:
+                  selectedMenu === item?.pageName ? "#784800" : "#7848001A",
               },
             }}
             onClick={() => handleMenuClick(item?.pageName)}
           >
-            <PermIdentityIcon sx={{fontSize:"1.5rem" ,color: selectedMenu === item?.pageName ? "white" : "#666666",}}/>
+            <PermIdentityIcon
+              sx={{
+                fontSize: "1.5rem",
+                color: selectedMenu === item?.pageName ? "white" : "#666666",
+              }}
+            />
             <Typography
               variant="h6"
               sx={{

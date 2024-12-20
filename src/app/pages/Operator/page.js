@@ -46,7 +46,7 @@ export default function DisplayOperator() {
             onClick={handleAddOperator}
             className={styles.btn}
           >
-            Add Operator
+            Add Operator 
           </Button>
         )}
       </Box>

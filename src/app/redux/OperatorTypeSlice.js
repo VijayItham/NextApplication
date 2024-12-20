@@ -66,9 +66,9 @@ const OperatorTypeSlice = createSlice({
       .addCase(updateOperatorType.fulfilled, (state, action) => {
         if (action.payload.statusCode === 200) {
           state.isLoading = false;
-          const { operatorTypeId, operatorTypeName } = action.meta.arg;
+          const {id, operatorTypeId, operatorTypeName } = action.meta.arg;
           state.operatorTypeData = state.operatorTypeData.map((item) =>
-            item.operatorTypeId === operatorTypeId ? { operatorTypeId, operatorTypeName } : item
+            item.operatorTypeId === operatorTypeId ? { id, operatorTypeId, operatorTypeName } : item
           );
         }
       })

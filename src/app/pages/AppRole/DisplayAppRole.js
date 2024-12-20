@@ -9,6 +9,7 @@ import { isEmpty } from 'lodash';
 import EditAppRole from "./EditAppRole";
 import DeleteAppRole from "./DeleteAppRole";
 import LoadingSpinner from "../../common/Loading"
+import { Box } from "@mui/material";
 
 export default function DisplayAppRole() {
   const [isEdit, setIsEdit] = useState(false);
@@ -19,13 +20,13 @@ export default function DisplayAppRole() {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchAppRole())
-  }, [fetchAppRole])
+  }, [dispatch])
+
   return (
-    // 
-    <div>
+    <Box>
       {isLoading ? <LoadingSpinner /> :
         !isEmpty(appRoleData) &&
-        <div>
+        <Box>
           <DataTable searchBy="roleName" setIsEdit={setIsEdit} setIsDelete={setIsDelete} setSelectedRow={setSelectedRow} data={appRoleData} column={column} />
           {
             isEdit && <EditAppRole data={selectedRow} isEdit={isEdit} setIsEdit={setIsEdit} />
@@ -33,8 +34,8 @@ export default function DisplayAppRole() {
           {
             isDelete && <DeleteAppRole data={selectedRow} isDelete={isDelete} setIsDelete={setIsDelete} />
           }
-        </div>
+        </Box>
       }
-    </div>
+    </Box>
   )
 }

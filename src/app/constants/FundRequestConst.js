@@ -1,12 +1,74 @@
-"use client"
+"use client";
+
 export const column = [
-    { field: 'fundRequestId', title: 'Fund Request ID', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'paymentMode', title: 'Payment Mode', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'fromBank', title: 'From Bank', isSortable: true, isResizable: false, sorDirection: 'asc' }, 
-    { field: 'toBank', title: 'To Bank', isSortable: true, isResizable: false, sorDirection: 'asc' }, 
-    { field: 'fundAmount', title: 'Fund Amount', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'referenceNo', title: 'Reference no.', isSortable: true, isResizable: false, sorDirection: 'asc' }, 
-    { field: 'paymentProf', title: 'Payment Prof', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'remark', title: 'Remark', isSortable: true, isResizable: false, sorDirection: 'asc' }, 
-    { field: 'status', title: 'Status', isSortable: true, isResizable: false, sorDirection: 'asc' }
-]
+  {
+    field: "id",
+    title: "ID",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "fundRequestId",
+    title: "Fund Request ID",
+    isSortable: true,
+    isVisible: false,
+    sortDirection: "asc",
+  },
+  {
+    field: "paymentMode",
+    title: "Payment Mode",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "fromBank",
+    title: "From Bank",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "toBank",
+    title: "To Bank",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "fundAmount",
+    title: "Fund Amount",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "referenceNo",
+    title: "Reference No.",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "paymentProf",
+    title: "Payment Prof",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "remark",
+    title: "Remark",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+  {
+    field: "status",
+    title: "Status",
+    isSortable: true,
+    isVisible: true,
+    sortDirection: "asc",
+  },
+];
