@@ -1,9 +1,59 @@
-"use client"
+"use client";
 export const column = [
-    { field: 'userCommissionId', title: 'User Com ID', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'operatorId', title: 'Operator ID', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'userName', title: 'User Name', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'commissionAmount', title: 'Commission Amount', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'operatorName', title: 'Operator Name', isSortable: true, isResizable: false, sorDirection: 'asc' },
-    { field: 'operatorCode', title: 'Operator Code', isSortable: true, isResizable: false, sorDirection: 'asc' }, 
-]
+  {
+    field: "id",
+    title: "ID",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "userCommissionId",
+    title: "User Com ID",
+    isSortable: true,
+    isResizable: false,
+    isVisible: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "operatorId",
+    title: "Operator ID",
+    isSortable: true,
+    isVisible: false,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "userName",
+    title: "User Name",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "commissionAmount",
+    title: "Commission Amount",
+    isSortable: true,
+    isResizable: false,
+    isVisible: true,
+    sorDirection: "asc",
+  },
+  {
+    field: "operatorName",
+    title: "Operator Name",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "operatorCode",
+    title: "Operator Code",
+    isSortable: true,
+    isResizable: false,
+    isVisible: true,
+    sorDirection: "asc",
+  },
+];

@@ -14,12 +14,12 @@ import {
 import { useDispatch } from "react-redux";
 
 export default function EditOperatorType({ data, setIsEdit, isEdit }) {
-    const { operatorTypeId, operatorTypeName } = data
+    const {id, operatorTypeId, operatorTypeName } = data
     const [updateOperatorTypeName, setUpdateOperatorTypeName] = useState(operatorTypeName);
      const dispatch = useDispatch();
 
     const handleEditSave = () => {
-        dispatch(updateOperatorType({operatorTypeId,operatorTypeName:updateOperatorTypeName}))
+        dispatch(updateOperatorType({id,operatorTypeId,operatorTypeName:updateOperatorTypeName}))
         setIsEdit(false)
     }
 

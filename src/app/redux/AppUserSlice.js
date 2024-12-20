@@ -5,7 +5,6 @@ import {
   postSetup,
   postUpdate,
   postRequest,
-  postReq,
 } from "../pages/api/page";
 
 import { doLogin, doLogout, getToken } from "../pages/api/authCookies";
@@ -60,18 +59,19 @@ export const verifyOtp = createAsyncThunk(
 
 export const updatePassword = createAsyncThunk(
   "updatePassword",
-  async ({ username, password }) => {
+  async ({ username,otp, password }) => {
     return await postRequest("/Authentication/updatePassword", {
       username,
       password,
+      otp
     });
   }
 );
 
 export const getMenuByUserRole = createAsyncThunk(
   "getMenuByUserRole",
-  async (data) => {
-    return await postReq("/Menu/getMenuByUserRole", data);
+  async () => {
+    return await getRequest("/Menu/getMenuByUserRole");
   }
 );
 
@@ -176,11 +176,18 @@ const AppUserSlice = createSlice({
       .addCase(updatePassword.pending, (state) => {
         state.isLoading = true;
       })
+      .addCase(updatePassword.fulfilled, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(updatePassword.rejected, (state) => {
+        state.isLoading = false;
+      })
       .addCase(verifyPin.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(verifyPin.fulfilled, (state, action) => {
         const userDetails = action?.payload ?? {};
+
         if (userDetails.statusCode == 200) {
           doLogin(userDetails.data[0], action.payload.token);
           state.userDetail = userDetails.data[0];
@@ -208,6 +215,8 @@ const AppUserSlice = createSlice({
       .addCase(forgotPassword.fulfilled, (state, action) => {
         if (action.payload.statusCode == 200) {
           state.isLoading = false;
+          const username = action.meta.arg;
+          state.userDetail = username;
           state.otpSent = true;
         }
       })
@@ -223,16 +232,10 @@ const AppUserSlice = createSlice({
         state.isLoading = false;
         const response = action.payload;
         if (response?.statusCode === 200) {
-          state.userDetail = response.data;
+          state.userDetail = response.data
         }
       })
       .addCase(verifyOtp.rejected, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(updatePassword.fulfilled, (state) => {
-        state.isLoading = false;
-      })
-      .addCase(updatePassword.rejected, (state) => {
         state.isLoading = false;
       })
 

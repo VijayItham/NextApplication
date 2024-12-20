@@ -5,10 +5,11 @@ import { Box } from "@mui/material";
 import OutlinedCard from "./Card/card";
 import { useEffect } from "react";
 import styles from "./Dashboard.module.css";
-import Rightbar from "./RecentActivity/page";
 import { useDispatch } from "react-redux";
 import { getDashboard } from "@/app/redux/AppUserSlice";
 import { getUserDetails } from "../api/authCookies";
+import "../../globals.css";
+import GetLatestRecharge from "./RecentActivity/page";
 
 export default function DashBoard() {
   const dispatch = useDispatch();
@@ -27,7 +28,7 @@ export default function DashBoard() {
         <Box className={styles.cardContainer}>
           <OutlinedCard />
         </Box>
-        <Rightbar />
+        <GetLatestRecharge />
       </Box>
     </>
   );

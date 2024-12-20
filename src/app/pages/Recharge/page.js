@@ -54,9 +54,18 @@ export default function Recharge() {
    // setMessage("Data Save Succefully");
   };
 
+
+  const inputStyles = {
+    "& .MuiOutlinedInput-root": {
+      "&.Mui-focused fieldset": {
+        borderColor: "#784800",
+      },
+    },
+  }
+
   return (
     <Box className = {styles.container}>
-        <Box sx={{ width:"90%", margin:"20px auto", marginRight:"5rem"}}>
+        <Box sx={{ width:"90%", margin:"20px auto", marginRight:"5rem",boxShadow: "0px 0px 10px #F9E0B4"}}>
     <Box
       component="form"
       onSubmit={onSubmit}
@@ -77,7 +86,7 @@ export default function Recharge() {
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <FormControl fullWidth>
-            <InputLabel id="role-select-label">Operator</InputLabel>
+            <InputLabel id="role-select-label" sx={{ color: 'black' }}>Operator</InputLabel>
             <Select
               labelId="operator-select-label"
               name="operatorId"
@@ -103,6 +112,10 @@ export default function Recharge() {
             variant="outlined"
             value={formData.circleCode}
             onChange={handleChange}
+            sx={inputStyles}
+            InputLabelProps={{
+              style: { color: '#333333' }, 
+            }}
           />
         </Grid>
         <Grid item xs={4}>
@@ -112,7 +125,11 @@ export default function Recharge() {
             label="Mobile No."
             variant="outlined"
             value={formData.mobileNo}
+            sx={inputStyles}
             onChange={handleChange}
+            InputLabelProps={{
+              style: { color: '#333333' }, 
+            }}
           />
         </Grid>
         <Grid item xs={4}>
@@ -123,6 +140,10 @@ export default function Recharge() {
             variant="outlined"
             value={formData.amount}
             onChange={handleChange}
+            InputLabelProps={{
+              style: { color: '#333333' }, 
+            }}
+            sx={inputStyles}
           />
         </Grid>
         {rechargeData && rechargeData.status && (
@@ -144,7 +165,7 @@ export default function Recharge() {
       </Grid>
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained">Submit
+          <Button type="submit" variant="contained" className={styles.btn}>Submit
           </Button>
         </Grid>
       </Grid>

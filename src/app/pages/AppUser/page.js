@@ -42,7 +42,7 @@ export default function DisplayAppUser() {
       "aadharImageFront",
       "createdBy"
     ])
-  );
+  ); 
 
   const handleAddUser = () => setIsAddUser(true);
   const selectedAllRowData = appUserData.filter(

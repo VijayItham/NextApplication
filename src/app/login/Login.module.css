@@ -2,9 +2,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  font-family: Montserrat;
   justify-content: center;
-  background-color: #f6f2eb;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -18,7 +16,7 @@
   margin-right: 4rem;
   margin-top: 2rem;
   max-width: 100%;
-  height: 32rem
+  height: 32rem;
 }
 
 .rightImage {
@@ -59,9 +57,9 @@
 
 .checkboxandforgotpassword {
   display: flex;
-  justify-Content: space-between;
-  align-Items: center;
-  margin-bottom: 5px
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
 .checkboxLabel {
@@ -96,7 +94,6 @@
   .rightImage {
     display: none;
   }
-
 }
 
 @media (max-width: 600px) {

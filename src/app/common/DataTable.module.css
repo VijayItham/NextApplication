@@ -3,6 +3,14 @@
   position: relative;
   top: 1.7rem;
   cursor: pointer;
-  left: 3.2rem;
+  left: 2.3rem;
   font-size: 2rem;
 }
+
+.btn {
+  padding:12px 15px !important;
+  background-color: #784800 !important;
+  font-size: 13px !important;
+  width: 40% !important;
+}
+

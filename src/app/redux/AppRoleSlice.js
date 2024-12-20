@@ -66,9 +66,9 @@ const AppRoleSlice = createSlice({
       .addCase(updateAppRole.fulfilled, (state, action) => {
         if (action.payload.statusCode === 200) {
           state.isLoading = false;
-          const { appRoleId, roleName } = action.meta.arg;
+          const {id, appRoleId, roleName } = action.meta.arg;
           state.appRoleData = state.appRoleData.map((item) =>
-            item.appRoleId === appRoleId ? { appRoleId, roleName } : item
+            item.appRoleId === appRoleId ? { id, appRoleId, roleName } : item
           );
         }
       })

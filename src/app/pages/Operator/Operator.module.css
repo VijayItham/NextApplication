@@ -1,13 +1,14 @@
 .container {
-    width: 81%;
-    top: 9.5rem;
-    left: 17.4rem;
-    overflow-y: auto;
-    background-color: #f6f2eb;
-    position: fixed;
-    bottom: 1px;
+  width: 81%;
+  top: 9.5rem;
+  left: 17.4rem;
+  overflow-y: auto;
+  background-color: #f6f2eb;
+  position: fixed;
+  bottom: 1px;
 }
 
-.btn{
-    background-color: #784800 !important;
+.btn {
+  background-color: #784800 !important;
+  padding: 12px 12px !important;
 }

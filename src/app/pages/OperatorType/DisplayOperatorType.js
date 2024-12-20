@@ -21,7 +21,6 @@ export default function DisplayOperatorType() {
     dispatch(fetchOperatorType())
   }, [fetchOperatorType])
   return (
-    // 
     <div>
       {isLoading ? <LoadingSpinner /> :
         !isEmpty(operatorTypeData) &&

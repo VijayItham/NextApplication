@@ -18,7 +18,7 @@ export default function MenuNavbar() {
         display:"flex",
         alignItems:"center",
         borderBottom: "1.5px solid #EFDCBA",
-        zIndex: 10000,
+        zIndex: 1000,
       }}
     >
       <GridViewIcon sx={{ marginLeft: "1rem", color: "#784800", marginRight:"15px" }} />

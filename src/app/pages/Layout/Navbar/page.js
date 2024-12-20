@@ -14,13 +14,15 @@ import { useState } from "react";
 import styles from "./Navbar.module.css";
 import { doLogout } from '../../api/authCookies';
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Navbar() {
   const router = useRouter();
   const user = getUserDetails();
   const dashboardData = useSelector((state) => state?.appUserReducer?.dashboardData);
   const balance = dashboardData?.data?.[0]?.currentBalance;
-  const menu = useSelector((state) => state.appUserReducer.menu);
+  const response = useSelector((state) => state?.appUserReducer?.menu);
+  const menu = response?.data;
   const pathname = usePathname();
   const [isBoxVisible, setIsBoxVisible] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
@@ -51,12 +53,14 @@ export default function Navbar() {
   return (
     <Box className={styles.header}>
       <Box className={styles.logoContainer}>
+        <Link href="/">
         <Image
           src="/images/Codetrex_logo.png"
           alt="Codetrex Logo"
           width={180}
           height={45}
         />
+        </Link>
       </Box>
       <>
         <Box className={styles.searchBox}>

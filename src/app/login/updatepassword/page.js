@@ -11,10 +11,10 @@ import InputAdornment from "@mui/material/InputAdornment";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useRouter } from "next/navigation";
 import { useSnackbar } from "notistack";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { updatePassword } from "@/app/redux/AppUserSlice";
-import { getUserDetails } from "@/app/pages/api/authCookies";
 import styles from "./UpdatePassword.module.css";
+import { useSelector } from "react-redux";
 
 export default function UpdatePassword() {
   const dispatch = useDispatch();
@@ -23,17 +23,9 @@ export default function UpdatePassword() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [otp, setOtp] = useState("");
 
-  const username = useSelector(
-    (state) => state?.appUserReducer.userDetail[0]?.userName
-  );
-
-  const details = getUserDetails();
-
-  if (details) {
-    const username = details?.userName ?? "";
-    return username;
-  }
+  const username = useSelector((state) => state?.appUserReducer?.userDetail);
 
   const handleGoHome = () => {
     router.push("/");
@@ -56,7 +48,7 @@ export default function UpdatePassword() {
     try {
       setLoading(true);
       const result = await dispatch(
-        updatePassword({ username, password })
+        updatePassword({ username, otp, password })
       ).unwrap();
 
       if (result?.statusCode === 200) {
@@ -98,10 +90,39 @@ export default function UpdatePassword() {
               Password reset?
             </Typography>
             <Typography className={styles.description}>
-              Create your password and confirm your password
+              Enter your OTP and create your password
             </Typography>
 
             <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
+              <TextField
+                margin="normal"
+                required
+                fullWidth
+                name="otp"
+                placeholder="Enter OTP"
+                id="otp"
+                value={otp}
+                onChange={(e) => setOtp(e.target.value)}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Typography variant="h6">@</Typography>
+                    </InputAdornment>
+                  ),
+                }}
+                sx={{
+                  marginBottom: "1rem",
+                  "& .MuiOutlinedInput-root": {
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#784800",
+                    },
+                  },
+                  "& .MuiInputLabel-root.Mui-focused": {
+                    color: "black",
+                  },
+                }}
+              />
+
               <TextField
                 margin="normal"
                 required
@@ -112,14 +133,12 @@ export default function UpdatePassword() {
                 className={styles.textField}
                 autoFocus
                 value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
+                onChange={(e) => setPassword(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <Typography variant="h6" component="span">
-                        {"@"}
+                        @
                       </Typography>
                     </InputAdornment>
                   ),
@@ -147,14 +166,12 @@ export default function UpdatePassword() {
                 id="confirmPassword"
                 autoComplete="confirm-password"
                 value={confirmPassword}
-                onChange={(e) => {
-                  setConfirmPassword(e.target.value);
-                }}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 InputProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <Typography variant="h6" component="span">
-                        {"@"}
+                        @
                       </Typography>
                     </InputAdornment>
                   ),
@@ -175,7 +192,7 @@ export default function UpdatePassword() {
               <Button
                 type="submit"
                 variant="contained"
-                disabled={loading}
+                disabled={loading || password !== confirmPassword}
                 className={styles.submitBtn}
               >
                 {loading ? <CircularProgress size={24} /> : "Submit"}

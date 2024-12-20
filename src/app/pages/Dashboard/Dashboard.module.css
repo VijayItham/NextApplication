@@ -1,12 +1,10 @@
 .rightSection {
   position: fixed;
-  overflow-x: hidden;
   overflow-y: auto;
   width: 81vw;
   top: 9.5rem;
   bottom: 0;
   left: 17.5rem;
-  background-color: #fbf8f3;
   height: 100vh;
 }
 

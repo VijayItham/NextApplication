@@ -19,6 +19,7 @@ import {
   updateUserCommission,
 } from "@/app/redux/UserCommissionSlice";
 import { fetchUserCommission } from "@/app/redux/UserCommissionSlice";
+import styles from "./UserCommission.module.css"
 
 export default function AddUserCommission({
   setIsAddUserCommission,
@@ -133,7 +134,7 @@ export default function AddUserCommission({
       </Grid>
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" className={styles.btn}>
             {isEdit ? "Update" : "Submit"}
           </Button>
         </Grid>

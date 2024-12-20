@@ -4,6 +4,7 @@
     left: 17.4rem;
     background-color: #f6f2eb;
     position: fixed;
+    overflow-y: auto;
     bottom: 1px;
 }
 

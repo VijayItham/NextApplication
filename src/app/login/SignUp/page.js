@@ -25,7 +25,7 @@ import styles from "./SignUp.module.css";
 import { useSnackbar } from "notistack";
 
 export default function SignUp() {
-  const {enqueueSnackbar} = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
@@ -48,14 +48,13 @@ export default function SignUp() {
     createdBy: "F931AD04-9E49-4B84-9DE4-7968BB1F26F0",
   });
 
-
   const dispatch = useDispatch();
   const router = useRouter();
   const { countryList, stateList, cityList } = useSelector(
     (data) => data.countryStateCityReducer
   );
 
-  const result = useSelector((state) =>state.appUserReducer.addAppUserData);
+  const result = useSelector((state) => state.appUserReducer.addAppUserData);
 
   useEffect(() => {
     if (result?.statusCode === 200) {
@@ -64,7 +63,7 @@ export default function SignUp() {
         autoHideDuration: 1000,
         style: { backgroundColor: "#4caf50", color: "#fff" },
       });
-    }else if(result?.statusCode === 417){
+    } else if (result?.statusCode === 417) {
       enqueueSnackbar("User alerady exists.", {
         variant: "error",
         autoHideDuration: 1000,
@@ -80,18 +79,17 @@ export default function SignUp() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-  
+
     if (name === "countryId") {
-      dispatch(fetchState(value)); 
+      dispatch(fetchState(value));
     } else if (name === "stateId") {
-      dispatch(fetchCity(value)); 
+      dispatch(fetchCity(value));
     }
     setFormData({
       ...formData,
       [name]: value,
     });
   };
-  
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -131,7 +129,7 @@ export default function SignUp() {
   };
 
   const handleLogin = () => {
-    router.push('/')
+    router.push("/");
   };
 
   const inputStyles = {
@@ -155,14 +153,8 @@ export default function SignUp() {
           alt="Boy-img"
           className={styles.leftImage}
         />
-        <Box
-          component="form"
-          onSubmit={onSubmit}
-          className={styles.box}
-        >
-          <Box
-            className={styles.content}
-          >
+        <Box component="form" onSubmit={onSubmit} className={styles.box}>
+          <Box className={styles.content}>
             <Typography variant="h5" mb={4} className={styles.title}>
               Sign Up
             </Typography>
@@ -175,7 +167,7 @@ export default function SignUp() {
                   label="User Name"
                   placeholder="UserName "
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   value={formData.userName}
                   onChange={handleChange}
@@ -190,7 +182,7 @@ export default function SignUp() {
                   label="First Name"
                   placeholder="First Name"
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   value={formData.firstName}
                   onChange={handleChange}
@@ -204,7 +196,7 @@ export default function SignUp() {
                   label="Last Name"
                   placeholder="Last Name"
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   value={formData.lastName}
                   onChange={handleChange}
@@ -220,7 +212,7 @@ export default function SignUp() {
                   type="password"
                   placeholder="Password"
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   value={formData.password}
                   onChange={handleChange}
@@ -235,7 +227,7 @@ export default function SignUp() {
                   label="Email"
                   type="email"
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   placeholder="Email"
                   value={formData.email}
@@ -252,7 +244,7 @@ export default function SignUp() {
                   type="tel"
                   placeholder="Phone No"
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   value={formData.phoneNumber}
                   onChange={handleChange}
@@ -260,7 +252,6 @@ export default function SignUp() {
                     pattern: "[0-9]*",
                     inputMode: "numeric",
                   }}
-
                   sx={inputStyles}
                 />
               </Grid>
@@ -272,7 +263,7 @@ export default function SignUp() {
                   label="Address"
                   placeholder="Address"
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   value={formData.address1}
                   onChange={handleChange}
@@ -280,10 +271,8 @@ export default function SignUp() {
                 />
               </Grid>
               <Grid item xs={4}>
-                <FormControl fullWidth >
-                  <InputLabel id="country-select-label" >
-                    Country
-                  </InputLabel>
+                <FormControl fullWidth>
+                  <InputLabel id="country-select-label">Country</InputLabel>
                   <Select
                     labelId="country-select-label"
                     name="countryId"
@@ -344,7 +333,7 @@ export default function SignUp() {
                   name="zipCode"
                   label="Zip Code"
                   InputLabelProps={{
-                    shrink: true
+                    shrink: true,
                   }}
                   value={formData.zipCode}
                   onChange={handleChange}
@@ -352,14 +341,28 @@ export default function SignUp() {
                 />
               </Grid>
             </Grid>
-            <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }} className={styles.groupBtn}>
+            <Grid
+              container
+              justifyContent="center"
+              spacing={2}
+              sx={{ mt: 3 }}
+              className={styles.groupBtn}
+            >
               <Grid item>
-                <Button type="submit" variant="contained" className={styles.button}>
+                <Button
+                  type="submit"
+                  variant="contained"
+                  className={styles.button}
+                >
                   Submit
                 </Button>
               </Grid>
               <Grid item>
-                <Button onClick={handleLogin} variant="outlined" className={styles.button}>
+                <Button
+                  onClick={handleLogin}
+                  variant="outlined"
+                  className={styles.button}
+                >
                   Login Now
                 </Button>
               </Grid>
@@ -373,7 +376,6 @@ export default function SignUp() {
           className={styles.rightImage}
         />
       </Box>
-
     </>
   );
 }

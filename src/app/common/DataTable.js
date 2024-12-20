@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import {  useState } from "react";
 import {
   Table,
   TableBody,
@@ -37,7 +37,6 @@ const DataTable = ({
     setOrder(isAsc ? "desc" : "asc");
     setOrderBy(property);
   };
-
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
@@ -59,13 +58,19 @@ const DataTable = ({
 
   const filteredRows = data
     .filter((row) =>
-      row[searchBy].toLowerCase().includes(searchQuery.toLowerCase())
+      row[searchBy]
+        ?.toString()
+        ?.toLowerCase()
+        ?.includes(searchQuery?.toLowerCase())
     )
     .sort((a, b) => {
+      if (!orderBy) return 0;
+      const aVal = a[orderBy] ?? "";
+      const bVal = b[orderBy] ?? "";
       if (order === "asc") {
-        return a[orderBy] < b[orderBy] ? -1 : 1;
+        return aVal < bVal ? -1 : aVal > bVal ? 1 : 0;
       } else {
-        return a[orderBy] > b[orderBy] ? -1 : 1;
+        return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
       }
     });
 
@@ -74,10 +79,8 @@ const DataTable = ({
     page * rowsPerPage + rowsPerPage
   );
 
-  const keys = Object.keys(paginatedRows?.[0] ?? []);
-
   return (
-    <Paper sx={{ borderRadius: "10px", marginTop: "31px" }}>
+    <Paper sx={{ borderRadius: "10px", position:"relative", top:"25px"  }}>
       <SearchIcon className={styles.searchIcon} />
       <TextField
         variant="outlined"
@@ -85,7 +88,8 @@ const DataTable = ({
         fullWidth
         sx={{
           width: "35%",
-          marginLeft: "5px",
+          position:"relative",
+          right:"10px",
           "& .MuiOutlinedInput-root": {
             "&.Mui-focused fieldset": {
               borderColor: "#784800",
@@ -104,7 +108,7 @@ const DataTable = ({
           <TableHead>
             <TableRow>
               {column
-                .filter((header) => header.isVisible) // Show only columns where isVisible is true
+                .filter((header) => header.isVisible)
                 .map((header) => (
                   <TableCell key={header.field}>
                     {header.isSortable ? (
@@ -126,42 +130,47 @@ const DataTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {paginatedRows.map((row) => {
-              const rowKey = keys.map((key) => row[key]).join("-");
-              return (
-                <TableRow key={rowKey}>
-                  {keys
-                    .filter((key) => {
-                      const header = column.find((col) => col.field === key);
-                      return header && header.isVisible; // Show only if isVisible is true
-                    })
-                    .map((key) => (
-                      <TableCell key={key}>{row[key]}</TableCell>
-                    ))}
-                  <TableCell style={{ width: "11rem" }}>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={() => handleEdit(row)} // Pass the full row data, including hidden properties
+            {paginatedRows.map((row, rowIndex) => (
+              <TableRow
+                key={`row-${rowIndex}`}
+                sx={{
+                  borderBottom: "1px solid #ddd",
+                }}
+              >
+                {column
+                  .filter((header) => header.isVisible)
+                  .map((header) => (
+                    <TableCell
+                      key={`${header.field}-${rowIndex}`}
+                      sx={{ padding: "8px"}}
                     >
-                      Edit
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => handleDelete(row)} // Pass the full row data, including hidden properties
-                      sx={{ marginLeft: "8px" }}
-                    >
-                      Delete
-                    </Button>
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                      {row[header.field]}
+                    </TableCell>
+                  ))}
+                <TableCell style={{ width: "13.5rem", display: "flex" }}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    className={styles.btn}
+                    onClick={() => handleEdit(row)}
+                  >
+                    Edit
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleDelete(row)}
+                    sx={{ marginLeft: "8px" }}
+                    className={styles.btn}
+                  >
+                    Delete
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
-
       <TablePagination
         rowsPerPageOptions={[5, 10, 25]}
         component="div"
