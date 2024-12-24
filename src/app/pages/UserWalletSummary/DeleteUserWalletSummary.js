@@ -1,6 +1,7 @@
 "use client";
-
-import { deleteAppRole } from "../../redux/AppRoleSlice";
+import { fetchAllUserWalletSummary } from "@/app/redux/UserWalletSummarySlice";
+import { deleteUserWalletSummary } from "@/app/redux/UserWalletSummarySlice";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Dialog,
@@ -9,14 +10,20 @@ import {
   DialogTitle,
 } from "@mui/material";
 
-import { useDispatch } from "react-redux";
-
-export default function DeleteAppRole({ data, setIsDelete, isDelete }) {
+export default function DeleteUserWalletSummary({
+  data,
+  setIsDelete,
+  isDelete,
+  setMessage,
+  setOpenSnackbar,
+}) {
   const dispatch = useDispatch();
-
-  const handleConfirmDelete = () => {
-    dispatch(deleteAppRole(data));
+  const handleConfirmDelete = async () => {
+    await dispatch(deleteUserWalletSummary(data.userWalletSummaryId));
     setIsDelete(false);
+    setMessage("Data Deleted Succefully!");
+    setOpenSnackbar(true);
+    dispatch(fetchAllUserWalletSummary());
   };
 
   return (

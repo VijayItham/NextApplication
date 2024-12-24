@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
+"user client";
 import {
   TextField,
   Button,
@@ -12,14 +10,17 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchOperatorType } from "@/app/redux/OperatorTypeSlice";
-import { addOperator, updateOperator } from "@/app/redux/OperatorSlice";
-import { fetchOperator } from "@/app/redux/OperatorSlice";
-import styles from "./Operator.module.css";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
+import {
+  addUserWalletSummary,
+  fetchAllUserWalletSummary,
+  updateUserWalletSummary,
+} from "@/app/redux/UserWalletSummarySlice";
+import styles from "./UserWalletSummary.module.css";
 
-export default function AddOperator({
-  setIsAddOperator,
+export default function AddUserWalletSummary({
+  setIsAddUserWalletSummary,
   isEdit,
   setIsEdit,
   setMessage,
@@ -27,20 +28,18 @@ export default function AddOperator({
   data,
 }) {
   const [formData, setFormData] = useState({
-    operatorTypeId: "",
-    operatorName: "",
-    operatorCode: "",
+    walletId: "",
+    currentBalance: "",
+    totalCreditAmount: "",
+    totalDebitAmount: "",
   });
 
-  const dispatch = useDispatch();
-  const { operatorTypeData } = useSelector((data) => data.operatorTypeReducer);
-
   useEffect(() => {
-    dispatch(fetchOperatorType());
     if (isEdit) {
       setFormData(data);
     }
   }, []);
+
   const handleChange = async (e) => {
     setFormData({
       ...formData,
@@ -48,25 +47,30 @@ export default function AddOperator({
     });
   };
 
+  const onCancel = () => {
+    setIsAddUserWalletSummary(false);
+    setIsEdit(false);
+  };
+
   const onSubmit = async (e) => {
     e.preventDefault();
     if (isEdit) {
-      await dispatch(updateOperator(formData));
+      await dispatch(updateUserWalletSummary(formData));
       setMessage("Data Updated Succefully");
     } else {
-      await dispatch(addOperator(formData));
+      await dispatch(addUserWalletSummary(formData));
       setMessage("Data Save Succefully");
     }
-    dispatch(fetchOperator());
+    dispatch(fetchAllUserWalletSummary());
     setIsEdit(false);
-    setIsAddOperator(false);
+    setIsAddUserWalletSummary(false);
     setOpenSnackbar(true);
   };
 
-  const onCancel = () => {
-    setIsAddOperator(false);
-    setIsEdit(false);
-  };
+  const dispatch = useDispatch();
+  const { userWalletSummaryData } = useSelector(
+    (data) => data.userWalletSummaryReducer
+  );
 
   return (
     <Box
@@ -84,24 +88,23 @@ export default function AddOperator({
       }}
     >
       <Typography variant="h5" mb={2}>
-        {isEdit ? "Update" : "Add"} Operator
+        {isEdit ? "Update" : "Add"} UserWalletSummary
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <FormControl fullWidth>
-            <InputLabel id="role-select-label">Operator Type</InputLabel>
+            <InputLabel id="role-select-label">UserName</InputLabel>
             <Select
-              labelId="operator-select-label"
-              name="operatorTypeId"
-              value={formData.operatorTypeId}
+              labelId="user-select-label"
+              name="walletId"
+              value={formData.walletId}
               onChange={handleChange}
               variant="outlined"
               required
-              disabled={isEdit}
             >
-              {operatorTypeData.map(({ operatorTypeId, operatorTypeName }) => (
-                <MenuItem key={operatorTypeId} value={operatorTypeId}>
-                  {operatorTypeName}
+              {userWalletSummaryData.map(({ walletId, userName }) => (
+                <MenuItem key={walletId} value={userName}>
+                  {userName}
                 </MenuItem>
               ))}
             </Select>
@@ -111,27 +114,40 @@ export default function AddOperator({
           <TextField
             fullWidth
             required
-            name="operatorName"
-            label="Operator Name"
+            name="currentBalance"
+            label="Current Balance"
             variant="outlined"
-            value={formData.operatorName}
+            value={formData.currentBalance}
             onChange={handleChange}
           />
         </Grid>
         <Grid item xs={4}>
           <TextField
             fullWidth
-            name="operatorCode"
-            label="Operator Code"
+            required
+            name="totalCreditAmount"
+            label="Total Credit Amount"
             variant="outlined"
-            value={formData.operatorCode}
+            value={formData.totalCreditAmount}
+            onChange={handleChange}
+          />
+        </Grid>
+        <Grid item xs={4}>
+          <TextField
+            fullWidth
+            required
+            name="totalDebitAmount"
+            label="TotalDebitAmount"
+            variant="outlined"
+            value={formData.totalDebitAmount}
             onChange={handleChange}
           />
         </Grid>
       </Grid>
+
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained" className={styles.button}>
+          <Button type="submit" variant="contained" className={styles.btn}>
             {isEdit ? "Update" : "Submit"}
           </Button>
         </Grid>
@@ -139,8 +155,8 @@ export default function AddOperator({
           <Button
             onClick={onCancel}
             variant="outlined"
+            className={styles.btn}
             style={{ color: "white" }}
-            className={styles.button}
           >
             Cancel
           </Button>

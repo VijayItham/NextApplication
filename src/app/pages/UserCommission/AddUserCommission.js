@@ -19,7 +19,7 @@ import {
   updateUserCommission,
 } from "@/app/redux/UserCommissionSlice";
 import { fetchUserCommission } from "@/app/redux/UserCommissionSlice";
-import styles from "./UserCommission.module.css"
+import styles from "./UserCommission.module.css";
 
 export default function AddUserCommission({
   setIsAddUserCommission,
@@ -30,7 +30,7 @@ export default function AddUserCommission({
   data,
 }) {
   const [formData, setFormData] = useState({
-    operatorId:"",
+    operatorId: "",
     userName: "",
     commissionAmount: "",
   });
@@ -139,7 +139,12 @@ export default function AddUserCommission({
           </Button>
         </Grid>
         <Grid item>
-          <Button onClick={onCancel} variant="outlined">
+          <Button
+            onClick={onCancel}
+            variant="outlined"
+            className={styles.btn}
+            style={{ color: "white" }}
+          >
             Cancel
           </Button>
         </Grid>

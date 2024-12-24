@@ -57,7 +57,7 @@ const DataTable = ({
 
   const filteredRows = data
     .filter((row) =>
-      row[searchBy].toLowerCase().includes(searchQuery.toLowerCase())
+      row[searchBy]?.toLowerCase()?.includes(searchQuery?.toLowerCase())
     )
     .sort((a, b) => {
       if (order === "asc") {
@@ -71,7 +71,7 @@ const DataTable = ({
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
-  const keys = Object.keys(paginatedRows?.[0]??[]);
+  const keys = Object.keys(paginatedRows?.[0] ?? []);
   return (
     <Paper>
       <TextField
@@ -96,7 +96,7 @@ const DataTable = ({
                       <h4>{header.title}</h4>
                     </TableSortLabel>
                   ) : (
-                   header.hide
+                    header.hide
                   )}
                 </TableCell>
               ))}

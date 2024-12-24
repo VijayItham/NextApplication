@@ -13,10 +13,19 @@ import {
   MenuItem,
 } from "@mui/material";
 import { useDispatch } from "react-redux";
-import { addFundRequest, updateFundRequest } from "@/app/redux/FundRequestSlice";
+import {
+  addFundRequest,
+  updateFundRequest,
+} from "@/app/redux/FundRequestSlice";
 import { fetchFundRequest } from "@/app/redux/FundRequestSlice";
+import styles from "./FundRequest.module.css";
 
-const paymentModeList = [{id:1,paymentMode:'Cash'},{id:2,paymentMode:'IMPS'},{id:3,paymentMode:'NEFT'},{id:4,paymentMode:'UPI/QR'}]
+const paymentModeList = [
+  { id: 1, paymentMode: "Cash" },
+  { id: 2, paymentMode: "IMPS" },
+  { id: 3, paymentMode: "NEFT" },
+  { id: 4, paymentMode: "UPI/QR" },
+];
 
 export default function AddFundRequest({
   setIsAddFundRequest,
@@ -42,12 +51,12 @@ export default function AddFundRequest({
       setFormData(data);
     }
   }, []);
-  
+
   const handleChange = async (e) => {
-      setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-      });
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
   };
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -55,7 +64,7 @@ export default function AddFundRequest({
       await dispatch(updateFundRequest(formData));
       setMessage("Data Updated Succefully");
     } else {
-     await dispatch(addFundRequest(formData));
+      await dispatch(addFundRequest(formData));
       setMessage("Data Save Succefully");
     }
     dispatch(fetchFundRequest());
@@ -175,12 +184,17 @@ export default function AddFundRequest({
       </Grid>
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" className={styles.button}>
             {isEdit ? "Update" : "Submit"}
           </Button>
         </Grid>
         <Grid item>
-          <Button onClick={onCancel} variant="outlined">
+          <Button
+            onClick={onCancel}
+            variant="outlined"
+            style={{ color: "white" }}
+            className={styles.button}
+          >
             Cancel
           </Button>
         </Grid>

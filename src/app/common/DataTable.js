@@ -1,6 +1,6 @@
 "use client";
 
-import {  useState } from "react";
+import { useState } from "react";
 import {
   Table,
   TableBody,
@@ -25,6 +25,7 @@ const DataTable = ({
   setIsDelete,
   setSelectedRow,
 }) => {
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -73,14 +74,13 @@ const DataTable = ({
         return aVal > bVal ? -1 : aVal < bVal ? 1 : 0;
       }
     });
-
   const paginatedRows = filteredRows.slice(
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
 
   return (
-    <Paper sx={{ borderRadius: "10px", position:"relative", top:"25px"  }}>
+    <Paper sx={{ borderRadius: "10px", position: "relative", top: "25px" }}>
       <SearchIcon className={styles.searchIcon} />
       <TextField
         variant="outlined"
@@ -88,8 +88,8 @@ const DataTable = ({
         fullWidth
         sx={{
           width: "35%",
-          position:"relative",
-          right:"10px",
+          position: "relative",
+          right: "10px",
           "& .MuiOutlinedInput-root": {
             "&.Mui-focused fieldset": {
               borderColor: "#784800",
@@ -142,7 +142,7 @@ const DataTable = ({
                   .map((header) => (
                     <TableCell
                       key={`${header.field}-${rowIndex}`}
-                      sx={{ padding: "8px"}}
+                      sx={{ padding: "8px" }}
                     >
                       {row[header.field]}
                     </TableCell>

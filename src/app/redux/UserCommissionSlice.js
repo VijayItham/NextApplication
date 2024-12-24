@@ -14,7 +14,8 @@ export const fetchUserCommission = createAsyncThunk("fetchUserCommission", async
 });
 
 export const addUserCommission = createAsyncThunk("addUserCommission", async (data) => {
-  return await postCreate("/UserCommission/addUserCommission", data);
+  const response = await postCreate("/UserCommission/addUserCommission", data);
+  return response.data;
 });
 
 export const updateUserCommission = createAsyncThunk(
@@ -53,8 +54,7 @@ const UserCommissionSlice = createSlice({
       .addCase(addUserCommission.fulfilled, (state, action) => {
         if (action.payload.statusCode === 200) {
           state.isLoading = false;
-          const { id, userCommissionName } = action.payload.data;
-          state.userCommissionData.push({ userCommissionId: id, userCommissionName });
+          state.userCommissionData = action.payload;
         }
       })
       .addCase(addUserCommission.rejected, (state) => {

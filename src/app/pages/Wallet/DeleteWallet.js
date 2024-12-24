@@ -1,6 +1,6 @@
 "use client";
 
-import { deleteAppRole } from "../../redux/AppRoleSlice";
+import { useDispatch } from "react-redux";
 import {
   Button,
   Dialog,
@@ -8,14 +8,13 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
+import { deleteWallet } from "../../redux/WalletSlice";
 
-import { useDispatch } from "react-redux";
-
-export default function DeleteAppRole({ data, setIsDelete, isDelete }) {
+export default function DeleteWallet({ data, isDelete, setIsDelete }) {
   const dispatch = useDispatch();
 
   const handleConfirmDelete = () => {
-    dispatch(deleteAppRole(data));
+    dispatch(deleteWallet(data));
     setIsDelete(false);
   };
 

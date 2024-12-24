@@ -1,65 +1,67 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import { omit, isEmpty } from "lodash";
-import { Button, Box, Snackbar } from "@mui/material";
+import { Box, Snackbar, Button } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
-import { fetchRoleMenu } from "@/app/redux/RoleMenuSlice";
-import DataTable from "../../common/DataTable";
-import LoadingSpinner from "../../common/Loading";
-import AddRoleMenu from "./AddRoleMenu";
-import DeleteRoleMenu from "./DeleteRoleMenu";
-import { column } from "@/app/constants/RoleMenuConst";
-import styles from "./RoleMenu.module.css";
+import { isEmpty } from "lodash";
 
-export default function DisplayRoleMenu() {
+import styles from "./News.module.css";
+import LoadingSpinner from "../../common/Loading";
+import DataTable from "@/app/common/DataTable";
+import AddNews from "./AddNews";
+import DeleteNews from "./DeleteNews";
+import { fetchAllNews } from "@/app/redux/NewsSlice";
+import { column } from "@/app/constants/NewsMenuConst";
+
+export default function News() {
   const dispatch = useDispatch();
-  const { isLoading, roleMenuData } = useSelector((data) => {
-    return data.roleMenuReducer;
-  });
 
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
-  const [selectedRow, setSelectedRow] = useState([]);
-  const [isAdd, setIsAdd] = useState(false);
-  const [message, setMessage] = useState("");
+  const [isAddNews, setIsAddNews] = useState(false);
+  const [selectedRow, setSelectedRow] = useState(null);
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [message, setMessage] = useState("");
 
-  const updatedRoleMenuData = roleMenuData.map((item) =>
-    omit(item, [
-      "menuId",
-      "appRoleId",
-      "controllerName",
-      "actionName",
-      "displayOrder",
-    ])
-  );
+  const { isLoading, newsData } = useSelector((state) => state?.newsReducer);
 
   useEffect(() => {
-    dispatch(fetchRoleMenu());
-  }, []);
-  const handleRoleMenu = () => setIsAdd(true);
+    dispatch(fetchAllNews());
+  }, [dispatch]);
 
-  const selectedAllRowData = roleMenuData.filter(
-    (item) => item.roleMenuId === selectedRow.roleMenuId
-  );
+  const handleAddNews = () => {
+    setIsAddNews(true);
+    setIsEdit(false);
+  };
 
   return (
-    <Box className={styles.container}>
+    <Box
+      style={{
+        position: "fixed",
+        width: "82.5vw",
+        top: "9.5rem",
+        bottom: 0,
+        height: "100vh",
+        backgroundColor: "#FBF8F3",
+        left: "17.5rem",
+        overflowY: "auto",
+      }}
+    >
       <Box sx={{ width: "93%", margin: "20px auto", marginRight: "3rem" }}>
-        <Box mb={2}>
-          {!isAdd && !isEdit && (
+        <Box sx={{ display: "flex", marginBottom: "10px" }}>
+          {!isAddNews && !isEdit && (
             <Button
               variant="contained"
               startIcon={<AddIcon />}
+              onClick={handleAddNews}
               className={styles.btn}
-              onClick={handleRoleMenu}
             >
-              Assign Menu
+              Add News
             </Button>
           )}
         </Box>
+
         <Snackbar
           open={openSnackbar}
           autoHideDuration={3000}
@@ -67,34 +69,37 @@ export default function DisplayRoleMenu() {
           message={message}
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
         />
+
         {isLoading ? (
           <LoadingSpinner />
         ) : (
-          !isEmpty(updatedRoleMenuData) &&
-          !isAdd &&
+          !isEmpty(newsData) &&
+          !isAddNews &&
           !isEdit && (
             <DataTable
-              searchBy="roleName"
+              searchBy="title"
               setIsEdit={setIsEdit}
               setIsDelete={setIsDelete}
               setSelectedRow={setSelectedRow}
-              data={updatedRoleMenuData}
+              data={newsData}
               column={column}
             />
           )
         )}
-        {(isAdd || isEdit) && (
-          <AddRoleMenu
+
+        {(isAddNews || isEdit) && (
+          <AddNews
             setIsEdit={setIsEdit}
-            setIsAdd={setIsAdd}
+            setIsAddNews={setIsAddNews}
             isEdit={isEdit}
             setOpenSnackbar={setOpenSnackbar}
             setMessage={setMessage}
-            data={selectedAllRowData[0]}
+            data={selectedRow || {}}
           />
         )}
+
         {isDelete && (
-          <DeleteRoleMenu
+          <DeleteNews
             data={selectedRow}
             setOpenSnackbar={setOpenSnackbar}
             setMessage={setMessage}

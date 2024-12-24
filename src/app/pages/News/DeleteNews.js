@@ -1,6 +1,3 @@
-"use client";
-
-import { deleteAppRole } from "../../redux/AppRoleSlice";
 import {
   Button,
   Dialog,
@@ -8,15 +5,29 @@ import {
   DialogContent,
   DialogTitle,
 } from "@mui/material";
-
 import { useDispatch } from "react-redux";
+import { fetchAllNews } from "@/app/redux/NewsSlice";
+import { deleteNews } from "@/app/redux/NewsSlice";
 
-export default function DeleteAppRole({ data, setIsDelete, isDelete }) {
+export default function DeleteNews({
+  data,
+  setIsDelete,
+  isDelete,
+  setMessage,
+  setOpenSnackbar,
+}) {
   const dispatch = useDispatch();
 
-  const handleConfirmDelete = () => {
-    dispatch(deleteAppRole(data));
+  const value = {
+    newsId: data?.newsId,
+  };
+
+  const handleConfirmDelete = async () => {
+    await dispatch(deleteNews(value));
     setIsDelete(false);
+    setMessage("Data Deleted Succefully!");
+    setOpenSnackbar(true);
+    dispatch(fetchAllNews());
   };
 
   return (

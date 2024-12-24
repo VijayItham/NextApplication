@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAppRole } from "@/app/redux/AppRoleSlice";
+import { verifyUserName } from "@/app/redux/AppUserSlice";
 import {
   fetchCountry,
   fetchState,
@@ -26,6 +27,14 @@ import { useSnackbar } from "notistack";
 
 export default function SignUp() {
   const { enqueueSnackbar } = useSnackbar();
+  const { appRoleData } = useSelector((data) => data?.appRoleReducer);
+
+  const [validationErrors, setValidationErrors] = useState({
+    userName: false,
+    email: false,
+    phoneNumber: false,
+  });
+
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
@@ -54,7 +63,7 @@ export default function SignUp() {
     (data) => data.countryStateCityReducer
   );
 
-  const result = useSelector((state) => state.appUserReducer.addAppUserData);
+  const result = useSelector((state) => state?.appUserReducer?.addAppUserData);
 
   useEffect(() => {
     if (result?.statusCode === 200) {
@@ -64,7 +73,7 @@ export default function SignUp() {
         style: { backgroundColor: "#4caf50", color: "#fff" },
       });
     } else if (result?.statusCode === 417) {
-      enqueueSnackbar("User alerady exists.", {
+      enqueueSnackbar("User already exists.", {
         variant: "error",
         autoHideDuration: 1000,
         style: { backgroundColor: "#e57373", color: "#fff" },
@@ -77,18 +86,34 @@ export default function SignUp() {
     dispatch(fetchCountry());
   }, [dispatch]);
 
-  const handleChange = (e) => {
+  const handleChange = async (e) => {
     const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
 
+    if (name === "userName" || name === "email" || name === "phoneNumber") {
+      const verificationResponse = await dispatch(
+        verifyUserName({
+          username: name === "userName" ? value : formData.userName,
+          email: name === "email" ? value : formData.email,
+          phoneNumber: name === "phoneNumber" ? value : formData.phoneNumber,
+        })
+      );
+
+      setValidationErrors({
+        userName: verificationResponse?.payload?.usernameVerified === false,
+        email: verificationResponse?.payload?.emailVerified === false,
+        phoneNumber:
+          verificationResponse?.payload?.phoneNumberVerified === false,
+      });
+    }
     if (name === "countryId") {
       dispatch(fetchState(value));
     } else if (name === "stateId") {
       dispatch(fetchCity(value));
     }
-    setFormData({
-      ...formData,
-      [name]: value,
-    });
   };
 
   const onSubmit = async (e) => {
@@ -138,6 +163,10 @@ export default function SignUp() {
       "&.Mui-focused fieldset": {
         borderColor: "#784800",
       },
+
+      "&.Mui-error": {
+        borderColor: "red",
+      },
     },
     "& .MuiInputLabel-root.Mui-focused": {
       color: "black",
@@ -165,12 +194,16 @@ export default function SignUp() {
                   required
                   name="userName"
                   label="User Name"
-                  placeholder="UserName "
+                  placeholder="UserName"
                   InputLabelProps={{
                     shrink: true,
                   }}
                   value={formData.userName}
                   onChange={handleChange}
+                  error={validationErrors.userName}
+                  helperText={
+                    validationErrors.userName ? "Username already exists." : ""
+                  }
                   sx={inputStyles}
                 />
               </Grid>
@@ -202,6 +235,25 @@ export default function SignUp() {
                   onChange={handleChange}
                   sx={inputStyles}
                 />
+              </Grid>
+              <Grid item xs={4}>
+                <FormControl fullWidth>
+                  <InputLabel id="role-select-label">Role Name</InputLabel>
+                  <Select
+                    labelId="role-select-label"
+                    name="appRoleId"
+                    value={formData.appRoleId}
+                    onChange={handleChange}
+                    variant="outlined"
+                    required
+                  >
+                    {appRoleData.map(({ appRoleId, roleName }) => (
+                      <MenuItem key={appRoleId} value={appRoleId}>
+                        {roleName}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </Grid>
               <Grid item xs={4}>
                 <TextField

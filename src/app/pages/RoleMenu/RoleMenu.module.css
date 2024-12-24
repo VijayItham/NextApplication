@@ -1,5 +1,5 @@
 .container {
-  width: 82%;
+  width: 81%;
   top: 9.5rem;
   left: 17.4rem;
   background-color: #f6f2eb;
@@ -11,4 +11,10 @@
 .btn {
   background-color: #784800 !important;
   padding: 15px 15px !important;
+}
+
+.button {
+  padding: 12px 25px !important;
+  background-color: #784800 !important;
+  font-size: 13px !important;
 }

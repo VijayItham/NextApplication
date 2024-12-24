@@ -113,7 +113,7 @@ export default function ForgotPassword() {
                 onClick={handleForgotPassword}
                 className={styles.sendMe}
               >
-                {loading ? <CircularProgress size={24} /> : "Send Me"}
+                {loading ? <CircularProgress size={24} /> : "GET OTP"}
               </Button>
             </>
           </Box>

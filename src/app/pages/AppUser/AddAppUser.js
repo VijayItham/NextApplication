@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAppRole } from "@/app/redux/AppRoleSlice";
+import styles from "./AppUser.module.css";
 import {
   fetchCountry,
   fetchState,
@@ -33,11 +34,11 @@ export default function AddAppUser({
   const [formData, setFormData] = useState({
     userName: "",
     firstName: "",
-    address2:"",
+    address2: "",
     lastName: "",
-    panImage:"",
+    panImage: "",
     password: "",
-    middleName:"",
+    middleName: "",
     email: "",
     phoneNumber: "",
     address1: "",
@@ -45,14 +46,14 @@ export default function AddAppUser({
     panNumber: "",
     aadharNumber: "",
     aadharImageFront: "",
-    aadharImageBack:"",
+    aadharImageBack: "",
     appRoleId: "",
     countryId: "",
     stateId: "",
     cityId: "",
   });
   const dispatch = useDispatch();
-  const {appRoleData}  = useSelector((data) => data.appRoleReducer);
+  const { appRoleData } = useSelector((data) => data.appRoleReducer);
   const { countryList, stateList, cityList } = useSelector(
     (data) => data.countryStateCityReducer
   );
@@ -96,11 +97,11 @@ export default function AddAppUser({
   const onSubmit = async (e) => {
     e.preventDefault();
     if (isEdit) {
-        await dispatch(updateAppUser(formData));
-        setMessage("Data Updated Succefully");
+      await dispatch(updateAppUser(formData));
+      setMessage("Data Updated Succefully");
     } else {
-        await dispatch(addAppUser(formData));
-        setMessage("Data Save Succefully");
+      await dispatch(addAppUser(formData));
+      setMessage("Data Save Succefully");
     }
     dispatch(fetchAppUser());
     setIsEdit(false);
@@ -335,12 +336,12 @@ export default function AddAppUser({
       </Grid>
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" className={styles.Btn}>
             {isEdit ? "Update" : "Submit"}
           </Button>
         </Grid>
         <Grid item>
-          <Button onClick={onCancel} variant="outlined">
+          <Button onClick={onCancel} variant="outlined" className={styles.Btn}>
             Cancel
           </Button>
         </Grid>

@@ -19,6 +19,7 @@ import {
 } from "@/app/redux/RoleMenuSlice";
 import { fetchAppRole } from "../../redux/AppRoleSlice";
 import { fetchMenu } from "../../redux/MenuSlice";
+import styles from "./RoleMenu.module.css";
 
 export default function AddRoleMenu({
   setIsAdd,
@@ -92,8 +93,6 @@ export default function AddRoleMenu({
       <Typography variant="h5" mb={2}>
         {isEdit ? "Update" : "Add"} Role Menu
       </Typography>
-
-      {/* Both dropdowns in a single row */}
       <Grid container spacing={2} style={{ marginBottom: "20px" }}>
         <Grid item xs={6}>
           <FormControl fullWidth>
@@ -138,12 +137,17 @@ export default function AddRoleMenu({
 
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" className={styles.button}>
             {isEdit ? "Update" : "Assign"}
           </Button>
         </Grid>
         <Grid item>
-          <Button onClick={onCancel} variant="outlined">
+          <Button
+            onClick={onCancel}
+            variant="outlined"
+            style={{ color: "white" }}
+            className={styles.button}
+          >
             Cancel
           </Button>
         </Grid>
