@@ -16,6 +16,9 @@ const initialState = {
   dashboardData: [],
   userDetail: {},
   menu: [],
+  usernameVerified: false,
+  emailVerified: false,
+  phoneNumberVerified: false,
 };
 
 export const onLogout = () => async (dispatch) => {
@@ -27,6 +30,17 @@ export const fetchUserLogin = createAsyncThunk(
   "fetchUserLogin",
   async (userDetail) => {
     return await postRequest("/Authentication/loginUser", userDetail);
+  }
+);
+
+export const verifyUserName = createAsyncThunk(
+  "verifyUserName",
+  async ({ username, email, phoneNumber }) => {
+    return await getRequest("/Authentication/verifyUserName", {
+      username,
+      email,
+      phoneNumber,
+    });
   }
 );
 
@@ -59,11 +73,11 @@ export const verifyOtp = createAsyncThunk(
 
 export const updatePassword = createAsyncThunk(
   "updatePassword",
-  async ({ username,otp, password }) => {
+  async ({ username, otp, password }) => {
     return await postRequest("/Authentication/updatePassword", {
       username,
       password,
-      otp
+      otp,
     });
   }
 );
@@ -125,6 +139,24 @@ const AppUserSlice = createSlice({
       })
       .addCase(fetchAppUser.rejected, (state) => {
         state.isLoading = false;
+      })
+
+      .addCase(verifyUserName.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(verifyUserName.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const response = action.payload;
+        if (response?.statusCode === 200) {
+          state.usernameVerified = response?.payload?.usernameVerified || false;
+          state.emailVerified = response?.payload?.emailVerified || false;
+          state.phoneNumberVerified =
+            response?.payload?.phoneNumberVerified || false;
+        }
+      })
+      .addCase(verifyUserName.rejected, (state) => {
+        state.isLoading = false;
+        state.usernameVerified = false;
       })
       .addCase(addAppUser.pending, (state) => {
         state.isLoading = true;
@@ -232,7 +264,7 @@ const AppUserSlice = createSlice({
         state.isLoading = false;
         const response = action.payload;
         if (response?.statusCode === 200) {
-          state.userDetail = response.data
+          state.userDetail = response.data;
         }
       })
       .addCase(verifyOtp.rejected, (state) => {

@@ -8,11 +8,15 @@ import menuReducer from "./MenuSlice";
 import roleMenuReducer from "./RoleMenuSlice";
 import fundRequestReducer from "./FundRequestSlice";
 import operatorTypeReducer from "./OperatorTypeSlice";
+import newsReducer from "./NewsSlice"
 import operatorReducer from "./OperatorSlice";
 import operatorCommissionReducer from "./OperatorCommissionSlice";
 import amountTypeReducer from "./AmountTypeSlice";
 import userCommissionReducer from "./UserCommissionSlice";
 import rechargeReducer from "./RechargeSlice";
+import userWalletSummaryReducer from "./UserWalletSummarySlice";
+import walletReducer from "./WalletSlice";
+
 
 const store = configureStore({
   reducer: {
@@ -27,7 +31,10 @@ const store = configureStore({
     operatorCommissionReducer,
     amountTypeReducer,
     userCommissionReducer,
+    newsReducer,
     rechargeReducer,
+    userWalletSummaryReducer,
+    walletReducer
   },
 });
 

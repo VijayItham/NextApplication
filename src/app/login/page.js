@@ -216,24 +216,25 @@ export default function Login() {
                   Forgot password ?
                 </Box>
               </Box>
-              <Box className={styles.containerBtn}>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  className={styles.button}
-                >
-                  {loading ? <CircularProgress size={24} /> : "Login Now"}
-                </Button>
-                <Button
-                  type="submit"
-                  variant="contained"
-                  className={styles.button}
-                  onClick={handleRegister}
-                >
-                  Register Now
-                </Button>
-              </Box>
+
+              <Button
+                type="submit"
+                variant="contained"
+                className={styles.button}
+                sx={{ position: "relative", right: "8.3rem" }}
+              >
+                {loading ? <CircularProgress size={24} /> : "Login Now"}
+              </Button>
             </Box>
+            <Button
+              type="submit"
+              variant="contained"
+              className={styles.button}
+              onClick={handleRegister}
+              sx={{ position: "relative", bottom: "4.8rem", left: "16.9rem" }}
+            >
+              Register Now
+            </Button>
           </Box>
         </Box>
         <Box

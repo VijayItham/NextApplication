@@ -18,6 +18,7 @@ export default function AddAppRole() {
     dispatch(addAppRole(roleName))
       .then(() => {
         dispatch(fetchAppRole());
+        setRoleName("");
       })
       .catch((error) => {
         console.error("Error adding role: ", error);
@@ -27,7 +28,7 @@ export default function AddAppRole() {
   return (
     <Box className={styles.container}>
       <Box sx={{ width: "93%", margin: "20px auto", marginRight: "3rem" }}>
-        <h3 style={{color:"#333333"}}>Add AppRole</h3>
+        <h3 style={{ color: "#333333" }}>Add AppRole</h3>
         <TextField
           placeholder="Add App  Role"
           onChange={(e) => setRoleName(e.target.value)}
@@ -50,7 +51,7 @@ export default function AddAppRole() {
         <Button
           onClick={onSubmit}
           color="primary"
-          style={{ marginLeft: "20px"}}
+          style={{ marginLeft: "20px" }}
           variant="contained"
           className={styles.btn}
         >

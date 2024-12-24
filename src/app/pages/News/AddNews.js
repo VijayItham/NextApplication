@@ -1,47 +1,45 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import {
-  TextField,
-  Button,
   Box,
   Typography,
   Grid,
   FormControl,
   InputLabel,
   Select,
+  TextField,
+  Button,
   MenuItem,
 } from "@mui/material";
+import { useEffect, useState } from "react";
+import { addNews, fetchAllNews, updateNews } from "@/app/redux/NewsSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchOperatorType } from "@/app/redux/OperatorTypeSlice";
-import { addOperator, updateOperator } from "@/app/redux/OperatorSlice";
-import { fetchOperator } from "@/app/redux/OperatorSlice";
-import styles from "./Operator.module.css";
+import styles from "./News.module.css";
 
-export default function AddOperator({
-  setIsAddOperator,
+export default function AddNews({
+  setIsAddNews,
   isEdit,
   setIsEdit,
   setMessage,
   setOpenSnackbar,
   data,
 }) {
+  const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    operatorTypeId: "",
-    operatorName: "",
-    operatorCode: "",
+    title: "",
+    newsType: "",
+    description: "",
   });
 
-  const dispatch = useDispatch();
-  const { operatorTypeData } = useSelector((data) => data.operatorTypeReducer);
+  const { newsData } = useSelector((state) => state?.newsReducer);
 
   useEffect(() => {
-    dispatch(fetchOperatorType());
     if (isEdit) {
       setFormData(data);
     }
-  }, []);
-  const handleChange = async (e) => {
+  }, [data, isEdit]);
+
+  const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -50,21 +48,25 @@ export default function AddOperator({
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    if (isEdit) {
-      await dispatch(updateOperator(formData));
-      setMessage("Data Updated Succefully");
-    } else {
-      await dispatch(addOperator(formData));
-      setMessage("Data Save Succefully");
+    try {
+      if (isEdit) {
+        await dispatch(updateNews(formData));
+        setMessage("Data Updated Successfully");
+      } else {
+        await dispatch(addNews(formData));
+        setMessage("Data Saved Successfully");
+      }
+      dispatch(fetchAllNews());
+      setIsEdit(false);
+      setIsAddNews(false);
+      setOpenSnackbar(true);
+    } catch (error) {
+      console.error("Error submitting news: ", error);
     }
-    dispatch(fetchOperator());
-    setIsEdit(false);
-    setIsAddOperator(false);
-    setOpenSnackbar(true);
   };
 
   const onCancel = () => {
-    setIsAddOperator(false);
+    setIsAddNews(false);
     setIsEdit(false);
   };
 
@@ -84,24 +86,23 @@ export default function AddOperator({
       }}
     >
       <Typography variant="h5" mb={2}>
-        {isEdit ? "Update" : "Add"} Operator
+        {isEdit ? "Update" : "Add"} News
       </Typography>
       <Grid container spacing={2}>
         <Grid item xs={4}>
           <FormControl fullWidth>
-            <InputLabel id="role-select-label">Operator Type</InputLabel>
+            <InputLabel id="news-type-label">News Type</InputLabel>
             <Select
-              labelId="operator-select-label"
-              name="operatorTypeId"
-              value={formData.operatorTypeId}
+              labelId="news-type-label"
+              name="newsType"
+              value={formData.newsType}
               onChange={handleChange}
               variant="outlined"
               required
-              disabled={isEdit}
             >
-              {operatorTypeData.map(({ operatorTypeId, operatorTypeName }) => (
-                <MenuItem key={operatorTypeId} value={operatorTypeId}>
-                  {operatorTypeName}
+              {newsData?.map(({ newsId, newsType }) => (
+                <MenuItem key={newsId} value={newsType}>
+                  {newsType}
                 </MenuItem>
               ))}
             </Select>
@@ -111,27 +112,28 @@ export default function AddOperator({
           <TextField
             fullWidth
             required
-            name="operatorName"
-            label="Operator Name"
+            name="title"
+            label="Title"
             variant="outlined"
-            value={formData.operatorName}
+            value={formData.title}
             onChange={handleChange}
           />
         </Grid>
         <Grid item xs={4}>
           <TextField
             fullWidth
-            name="operatorCode"
-            label="Operator Code"
+            required
+            name="description"
+            label="Description"
             variant="outlined"
-            value={formData.operatorCode}
+            value={formData.description}
             onChange={handleChange}
           />
         </Grid>
       </Grid>
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained" className={styles.button}>
+          <Button type="submit" variant="contained" className={styles.btn}>
             {isEdit ? "Update" : "Submit"}
           </Button>
         </Grid>
@@ -139,8 +141,8 @@ export default function AddOperator({
           <Button
             onClick={onCancel}
             variant="outlined"
+            className={styles.btn}
             style={{ color: "white" }}
-            className={styles.button}
           >
             Cancel
           </Button>

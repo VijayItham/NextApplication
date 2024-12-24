@@ -1,13 +1,21 @@
 .container {
-    width: 82%;
-    top: 9.5rem;
-    left: 17.4rem;
-    background-color: #f6f2eb;
-    position: fixed;
-    overflow-y: auto;
-    bottom: 1px;
+  width: 82%;
+  top: 9.5rem;
+  left: 17.4rem;
+  background-color: #f6f2eb;
+  position: fixed;
+  overflow-y: auto;
+  bottom: 1px;
 }
 
-.btn{
-    background-color: #784800 !important;
+.btn {
+  background-color: #784800 !important;
+}
+
+.Btn {
+  padding: 12px 18px !important;
+  background-color: #784800 !important;
+  font-size: 13px !important;
+  width: 40% !important;
+  color: white;
 }

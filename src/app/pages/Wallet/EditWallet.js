@@ -1,39 +1,43 @@
 "use client";
 
 import { useState } from "react";
-import { updateAppRole } from "../../redux/AppRoleSlice";
+import { useDispatch } from "react-redux";
 import {
+  TextField,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  TextField,
 } from "@mui/material";
+import { fetchAllWallets, updateWallet } from "@/app/redux/WalletSlice";
 
-import { useDispatch } from "react-redux";
+export default function UpdateWallet({ data, setIsEdit, isEdit }) {
+  const { walletId, walletName } = data;
+  const [updateWalletName, setUpdateWalletName] = useState(walletName);
 
-export default function EditAppRole({ data, setIsEdit, isEdit }) {
-  const { id, appRoleId, roleName } = data;
-  const [updateRoleName, setUpdateRoleName] = useState(roleName);
   const dispatch = useDispatch();
-
-  const handleEditSave = () => {
-    dispatch(updateAppRole({ id, appRoleId, roleName: updateRoleName }));
+  const handleEditSave = async () => {
+    try {
+      await dispatch(updateWallet({ walletId, walletName: updateWalletName }));
+      dispatch(fetchAllWallets());
+    } catch (error) {
+      console.error("Error updating wallet: ", error);
+    }
     setIsEdit(false);
   };
 
   return (
     <Dialog open={isEdit} onClose={() => setIsEdit(false)}>
-      <DialogTitle>Edit App Role</DialogTitle>
+      <DialogTitle>Edit App Wallet</DialogTitle>
       <DialogContent>
         <TextField
           label="Role Name"
           name="name"
           fullWidth
           margin="normal"
-          value={updateRoleName}
-          onChange={(e) => setUpdateRoleName(e.target.value)}
+          value={updateWalletName}
+          onChange={(e) => setUpdateWalletName(e.target.value)}
         />
       </DialogContent>
       <DialogActions>

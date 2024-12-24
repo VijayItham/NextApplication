@@ -2,41 +2,45 @@
 
 import { deleteAppUser } from "../../redux/AppUserSlice";
 import {
-    Button,
-    Dialog,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
 } from "@mui/material";
 import { fetchAppUser } from "@/app/redux/AppUserSlice";
 
 import { useDispatch } from "react-redux";
 
-export default function DeleteAppUser({ data, setIsDelete, isDelete, setMessage, setOpenSnackbar }) {
-    const dispatch = useDispatch();
+export default function DeleteAppUser({
+  data,
+  setIsDelete,
+  isDelete,
+  setMessage,
+  setOpenSnackbar,
+}) {
+  const dispatch = useDispatch();
 
-    const handleConfirmDelete = async() => {
-       await dispatch(deleteAppUser(data.appUserId))
-        setIsDelete(false)
-        setMessage("Data Deleted Succefully!")
-        setOpenSnackbar(true);
-        dispatch(fetchAppUser());
-    }
+  const handleConfirmDelete = async () => {
+    await dispatch(deleteAppUser(data.appUserId));
+    setIsDelete(false);
+    setMessage("Data Deleted Succefully!");
+    setOpenSnackbar(true);
+    dispatch(fetchAppUser());
+  };
 
-    return (
-        <Dialog open={isDelete} onClose={() => setIsDelete(false)}>
-        <DialogTitle>Delete Confirmation</DialogTitle>
-        <DialogContent>
-            Are you sure you want to delete this row?
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => setIsDelete(false)} color="primary">
-            Cancel
-          </Button>
-          <Button onClick={handleConfirmDelete} color="secondary">
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-    );
+  return (
+    <Dialog open={isDelete} onClose={() => setIsDelete(false)}>
+      <DialogTitle>Delete Confirmation</DialogTitle>
+      <DialogContent>Are you sure you want to delete this row?</DialogContent>
+      <DialogActions>
+        <Button onClick={() => setIsDelete(false)} color="primary">
+          Cancel
+        </Button>
+        <Button onClick={handleConfirmDelete} color="secondary">
+          Delete
+        </Button>
+      </DialogActions>
+    </Dialog>
+  );
 }

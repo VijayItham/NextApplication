@@ -1,0 +1,60 @@
+"use client";
+export const column = [
+  {
+    field: "id",
+    title: "ID",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "userWalletSummaryId",
+    title: "UserWalletSummaryId",
+    isSortable: true,
+    isVisible: false,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "userName",
+    title: "UserName",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "walletName",
+    title: "WalletName",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "currentBalance",
+    title: "CurrentBalance",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+  {
+    field: "totalCreditAmount",
+    title: "TotalCreditAmount",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+
+  {
+    field: "totalDebitAmount",
+    title: "TotalDebitAmount",
+    isSortable: true,
+    isVisible: true,
+    isResizable: false,
+    sorDirection: "asc",
+  },
+];

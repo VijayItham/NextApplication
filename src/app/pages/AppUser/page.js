@@ -12,7 +12,7 @@ import LoadingSpinner from "../../common/Loading";
 import AddAppUser from "./AddAppUser";
 import DeleteAppUser from "./DeleteAppUser";
 import { column } from "@/app/constants/AppUserConst";
-import styles from "./AppUser.module.css"
+import styles from "./AppUser.module.css";
 
 export default function DisplayAppUser() {
   const dispatch = useDispatch();
@@ -25,7 +25,7 @@ export default function DisplayAppUser() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   useEffect(() => {
-      dispatch(fetchAppUser());
+    dispatch(fetchAppUser());
   }, []);
 
   const updatedUserData = appUserData.map((item) =>
@@ -40,9 +40,9 @@ export default function DisplayAppUser() {
       "panImage",
       "aadharImageBack",
       "aadharImageFront",
-      "createdBy"
+      "createdBy",
     ])
-  ); 
+  );
 
   const handleAddUser = () => setIsAddUser(true);
   const selectedAllRowData = appUserData.filter(
@@ -50,61 +50,61 @@ export default function DisplayAppUser() {
   );
   return (
     <Box className={styles.container}>
-       <Box sx={{ width:"93%", margin:"20px auto" , marginRight:"3rem"}}>
-      <Box mb={2}>
-        {!isAddUser && !isEdit &&  (
-          <Button
-            variant="contained"
-            startIcon={<AddIcon />}
-            onClick={handleAddUser}
-            className={styles.btn}
-          >
-            Add User
-          </Button>
+      <Box sx={{ width: "93%", margin: "20px auto", marginRight: "3rem" }}>
+        <Box mb={2}>
+          {!isAddUser && !isEdit && (
+            <Button
+              variant="contained"
+              startIcon={<AddIcon />}
+              onClick={handleAddUser}
+              className={styles.btn}
+            >
+              Add User
+            </Button>
+          )}
+        </Box>
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={3000}
+          onClose={() => setOpenSnackbar(false)}
+          message={message}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        />
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          !isEmpty(updatedUserData) &&
+          !isAddUser &&
+          !isEdit && (
+            <DataTable
+              searchBy="userName"
+              setIsEdit={setIsEdit}
+              setIsDelete={setIsDelete}
+              setSelectedRow={setSelectedRow}
+              data={updatedUserData}
+              column={column}
+            />
+          )
         )}
-      </Box>
-      <Snackbar
-        open={openSnackbar}
-        autoHideDuration={3000}
-        onClose={() => setOpenSnackbar(false)}
-        message={message}
-        anchorOrigin={{ vertical: "top", horizontal: "center" }}
-      />
-      {isLoading ? (
-        <LoadingSpinner />
-      ) : (
-        !isEmpty(updatedUserData) &&
-        !isAddUser &&
-        !isEdit && (
-          <DataTable
-            searchBy="userName"
+        {(isAddUser || isEdit) && (
+          <AddAppUser
             setIsEdit={setIsEdit}
-            setIsDelete={setIsDelete}
-            setSelectedRow={setSelectedRow}
-            data={updatedUserData}
-            column={column}
+            setIsAddUser={setIsAddUser}
+            isEdit={isEdit}
+            setOpenSnackbar={setOpenSnackbar}
+            setMessage={setMessage}
+            data={selectedAllRowData[0]}
           />
-        )
-      )}
-      {(isAddUser || isEdit) && (
-        <AddAppUser
-          setIsEdit={setIsEdit}
-          setIsAddUser={setIsAddUser}
-          isEdit={isEdit}
-          setOpenSnackbar={setOpenSnackbar}
-          setMessage={setMessage}
-          data={selectedAllRowData[0]}
-        />
-      )}
-      {isDelete && (
-        <DeleteAppUser
-          data={selectedRow}
-          setOpenSnackbar={setOpenSnackbar}
-          setMessage={setMessage}
-          isDelete={isDelete}
-          setIsDelete={setIsDelete}
-        />
-      )}
+        )}
+        {isDelete && (
+          <DeleteAppUser
+            data={selectedRow}
+            setOpenSnackbar={setOpenSnackbar}
+            setMessage={setMessage}
+            isDelete={isDelete}
+            setIsDelete={setIsDelete}
+          />
+        )}
       </Box>
     </Box>
   );

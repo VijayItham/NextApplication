@@ -34,6 +34,7 @@
   border-radius: 50px;
   box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
   text-align: center;
+  max-height: 26rem;
 }
 
 .title {
@@ -69,12 +70,6 @@
 .forgotPassword {
   color: #784800;
   cursor: pointer;
-}
-
-.containerBtn {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .button {

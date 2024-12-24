@@ -1,59 +1,58 @@
-"use client";
-
-import { useDispatch, useSelector } from "react-redux";
-import { fetchAppRole } from "../../redux/AppRoleSlice";
-import { useEffect, useState } from "react";
-import DataTable from "../../common/DataTable";
-import { column } from "../../constants/AppRoleConst";
+import { fetchAllWallets } from "@/app/redux/WalletSlice";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
-import EditAppRole from "./EditAppRole";
-import DeleteAppRole from "./DeleteAppRole";
-import LoadingSpinner from "../../common/Loading";
-import { Box } from "@mui/material";
+import { useState } from "react";
+import { column } from "@/app/constants/WalletConst";
+import LoadingSpinner from "@/app/common/Loading";
+import DataTable from "@/app/common/DataTable";
+import { useSelector } from "react-redux";
+import DeleteWallet from "./DeleteWallet";
+import EditWallet from "./EditWallet";
 
-export default function DisplayAppRole() {
+export default function DisplayWallet() {
   const [isEdit, setIsEdit] = useState(false);
   const [isDelete, setIsDelete] = useState(false);
   const [selectedRow, setSelectedRow] = useState([]);
-  const { isLoading, appRoleData } = useSelector((data) => data.appRoleReducer);
+  const { isLoading, wallets } = useSelector((data) => data?.walletReducer);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(fetchAppRole());
+    dispatch(fetchAllWallets());
   }, [dispatch]);
 
   return (
-    <Box>
+    <div>
       {isLoading ? (
         <LoadingSpinner />
       ) : (
-        !isEmpty(appRoleData) && (
-          <Box>
+        !isEmpty(wallets) && (
+          <div>
             <DataTable
-              searchBy="roleName"
+              searchBy="walletName"
               setIsEdit={setIsEdit}
               setIsDelete={setIsDelete}
               setSelectedRow={setSelectedRow}
-              data={appRoleData}
+              data={wallets}
               column={column}
             />
             {isEdit && (
-              <EditAppRole
+              <EditWallet
                 data={selectedRow}
                 isEdit={isEdit}
                 setIsEdit={setIsEdit}
               />
             )}
             {isDelete && (
-              <DeleteAppRole
+              <DeleteWallet
                 data={selectedRow}
                 isDelete={isDelete}
                 setIsDelete={setIsDelete}
               />
             )}
-          </Box>
+          </div>
         )
       )}
-    </Box>
+    </div>
   );
 }

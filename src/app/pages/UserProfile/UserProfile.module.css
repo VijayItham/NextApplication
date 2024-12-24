@@ -1,64 +1,65 @@
 .container {
-    width: 84%;
-    top: 8rem;
-    left: 17.4rem;
-    background-color: #f6f2eb;
-    position: fixed;
-    bottom: 1px;
+  width: 84%;
+  top: 8rem;
+  left: 17.4rem;
+  background-color: #f6f2eb;
+  position: fixed;
+  bottom: 1px;
 }
 
 .tabBox {
-    margin-left: 10rem;
-    margin-top: 24px;
+  margin-left: 10rem;
+  margin-top: 24px;
 }
 
 .columnStyles {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .content {
-    padding: 50px;
-    background-color: #fff;
-    box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
-    border-radius: 2px;
-    width: 100%;
-    max-width: 800px;
-    position: relative;
-    border-radius: 50px;
-    bottom: 3rem;
-    height: 55vh;
+  padding: 50px;
+  background-color: #fff;
+  box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
+  border-radius: 2px;
+  width: 100%;
+  max-width: 800px;
+  position: relative;
+  border-radius: 50px;
+  bottom: 4rem;
+  height: 50vh;
 }
 
 .content1 {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .title {
-    color: #333333;
-    font-size: 2rem;
+  color: #333333;
+  font-size: 2rem;
 }
 
 .box {
-    max-width: 440px;
-    background-color: #fff;
-    padding: 3rem;
-    border-radius: 50px;
-    box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
-    text-align: center;
-    margin-left: 8rem;
+  max-width: 440px;
+  background-color: #fff;
+  padding: 3rem;
+  border-radius: 50px;
+  box-shadow: 0px 4px 10px rgba(249, 224, 180, 1);
+  text-align: center;
+  margin-left: 8rem;
+  padding-bottom: 2.3rem;
 }
 
 .submitBtn {
-    margin-top: 3px !important;
-    margin-bottom: 2px !important;
-    padding: 15px !important;
-    width: 8rem !important;
-    border-radius: 3rem !important;
-    background-color: #784800 !important;
-    font-size: 13px !important;
-    margin-right: 20rem !important;
-    color: white !important;
+  margin-top: 3px !important;
+  margin-bottom: 2px !important;
+  padding: 15px !important;
+  width: 8rem !important;
+  border-radius: 3rem !important;
+  background-color: #784800 !important;
+  font-size: 13px !important;
+  margin-right: 20rem !important;
+  color: white !important;
 }

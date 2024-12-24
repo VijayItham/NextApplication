@@ -15,6 +15,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAmountType } from "@/app/redux/AmountTypeSlice";
 import { fetchOperator } from "@/app/redux/OperatorSlice";
+import styles from "./OperatorCommision.module.css";
 import {
   addOperatorCommission,
   updateOperatorCommission,
@@ -31,7 +32,7 @@ export default function AddOperatorCommission({
 }) {
   const [formData, setFormData] = useState({
     operatorId: "",
-    commissionAmount:"",
+    commissionAmount: "",
     commissionMargin: "",
     amountTypeId: "",
   });
@@ -154,12 +155,12 @@ export default function AddOperatorCommission({
       </Grid>
       <Grid container justifyContent="center" spacing={2} sx={{ mt: 3 }}>
         <Grid item>
-          <Button type="submit" variant="contained">
+          <Button type="submit" variant="contained" className={styles.Btn}>
             {isEdit ? "Update" : "Submit"}
           </Button>
         </Grid>
         <Grid item>
-          <Button onClick={onCancel} variant="outlined">
+          <Button onClick={onCancel} variant="outlined" className={styles.Btn}>
             Cancel
           </Button>
         </Grid>
