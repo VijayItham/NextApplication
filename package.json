@@ -20,6 +20,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "formidable": "^3.5.1",
     "js-cookie": "^3.0.5",
+    "jsonwebtoken": "^9.0.2",
     "lodash": "^4.17.21",
     "next": "^15.1.0",
     "notistack": "^3.0.1",

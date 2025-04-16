@@ -7,7 +7,7 @@ import {
   postRequest,
 } from "../pages/api/page";
 
-import { doLogin, doLogout, getToken } from "../pages/api/authCookies";
+import { doLogin, doLoginPin, doLogout, getTokenPin } from "../pages/api/authCookies";
 
 const initialState = {
   isLoading: false,
@@ -45,12 +45,12 @@ export const verifyUserName = createAsyncThunk(
 );
 
 export const verifyPin = createAsyncThunk("verifyPin", async (pin) => {
-  const data = { pin, token: getToken() };
+  const data = { pin, token: getTokenPin() };
   return await postRequest("/Authentication/verifyPin", data);
 });
 
 export const updatePin = createAsyncThunk("updatePin", async (pin) => {
-  const data = { pin, token: getToken() };
+  const data = { pin, token: getTokenPin() };
   return await postRequest("/Authentication/updatePin", data);
 });
 
@@ -221,7 +221,8 @@ const AppUserSlice = createSlice({
         const userDetails = action?.payload ?? {};
 
         if (userDetails.statusCode == 200) {
-          doLogin(userDetails.data[0], action.payload.token);
+          //doLogin(userDetails.data[0], action.payload.token);
+          doLoginPin(userDetails.data[0], action.payload.token)
           state.userDetail = userDetails.data[0];
           state.token = action.payload.token;
         }

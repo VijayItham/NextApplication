@@ -7,14 +7,19 @@ export const isLoggedIn = () => {
     return data !== undefined; 
 };
   
-export const doLogin = (data, token) => {
-    Cookies.set("userDetail", JSON.stringify(data));
-    Cookies.set("token", token);
+export const doLogin = (data,token) => {
+     Cookies.set("userDetail", JSON.stringify(data));
+    Cookies.set("tokenPin", token);
+};
+export const doLoginPin = (data, token) => {
+  Cookies.set("userDetail", JSON.stringify(data));
+  Cookies.set("token", token);
 };
   
 export const doLogout = () => {
     Cookies.remove("userDetail", { path: '/' }); 
     Cookies.remove("token", { path: '/' });
+    Cookies.remove("tokenPin", { path: '/' });
 };
   
 export const getToken = () => {
@@ -23,6 +28,13 @@ export const getToken = () => {
     } else {
       return null;
     }
+};
+export const getTokenPin = () => {
+  if (isLoggedIn()) {
+    return Cookies.get("tokenPin");
+  } else {
+    return null;
+  }
 };
   
 export const getUserDetails = () => {
